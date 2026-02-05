@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/kudouScene.unity
+    guid: 4eae146350ea6af44bb485c7abba80a4
   m_configObjects: {}
