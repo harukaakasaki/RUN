@@ -30,6 +30,7 @@ public abstract class C : MonoBehaviour
     // 重力など
     [SerializeField] protected float m_Gravity = -20f;
 
+    //コリジョンの当たり判定を管理するコンポーネント
     protected CharacterController m_Controller;
 
     // 公開プロパティ読み取り専用にしたいとき
@@ -61,6 +62,7 @@ public abstract class C : MonoBehaviour
     /// <summary>
     /// 継承先で毎フレームの水平速度決定
     /// プレイヤーは入力ベクトル、敵は追跡ベクトル
+    /// 水平速度（x/z）の決定
     /// </summary>
     protected abstract void Tick();
 
