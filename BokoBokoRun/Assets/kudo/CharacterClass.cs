@@ -33,6 +33,12 @@ public abstract class C : MonoBehaviour
     protected CharacterController m_Controller;
 
     // 公開プロパティ読み取り専用にしたいとき
+    //カプセル化したgetter
+    //下記と同じ意味
+    //public bool IsDead
+    //{
+    //    get { return m_IsDead; }
+    //}
     public bool IsDead => m_IsDead;
     public bool IsGrounded => m_IsGrounded;
     public float Speed => m_CharacterSpeed;
