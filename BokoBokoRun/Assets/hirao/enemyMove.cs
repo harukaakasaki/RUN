@@ -12,11 +12,11 @@ public class enemyMove : C
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+
     }
-    void Tick()
+    protected override void Tick()//enemy‚Ì“®‚«
     {
 
     }
