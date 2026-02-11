@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.PlayerSettings;
 
-//定数クラス
-static class Constants
-{
-    public const float kSpeed = 10.0f;//移動速度
-    public const float kJumpPower = 300.0f;//ジャンプ力
-}
-
 public class Controller : MonoBehaviour
 {
+    //定数クラス
+    static class Constants
+    {
+        public const float kSpeed = 10.0f;//移動速度
+        public const float kJumpPower = 300.0f;//ジャンプ力
+    }
+
     //項目名を設定
     [Header("Input Actions (.inputactions asset)")]
     [SerializeField] private InputActionAsset m_actionsAsset;
