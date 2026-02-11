@@ -1,39 +1,9 @@
 fileFormatVersion: 2
-guid: 7120c5048b946104d9dbe69533187a01
+guid: 0ec8d069cca573248acaeb843740eb34
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: mremireh_body__diffuse
-    second: {fileID: 2800000, guid: 03f5fd8dd8593c34e920050a4c816a45, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: mremireh_body_normal
-    second: {fileID: 2800000, guid: 05f1588b44fde8e49a415863106c9499, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: mremireh_body_specular
-    second: {fileID: 2800000, guid: 09cfb792df1e706468688d6fc7f98112, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: mremireh_shoe_diffuse
-    second: {fileID: 2800000, guid: 5dd9300c0ceca8d44ab518babd5c3feb, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: mremireh_shoe_normal
-    second: {fileID: 2800000, guid: ce3d9b10524c82d448223aee4a2f8537, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: mremireh_shoe_specular
-    second: {fileID: 2800000, guid: b042b1ef6de977940ae0f9756cf2c996, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -54,7 +24,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -123,13 +93,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

@@ -17,24 +17,24 @@ public class enemyMove : C
     //関数
     private void Move()
     {
-       // m_velovity = new Vector3{3f,0f,0f};
+        m_Velocity = new Vector3(0.0f,0.0f,0.01f);
     }
 
 
 
     // Start is called before the first frame update
-    void Start()
+    void Start()//初期化
     {
         m_State = EnemyState.Move;
     }
 
     // Update is called once per frame
-    protected override void Update()
+    protected override void Update()//毎フレーム更新
     {
         Tick();
         ApplyGravity();
 
-        this.transform.position = m_Velocity;
+        this.transform.position += m_Velocity;
 
     }
     protected override void Tick()//enemyの動き
@@ -44,6 +44,7 @@ public class enemyMove : C
             case EnemyState.Idle:
                 break;
             case EnemyState.Move:
+                Move();
                 break;
             case EnemyState.Attack:
                 break;
