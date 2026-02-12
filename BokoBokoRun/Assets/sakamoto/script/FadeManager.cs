@@ -26,9 +26,7 @@ public class FadeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Imageコンポーネントを取得
-        m_fadeImage = GetComponent<Image>();
-
+        m_fadeImage.enabled = true;
         //画像のRedの値を取得
         m_red = m_fadeImage.color.r;
         //画像のGreenの値を取得
@@ -39,11 +37,11 @@ public class FadeManager : MonoBehaviour
         m_alpha = m_fadeImage.color.a;
 
         //フェードタイプを初期化
-        m_type = FadeType.Normal;
+        m_type = FadeType.In;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //フェードタイプに合わせて処理を変更する
         switch (m_type)
@@ -78,10 +76,10 @@ public class FadeManager : MonoBehaviour
         m_fadeImage.enabled = true;
         m_alpha += Constants.fade_speed;
         Alpha();
-        if (m_alpha >= 1)
-        {
-            m_type = FadeType.Normal;
-        }
+        //if (m_alpha >= 1)
+        //{
+        //    m_type = FadeType.Normal;
+        //}
     }
     void Alpha()
     {
