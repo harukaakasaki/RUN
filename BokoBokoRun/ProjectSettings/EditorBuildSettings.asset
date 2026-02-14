@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/kudouScene.unity
+    path: Assets/scene/kudouScene.unity
     guid: 4eae146350ea6af44bb485c7abba80a4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 2d12cba37f885924c831205c06b68b6d, type: 2}
