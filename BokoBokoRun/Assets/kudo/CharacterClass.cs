@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// キャラクターコントローラーを必須コンポーネントにする
 [RequireComponent(typeof(CharacterController))]
+// キャラクターの基本クラス
+//C抽象クラスってこと
 public abstract class C : MonoBehaviour
 {
 
