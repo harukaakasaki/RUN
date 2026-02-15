@@ -11,7 +11,8 @@ public class FadeManager : MonoBehaviour
         public const float fade_speed = 0.02f;//フェードする速度
     }
 
-    float m_red, m_green, m_blue, m_alpha; //RGBA
+    float m_graphRed, m_graphGreen, m_graphBlue, m_graphAlpha; //画像のRGBA
+    float m_textRed, m_textGreen, m_textBlue, m_textAlpha; //テキストのRGBA
 
     public enum FadeType               //フェードタイプ
     {
@@ -21,20 +22,38 @@ public class FadeManager : MonoBehaviour
     };
     public FadeType m_type;            //フェードタイプ宣言
 
-    [SerializeField] Image m_fadeImage;                  //フェードに使う黒い画像
+    [SerializeField] Image m_fadeImage;//フェードに使う黒い画像
+    [SerializeField] Text[] m_texts;   //フェードさせるテキストの配列
 
     // Start is called before the first frame update
     void Start()
     {
+        //画像
+        //黒い画像の存在をtrueにする
         m_fadeImage.enabled = true;
         //画像のRedの値を取得
-        m_red = m_fadeImage.color.r;
+        m_graphRed = m_fadeImage.color.r;
         //画像のGreenの値を取得
-        m_green = m_fadeImage.color.g;
+        m_graphGreen = m_fadeImage.color.g;
         //画像のBlueの値を取得
-        m_blue = m_fadeImage.color.b;
+        m_graphBlue = m_fadeImage.color.b;
         //画像のAlphaの値を取得
-        m_alpha = m_fadeImage.color.a;
+        m_graphAlpha = m_fadeImage.color.a;
+
+        //テキスト
+        //テキストの存在をすべてtrueにする
+        foreach(var text in m_texts)
+        {
+            text.enabled = true;
+            //テキストのRedの値を取得
+            m_textRed = text.color.r;
+            //テキストのGreenの値を取得
+            m_textGreen = text.color.g;
+            //テキストのBlueの値を取得
+            m_textBlue = text.color.b;
+            //テキストのAlphaの値を取得
+            m_textAlpha = text.color.a;
+        }
 
         //フェードタイプを初期化
         m_type = FadeType.In;
@@ -60,11 +79,12 @@ public class FadeManager : MonoBehaviour
     private void FadeIn()
     {
         //不透明度を減らしていく
-        m_alpha -= Constants.fade_speed;
-        //不透明度を画像に適用する
+        m_graphAlpha -= Constants.fade_speed;
+        m_textAlpha -= Constants.fade_speed;
+        //不透明度を適用する
         Alpha();
         //不透明度が0以下になったら
-        if (m_alpha <= 0)
+        if (m_graphAlpha <= 0)
         {
             //通常状態にする
             m_type = FadeType.Normal;
@@ -73,16 +93,36 @@ public class FadeManager : MonoBehaviour
 
     private void FadeOut()
     {
+        //存在をtrueにする
         m_fadeImage.enabled = true;
-        m_alpha += Constants.fade_speed;
+        foreach(var text in m_texts)
+        {
+            text.enabled = true;//存在をtrueにする
+            m_textAlpha += Constants.fade_speed;//テキストの不透明度を上げる
+        }
+        //画像の不透明度を上げる
+        m_graphAlpha += Constants.fade_speed;
+        //不透明度を適用
         Alpha();
-        //if (m_alpha >= 1)
-        //{
-        //    m_type = FadeType.Normal;
-        //}
     }
     void Alpha()
     {
-        m_fadeImage.color = new Color(m_red, m_green, m_blue, m_alpha);
+        //画像のアルファを適用
+        m_fadeImage.color = new Color(m_graphRed, m_graphGreen, m_graphBlue, m_graphAlpha);
+        //テキストのアルファを適用
+        foreach (var text in m_texts)
+        {
+            text.color = new Color(m_textRed, m_textGreen, m_textBlue, m_textAlpha);
+        }
+    }
+
+    public void OnFadeIn()
+    {
+        m_type = FadeType.In;
+    }
+
+    public void OnFadeout()
+    {
+        m_type = FadeType.Out;
     }
 }

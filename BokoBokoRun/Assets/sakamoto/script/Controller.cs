@@ -23,6 +23,8 @@ public class Controller : MonoBehaviour
     private InputAction m_moveAction;
     //Rigidbody
     private Rigidbody m_rigidbody;
+    //フェードマネージャー
+    private FadeManager m_fadeManager;
 
     // Start is called before the first frame update
     void Start()
@@ -54,5 +56,6 @@ public class Controller : MonoBehaviour
             Debug.Log("Move");
         }
 
+        //TitleSceneの時にどのボタンでもいいから押されたらフェードを呼ぶ
     }
 }
