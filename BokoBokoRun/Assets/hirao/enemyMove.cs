@@ -17,7 +17,7 @@ public class enemyMove : C
     //ä÷êî
     private void Move()
     {
-        m_Velocity = new Vector3(0.0f,0.0f,0.01f);
+        m_Velocity = new Vector3(0.01f,0.0f,0.0f);
     }
 
 
