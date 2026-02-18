@@ -30,7 +30,7 @@ public class FadeManager : MonoBehaviour
     {
         //‰æ‘œ
         //•‚¢‰æ‘œ‚Ì‘¶İ‚ğtrue‚É‚·‚é
-        m_fadeImage.enabled = true;
+        m_fadeImage.gameObject.SetActive(true);
         //‰æ‘œ‚ÌRed‚Ì’l‚ğæ“¾
         m_graphRed = m_fadeImage.color.r;
         //‰æ‘œ‚ÌGreen‚Ì’l‚ğæ“¾
@@ -121,7 +121,7 @@ public class FadeManager : MonoBehaviour
         m_type = FadeType.In;
     }
 
-    public void OnFadeout()
+    public void OnFadeOut()
     {
         m_type = FadeType.Out;
     }
