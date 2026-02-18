@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManagerBase : MonoBehaviour
+public class InGameManager : GameManagerBase
 {
-    [SerializeField] protected GameFlowManager m_gameFlowManager;
-    [SerializeField] protected FadeManager m_fadeManager;
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_fadeManager.OnFadeIn();
     }
 
     // Update is called once per frame
