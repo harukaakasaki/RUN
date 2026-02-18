@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour
 
     //項目名を設定
     [Header("Input Actions (.inputactions asset)")]
-    [SerializeField] private InputActionAsset m_actionsAsset;
+    //[SerializeField] private InputActionAsset m_actionsAsset;
 
     //移動速度
     private float m_speed = Constants.kSpeed;
@@ -25,23 +25,25 @@ public class Controller : MonoBehaviour
     private Rigidbody m_rigidbody;
     //フェードマネージャー
     private FadeManager m_fadeManager;
+    //PlayerInput
+    private PlayerInput m_playerInput;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        //InputActionのジャンプと移動を取得して有効化
-        m_moveAction = m_actionsAsset.FindAction("Move");
+        //コンポーネントを取得
+        m_playerInput = GetComponent<PlayerInput>();
+        m_rigidbody = GetComponent<Rigidbody>();
+
+        //各プレイヤーに紐づくactionsからアクションを取得
+        m_moveAction = m_playerInput.actions["Move"];
 
         m_moveAction.Enable();
-
-        //Rigidbodyの取得
-        m_rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //移動
+        //移動(playerInputにペアリングされたデバイス入力のみ拾う)
         var moveValue = m_moveAction.ReadValue<Vector2>();
         //移動ベクトルの大きさを1に制限
         moveValue = Vector2.ClampMagnitude(moveValue, 1.0f);
@@ -55,7 +57,5 @@ public class Controller : MonoBehaviour
         {
             Debug.Log("Move");
         }
-
-        //TitleSceneの時にどのボタンでもいいから押されたらフェードを呼ぶ
     }
 }
