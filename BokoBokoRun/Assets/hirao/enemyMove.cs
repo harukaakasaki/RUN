@@ -24,7 +24,16 @@ public class enemyMove : C
     private void Entering()//出場中
     {
         m_count++;
-        m_Velocity = new Vector3(0.0f, 0.0f, 0.01f);
+        //角度によって、進む向きを変える
+        Quaternion rot = transform.rotation;//現在の角度を入手
+        if(rot ==  Quaternion.identity)//どっちか2分の1
+        {
+            m_Velocity = new Vector3(0.0f, 0.0f, 0.005f);
+        }
+        else
+        {
+            m_Velocity = new Vector3(0.0f, 0.0f, -0.005f);
+        }
         if(m_count > 1000)
         {
             m_State = EnemyState.Active;
@@ -47,8 +56,6 @@ public class enemyMove : C
     protected override void Update()//毎フレーム更新
     {
         Tick();
-      
-
         this.transform.position += m_Velocity;
 
     }
