@@ -9,7 +9,7 @@ public class Controller : MonoBehaviour
     //定数クラス
     static class Constants
     {
-        public const float kSpeed = 10.0f;//移動速度
+        public const float kSpeed = 3.0f;//移動速度
         public const float kJumpPower = 300.0f;//ジャンプ力
     }
 

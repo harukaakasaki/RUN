@@ -8,6 +8,12 @@ using UnityEngine;
 //C抽象クラスってこと
 public abstract class C : MonoBehaviour
 {
+    //グローバル変数-------------------------------------------------
+    [Header("グローバル変数")]
+    private float kCharaSpeed = 0.01f;
+    private float kGravity = 0.0f;
+    //---------------------------------------------------------------
+
 
     // 継承先でも読み書きするからprotected
     // 見出し

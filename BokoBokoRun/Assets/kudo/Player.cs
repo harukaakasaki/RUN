@@ -19,6 +19,8 @@ public class Player : C
     float m_rotateSpeed = 5.0f;
     
     private Vector3 m_playerPos;
+    [SerializeField] private Vector3 m_spawnPos;
+
     //スムージング用
     private float m_SmoothedSpeed;
 
@@ -36,7 +38,8 @@ public class Player : C
             Debug.LogError("Animator が見つかりません.");
         }
         //初期位置を保存
-        m_playerPos = transform.position;
+        m_playerPos = m_spawnPos;
+        transform.position = m_playerPos;
 
         // 同じオブジェクトにアタッチされているControllerを取得
         m_controller = GetComponent<Controller>();
@@ -108,6 +111,10 @@ public class Player : C
         m_playerPos = now;
     }
 
+    private void FixedUpdate()
+    {
+        this.transform.position = m_playerPos;
+    }
     protected override void Tick()
     {
         //m_Stateが０の時はIdle、１の時はMoveのアニメーションを再生する
