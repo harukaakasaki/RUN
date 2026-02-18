@@ -20,12 +20,13 @@ public class Player : C
     
     private Vector3 m_playerPos;
     [SerializeField] private Vector3 m_spawnPos;
+    private Vector3 m_prevPos;
+    private Vector3 m_targetPos;
 
     //スムージング用
-    private float m_SmoothedSpeed;
+    private float m_smoothedSpeed;
 
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
-    private static readonly int SpeedHash = Animator.StringToHash("Speed");
     // Start is called before the first frame update
     void Start()
     {
@@ -45,86 +46,58 @@ public class Player : C
         m_controller = GetComponent<Controller>();
     }
 
-    // Update is called once per frame
+
+
     protected override void Update()
     {
-        Tick();
-
-        //this.transform.position += m_Velocity;
-    }
-
-    private void LateUpdate()
-    {
-        // Controllerの移動を取得
+        //  入力ターゲット位置を取得
         if (m_controller != null)
         {
-            // 現在の位置と前フレームの位置から移動ベクトルを計算
-            Vector3 currentPosition = m_controller.transform.position;
-            Vector3 moveDir = currentPosition - m_playerPos;
-
-            // 水平方向の移動のみを考慮
-            moveDir.y = 0f;
-
-            // 移動ベクトルをm_Velocityに設定
-            m_Velocity = moveDir / Time.deltaTime;
-
-            // 進む方向に向く
-            if (moveDir.sqrMagnitude > 0.001f) // 移動しているときだけ回転
-            {
-                transform.forward = Vector3.Slerp(
-                    transform.forward,
-                    moveDir.normalized,
-                    Time.deltaTime * m_rotateSpeed
-                );
-            }
-
-            // 前フレームの位置を更新
-            m_playerPos = currentPosition;
+            m_targetPos = m_controller.transform.position;
         }
 
-        // 現在位置
-        Vector3 now = transform.position;
+        //自身の位置をターゲットに追随
+      
+        transform.position = m_targetPos;
 
-        // 位置差分（XZ の水平成分のみ）
-        Vector3 delta = now - m_playerPos;
+        //速度計算
+        Vector3 now = transform.position;
+        Vector3 delta = now - m_prevPos; // 水平成分のみ見たいなら y=0 に
         delta.y = 0f;
 
-        // 速度（m/s）
         float rawSpeed = (Time.deltaTime > 0f) ? (delta.magnitude / Time.deltaTime) : 0f;
+        m_smoothedSpeed = Mathf.Lerp(m_smoothedSpeed, rawSpeed, 0.2f);
 
-        // 少しならした方が自然
-        m_SmoothedSpeed = Mathf.Lerp(m_SmoothedSpeed, rawSpeed, 0.2f);
-
-        // 閾値
-        bool isMoving = m_SmoothedSpeed > 0.05f;
-
-        // 状態を更新
+        bool isMoving = m_smoothedSpeed > 0.05f;
         m_state = isMoving ? PlayerState.Move : PlayerState.Idle;
 
-        // Animator に反映
         if (m_animator)
         {
             m_animator.SetBool(IsMovingHash, isMoving);
         }
 
+        // 回転移動しているときだけ
+        if (delta.sqrMagnitude > 0.0001f)
+        {
+            Vector3 dir = delta.normalized;
+            transform.forward = Vector3.Slerp(transform.forward, dir, Time.deltaTime * m_rotateSpeed);
+        }
+
         // 前フレーム位置を更新
-        m_playerPos = now;
+        m_prevPos = now;
+
+        Tick();
     }
 
-    private void FixedUpdate()
-    {
-        this.transform.position = m_playerPos;
-    }
     protected override void Tick()
     {
-        //m_Stateが０の時はIdle、１の時はMoveのアニメーションを再生する
         switch (m_state)
         {
             case PlayerState.Idle:
                 break;
-
             case PlayerState.Move:
                 break;
         }
     }
 }
+
