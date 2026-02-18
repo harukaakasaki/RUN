@@ -16,8 +16,8 @@ public class CHeck : MonoBehaviour
     {
         if (Mathf.Abs(transform.position.z - lastZ) > 0.001f)
         {
-            Debug.Log($"Z軸が変更されました: {lastZ} → {transform.position.z}");
-            Debug.Log($"変更したスクリプト: {UnityEngine.StackTraceUtility.ExtractStackTrace()}");
+           // Debug.Log($"Z軸が変更されました: {lastZ} → {transform.position.z}");
+            //Debug.Log($"変更したスクリプト: {UnityEngine.StackTraceUtility.ExtractStackTrace()}");
         }
         lastZ = transform.position.z;
     }

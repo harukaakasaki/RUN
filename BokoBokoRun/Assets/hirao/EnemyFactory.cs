@@ -5,6 +5,12 @@ using UnityEngine.InputSystem;
 
 public class EnemyFactory : MonoBehaviour
 {
+    //敵がスポーンする座標
+    Vector3 point0 = new Vector3(21, -1, 33);
+
+
+
+
     // Inspectorでアサインする敵のPrefab
     public GameObject enemyPrefab;
 
@@ -36,5 +42,21 @@ public class EnemyFactory : MonoBehaviour
             SpawnEnemy(this.transform.position);
         }
 
+    }
+
+    void OnTriggerEnter(Collider other)//子オブジェクトが当たり判定と当たったら、これが呼び出される
+    {
+        SpawnID point = GetComponent<SpawnID>();
+
+        if (point != null)
+        {
+           switch(point.spawnID)
+            {
+                case 0:
+                    SpawnEnemy(point0);
+                    Debug.Log("敵が生成されました。");
+                    break;
+            }
+        }
     }
 }

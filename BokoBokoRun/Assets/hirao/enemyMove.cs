@@ -47,7 +47,7 @@ public class enemyMove : C
     protected override void Update()//毎フレーム更新
     {
         Tick();
-        ApplyGravity();
+      
 
         this.transform.position += m_Velocity;
 

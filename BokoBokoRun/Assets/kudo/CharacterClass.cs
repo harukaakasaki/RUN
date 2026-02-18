@@ -32,7 +32,6 @@ public abstract class C : MonoBehaviour
     // 重力など
     [SerializeField] protected float m_Gravity = -20f;
 
-    protected CharacterController m_Controller;
 
     // 公開プロパティ読み取り専用にしたいとき
     //カプセル化したgetter
@@ -48,7 +47,6 @@ public abstract class C : MonoBehaviour
     //一回だけ呼ばれる
     protected virtual void Awake()
     {
-        m_Controller = GetComponent<CharacterController>();
         m_CharacterPos = transform.position;
     }
 
@@ -59,7 +57,7 @@ public abstract class C : MonoBehaviour
         // 継承先がここで入力やAIからm_Velocityを組み立てる
         Tick();
 
-        ApplyGravity();
+       
         MoveCharacter();
 
         // 表示用キャッシュ更新
@@ -72,25 +70,11 @@ public abstract class C : MonoBehaviour
     /// </summary>
     protected abstract void Tick();
 
-    protected virtual void ApplyGravity()
-    {
-        // CharacterController の接地判定
-        if (m_Controller.isGrounded)
-        {
-            m_IsGrounded = true;
-            // 接地押し付け
-            if (m_Velocity.y < 0f) m_Velocity.y = -2f; 
-        }
-        else
-        {
-            m_IsGrounded = false;
-            m_Velocity.y += m_Gravity * Time.deltaTime;
-        }
-    }
+    
 
     protected virtual void MoveCharacter()
     {
-        m_Controller.Move(m_Velocity * Time.deltaTime);
+       
     }
 
     // 共通の死亡時処理。コライダ無効化等

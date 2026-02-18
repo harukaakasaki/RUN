@@ -40,7 +40,7 @@ public class Player : C
     protected override void Update()
     {
         Tick();
-        ApplyGravity();
+
         this.transform.position += m_Velocity;
     }
     private void LateUpdate()
