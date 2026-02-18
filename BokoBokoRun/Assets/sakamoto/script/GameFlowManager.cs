@@ -32,13 +32,23 @@ public sealed class GameFlowManager : MonoBehaviour
         {
             Destroy(gameObject);//2つ目以降のインスタンスを破棄
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        switch (m_scene)
+        {
+            case Scene.Title:
+                Debug.Log("タイトルシーン");
+                break;
+            case Scene.InGame:
+                Debug.Log("インゲーム中");
+                break;
+            case Scene.Result:
+                Debug.Log("リザルトシーン");
+                break;
+        }
     }
 
     public void ChangeScene(Scene scene)
@@ -48,6 +58,6 @@ public sealed class GameFlowManager : MonoBehaviour
 
     public Scene GetScene()
     {
-        return m_scene; 
+        return m_scene;
     }
 }
