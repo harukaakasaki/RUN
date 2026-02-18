@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum PlayerState
 {
     Idle,
     Move,
 }
+
 public class Player : C
 {
-    PlayerState m_State;
+    private Controller m_controller;
+    PlayerState m_state;
     Animator m_animator;
-
-    //private Vector3 m_PlaerVelocity;
-    private Vector3 m_PlayerPos;
-
+    //回転
+    float m_rotateSpeed = 5.0f;
+    
+    private Vector3 m_playerPos;
     //スムージング用
     private float m_SmoothedSpeed;
 
@@ -23,17 +27,19 @@ public class Player : C
     // Start is called before the first frame update
     void Start()
     {
-        m_State = PlayerState.Idle;
-        
+        m_state = PlayerState.Idle;
+       
         // Animatorコンポーネントを取得
-         m_animator = GetComponent<Animator>();
+        m_animator = GetComponent<Animator>();
         if (m_animator == null)
         {
             Debug.LogError("Animator が見つかりません.");
         }
         //初期位置を保存
-        m_PlayerPos = transform.position;
+        m_playerPos = transform.position;
 
+        // 同じオブジェクトにアタッチされているControllerを取得
+        m_controller = GetComponent<Controller>();
     }
 
     // Update is called once per frame
@@ -41,29 +47,56 @@ public class Player : C
     {
         Tick();
 
-        this.transform.position += m_Velocity;
+        //this.transform.position += m_Velocity;
     }
+
     private void LateUpdate()
     {
+        // Controllerの移動を取得
+        if (m_controller != null)
+        {
+            // 現在の位置と前フレームの位置から移動ベクトルを計算
+            Vector3 currentPosition = m_controller.transform.position;
+            Vector3 moveDir = currentPosition - m_playerPos;
+
+            // 水平方向の移動のみを考慮
+            moveDir.y = 0f;
+
+            // 移動ベクトルをm_Velocityに設定
+            m_Velocity = moveDir / Time.deltaTime;
+
+            // 進む方向に向く
+            if (moveDir.sqrMagnitude > 0.001f) // 移動しているときだけ回転
+            {
+                transform.forward = Vector3.Slerp(
+                    transform.forward,
+                    moveDir.normalized,
+                    Time.deltaTime * m_rotateSpeed
+                );
+            }
+
+            // 前フレームの位置を更新
+            m_playerPos = currentPosition;
+        }
 
         // 現在位置
         Vector3 now = transform.position;
 
         // 位置差分（XZ の水平成分のみ）
-        Vector3 delta = now - m_PlayerPos;
+        Vector3 delta = now - m_playerPos;
         delta.y = 0f;
 
         // 速度（m/s）
         float rawSpeed = (Time.deltaTime > 0f) ? (delta.magnitude / Time.deltaTime) : 0f;
 
-        // 少しならした方が自然（0.2 は好みで調整）
+        // 少しならした方が自然
         m_SmoothedSpeed = Mathf.Lerp(m_SmoothedSpeed, rawSpeed, 0.2f);
 
-        // 閾値（停止ゆらぎ対策）。0.03〜0.1 の間で調整してみてください
+        // 閾値
         bool isMoving = m_SmoothedSpeed > 0.05f;
 
-        // 状態を更新（もし状態パターンを使うなら）
-        m_State = isMoving ? PlayerState.Move : PlayerState.Idle;
+        // 状態を更新
+        m_state = isMoving ? PlayerState.Move : PlayerState.Idle;
 
         // Animator に反映
         if (m_animator)
@@ -72,14 +105,13 @@ public class Player : C
         }
 
         // 前フレーム位置を更新
-        m_PlayerPos = now;
-
+        m_playerPos = now;
     }
 
     protected override void Tick()
     {
         //m_Stateが０の時はIdle、１の時はMoveのアニメーションを再生する
-        switch (m_State)
+        switch (m_state)
         {
             case PlayerState.Idle:
                 break;
@@ -87,6 +119,5 @@ public class Player : C
             case PlayerState.Move:
                 break;
         }
-
     }
 }
