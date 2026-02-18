@@ -4,20 +4,33 @@ using UnityEngine;
 
 public enum EnemyState
 {
-    Idle,
-    Move,
-    Attack,
+  Enter,
+  Active
 }
 
 
 public class enemyMove : C
 {
     //EnemyÇÃèÛë‘
-    EnemyState m_State;
+    public EnemyState m_State = EnemyState.Enter;
+    int m_count = 0;
+    bool isRotate = false;
     //ä÷êî
-    private void Move()
+    private void Move()//à⁄ìÆíÜ
     {
-        m_Velocity = new Vector3(0.01f,0.0f,0.0f);
+        
+      m_Velocity = new Vector3(0.01f, 0.0f, 0.0f);
+    }
+    private void Entering()//èoèÍíÜ
+    {
+        m_count++;
+        m_Velocity = new Vector3(0.0f, 0.0f, 0.01f);
+        if(m_count > 1000)
+        {
+            m_State = EnemyState.Active;
+            isRotate = true;
+          
+        }
     }
 
 
@@ -25,7 +38,9 @@ public class enemyMove : C
     // Start is called before the first frame update
     void Start()//èâä˙âª
     {
-        m_State = EnemyState.Move;
+    
+        m_count = 0;
+        isRotate = false;
     }
 
     // Update is called once per frame
@@ -39,14 +54,20 @@ public class enemyMove : C
     }
     protected override void Tick()//enemyÇÃìÆÇ´
     {
+        if(isRotate)
+        {
+            Quaternion targetRotation = Quaternion.Euler(0, 90, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
+
+
         switch(m_State)
         {
-            case EnemyState.Idle:
+            case EnemyState.Enter:
+                Entering();
                 break;
-            case EnemyState.Move:
+            case EnemyState.Active:
                 Move();
-                break;
-            case EnemyState.Attack:
                 break;
             default:
                 break;
