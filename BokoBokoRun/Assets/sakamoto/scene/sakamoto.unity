@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0524b0a13b3a4494c90a5a1c537399bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gameFlowManager: {fileID: 1951619562}
   m_fadeManager: {fileID: 1751058197}
 --- !u!1 &443995827
 GameObject:
@@ -178,6 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 443995828}
+  - component: {fileID: 443995829}
   m_Layer: 0
   m_Name: ResultManager
   m_TagString: Untagged
@@ -200,6 +200,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &443995829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443995827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad54f8e7ff62d449b9238e65f5618c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fadeManager: {fileID: 1751058197}
 --- !u!1 &879418708
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935d05ea2c82c92458e35830c83e8a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gameFlowManager: {fileID: 1951619562}
   m_fadeManager: {fileID: 1751058197}
 --- !u!4 &879418710
 Transform:
@@ -953,6 +965,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ff4c4ca5ad92f438b7cf9f54a38434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_titleManger: {fileID: 879418709}
+  m_inGameManger: {fileID: 132543550}
+  m_resultManger: {fileID: 443995829}
 --- !u!4 &1951619563
 Transform:
   m_ObjectHideFlags: 0
