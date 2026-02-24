@@ -7,7 +7,7 @@ public class InGameManager : GameManagerBase
     // Start is called before the first frame update
     void Start()
     {
-        m_fadeManager.OnFadeIn();
+        
     }
 
     // Update is called once per frame
