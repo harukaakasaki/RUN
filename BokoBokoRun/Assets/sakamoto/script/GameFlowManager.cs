@@ -7,26 +7,29 @@ public sealed class GameFlowManager : MonoBehaviour
 {
     private static GameFlowManager m_instance;
 
-    public enum managerNumber
-    {
+    [SerializeField] private TitleManager m_titleManger;   //タイトルマネージャー
+    [SerializeField] private InGameManager m_inGameManger;//インゲームマネージャー
+    [SerializeField] private ResultManager m_resultManger;//リザルトマネージャー
 
-    }
-
-    [SerializeField] private GameManagerBase[] m_managers;   //管理する
 
     public enum Scene
     {
-        Title,//タイトルシーン
-        InGame,//ゲーム中
-        Result,//リザルトシーン
+        Title,  //タイトルシーン
+        InGame, //ゲーム中
+        Result, //リザルトシーン
     }
     private static Scene m_scene;
 
     // Start is called before the first frame update
     void Start()
     {
+        //念のためマネージャーをすべて非アクティブ化する
+        m_titleManger.enabled = false;
+        m_inGameManger.enabled = false;
+        m_resultManger.enabled = false;
+
         //初期シーンをタイトルに設定
-        m_scene = Scene.Title;
+        ChangeScene(Scene.Title);
     }
 
     private void Awake()
@@ -48,12 +51,18 @@ public sealed class GameFlowManager : MonoBehaviour
         {
             case Scene.Title:
                 Debug.Log("タイトルシーン");
-                break;
+                if (m_titleManger.GetIsStart())
+                {
+                    ChangeScene(Scene.InGame);
+                }
+                    break;
             case Scene.InGame:
                 Debug.Log("インゲーム中");
+
                 break;
             case Scene.Result:
                 Debug.Log("リザルトシーン");
+
                 break;
         }
     }
@@ -61,23 +70,24 @@ public sealed class GameFlowManager : MonoBehaviour
     public void ChangeScene(Scene scene)
     {
         m_scene = scene;
-        //対応したシーンのマネージャーの初期化処理を行う
-        switch (m_scene)
+        //対応したシーンのマネージャーのアクティブ化を行う
+        switch (scene)
         {
             case Scene.Title:
-                
+                m_titleManger.enabled = true;
+                m_inGameManger.enabled = false;
+                m_resultManger.enabled = false;
                 break;
             case Scene.InGame:
-                
+                m_titleManger.enabled = false;
+                m_inGameManger.enabled = true;
+                m_resultManger.enabled = false;
                 break;
             case Scene.Result:
-                
+                m_titleManger.enabled = false;
+                m_inGameManger.enabled = false;
+                m_resultManger.enabled = true;
                 break;
         }
-    }
-
-    public Scene GetScene()
-    {
-        return m_scene;
     }
 }
