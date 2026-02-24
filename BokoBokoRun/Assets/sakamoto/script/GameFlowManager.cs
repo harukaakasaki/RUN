@@ -7,6 +7,13 @@ public sealed class GameFlowManager : MonoBehaviour
 {
     private static GameFlowManager m_instance;
 
+    public enum managerNumber
+    {
+
+    }
+
+    [SerializeField] private GameManagerBase[] m_managers;   //管理する
+
     public enum Scene
     {
         Title,//タイトルシーン
@@ -54,6 +61,19 @@ public sealed class GameFlowManager : MonoBehaviour
     public void ChangeScene(Scene scene)
     {
         m_scene = scene;
+        //対応したシーンのマネージャーの初期化処理を行う
+        switch (m_scene)
+        {
+            case Scene.Title:
+                
+                break;
+            case Scene.InGame:
+                
+                break;
+            case Scene.Result:
+                
+                break;
+        }
     }
 
     public Scene GetScene()

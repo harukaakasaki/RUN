@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
+using UnityEngine.UI;
 
 public class TitleManager : GameManagerBase
 {
@@ -14,7 +15,7 @@ public class TitleManager : GameManagerBase
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void OnEnable()
@@ -43,5 +44,6 @@ public class TitleManager : GameManagerBase
     // Update is called once per frame
     void Update()
     {
+
     }
 }
