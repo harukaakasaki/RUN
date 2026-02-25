@@ -16,7 +16,7 @@ public class Player : C
     PlayerState m_state;
     Animator m_animator;
     //回転
-    float m_rotateSpeed = 5.0f;
+    float m_rotateSpeed = 7.0f;
     
     private Vector3 m_playerPos;
     [SerializeField] private Vector3 m_spawnPos;
@@ -67,7 +67,7 @@ public class Player : C
 
         float rawSpeed = (Time.deltaTime > 0f) ? (delta.magnitude / Time.deltaTime) : 0f;
         m_smoothedSpeed = Mathf.Lerp(m_smoothedSpeed, rawSpeed, 0.2f);
-
+        
         bool isMoving = m_smoothedSpeed > 0.05f;
         m_state = isMoving ? PlayerState.Move : PlayerState.Idle;
 
