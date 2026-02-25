@@ -17,10 +17,10 @@ public class TitleManager : GameManagerBase
         
     }
 
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        //GameManagerBaseのOnEnableを呼ぶ
-        base.OnEnable();
+        //開始時のフラグを降ろす
+        m_isStated = false;
 
         //何かのボタンが押された瞬間に呼ばれる
         m_onAnyButton = InputSystem.onAnyButtonPress.CallOnce(control =>
@@ -33,20 +33,11 @@ public class TitleManager : GameManagerBase
         });
     }
 
-    protected override void OnDisable()
+    private void OnDisable()
     {
-        //GameMangerBaseのOnDisableを呼ぶ
-        base.OnDisable();
-
         //登録したイベントを解除する
         m_onAnyButton?.Dispose();
         m_onAnyButton = null;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public bool GetIsStart() { return m_isStated; }
