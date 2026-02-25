@@ -7,8 +7,22 @@ using UnityEngine.InputSystem;
 public class EnemyFactory : MonoBehaviour
 {
     //敵がスポーンする座標//追加していく//inspectorでいじれる機能があったはず、//Excelみたいに
-    Vector3 point0 = new Vector3(21, 0.6f, 30);
-    Vector3 point01 = new Vector3(21, 0.6f, 45);
+    Vector3 point0 = new Vector3(53.5f, 0.6f, 30);
+    Vector3 point01 = new Vector3(53.5f, 0.6f, 45);
+    Vector3 point1 = new Vector3(104.5f, 0.6f, 30);
+    Vector3 point11 = new Vector3(104.5f, 0.6f, 45);
+    Vector3 point2 = new Vector3(153.5f, 0.6f, 30);
+    Vector3 point21 = new Vector3(153.5f, 0.6f, 45);
+    Vector3 point3 = new Vector3(204.5f, 0.6f, 30);
+    Vector3 point31 = new Vector3(204.5f, 0.6f, 45);
+    Vector3 point4 = new Vector3(251.5f, 0.6f, 30);
+    Vector3 point41 = new Vector3(251.5f, 0.6f, 45);
+    Vector3 point5 = new Vector3(306.5f, 0.6f, 30);
+    Vector3 point51 = new Vector3(306.5f, 0.6f, 45);
+    Vector3 point6 = new Vector3(357.5f, 0.6f, 30);
+    Vector3 point61 = new Vector3(357.5f, 0.6f, 45);
+    Vector3 point7 = new Vector3(408.5f, 0.6f, 30);
+    Vector3 point71 = new Vector3(408.5f, 0.6f, 45);
 
 
 
@@ -68,7 +82,34 @@ public class EnemyFactory : MonoBehaviour
             case 0:
                 SpawnEnemy(point0,true);
                 SpawnEnemy(point01, false);
-                Debug.Log("敵が生成されました。");
+                break;
+            case 1:
+                SpawnEnemy(point1,true);
+                SpawnEnemy(point11, false);
+                break;
+            case 2:
+                SpawnEnemy(point2,true);
+                SpawnEnemy(point21, false);
+                break;
+            case 3:
+                SpawnEnemy(point3,true);
+                SpawnEnemy(point31, false);
+                break;
+            case 4:
+                SpawnEnemy(point4,true);
+                SpawnEnemy(point41, false);
+                break;
+            case 5:
+                SpawnEnemy(point5,true);
+                SpawnEnemy(point51, false);
+                break;
+            case 6:
+                SpawnEnemy(point6,true);
+                SpawnEnemy(point61, false);
+                break;
+            case 7:
+                SpawnEnemy(point7,true);
+                SpawnEnemy(point71, false);
                 break;
             default:
                 break;
