@@ -43,15 +43,15 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //移動(playerInputにペアリングされたデバイス入力のみ拾う)
-        var moveValue = m_moveAction.ReadValue<Vector2>();
-        //移動ベクトルの大きさを1に制限
-        moveValue = Vector2.ClampMagnitude(moveValue, 1.0f);
-        //移動ベクトルの計算
-        var move = new Vector3(moveValue.x, 0.0f, moveValue.y) * m_speed * Time.deltaTime;
+        ////移動(playerInputにペアリングされたデバイス入力のみ拾う)
+        //var moveValue = m_moveAction.ReadValue<Vector2>();
+        ////移動ベクトルの大きさを1に制限
+        //moveValue = Vector2.ClampMagnitude(moveValue, 1.0f);
+        ////移動ベクトルの計算
+        //var move = new Vector3(moveValue.x, 0.0f, moveValue.y) * m_speed * Time.deltaTime;
 
         //移動
-        transform.Translate(move, Space.World);
+        //transform.Translate(move, Space.World);
 
         if (m_moveAction.WasPressedThisFrame())
         {
