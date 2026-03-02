@@ -33,6 +33,7 @@ public class GoalLineChecker : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             Rank++;
+            //‚¢‚Á‚½‚ñÅ‰‚Ìl‚ÉG‚ê‚½‚çƒS[ƒ‹ˆÚs‚ğ‚·‚é
         }
     }
 }

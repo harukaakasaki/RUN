@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraManager : MonoBehaviour
+public class targetMove : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,8 @@ public class cameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position += new Vector3(0.007f, 0.0f, 0.0f);
+        Vector3 move = new Vector3(0.005f, 0.0f, 0.0f);
+
+        transform.position += move;
     }
 }
