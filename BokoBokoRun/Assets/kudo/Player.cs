@@ -86,6 +86,8 @@ public class Player : C
         // 前フレーム位置を更新
         m_prevPos = now;
 
+
+
         Tick();
     }
 
