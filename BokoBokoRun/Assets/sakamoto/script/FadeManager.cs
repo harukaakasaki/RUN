@@ -13,7 +13,8 @@ public class FadeManager : MonoBehaviour
 
     [SerializeField] private Image m_fadeImage;//最前面の黒い画像
 
-    float m_graphRed, m_graphGreen, m_graphBlue, m_graphAlpha; //画像のRGBA
+    float m_graphRed, m_graphGreen, m_graphBlue;
+    public float m_graphAlpha; //画像のRGBA
     public bool m_isFading { get; private set; }//セッターとゲッターをメンバ変数と同時に宣言
 
     /// <summary>
@@ -40,7 +41,7 @@ public class FadeManager : MonoBehaviour
         m_fadeImage.color = new Color(m_graphRed, m_graphGreen, m_graphBlue, m_graphAlpha);
     }
 
-    public IEnumerator FadeOut(float startAopha = 0f, float endAlpha = 1.0f)
+    public IEnumerator FadeOut(float startAopha = 0.0f, float endAlpha = 1.0f)
     {
         //フェード中のフラグを立てる
         m_isFading = true;
@@ -66,7 +67,7 @@ public class FadeManager : MonoBehaviour
     {
         //フェードフラグを立てる
         m_isFading = true;
-        //黒い画像を非アクティブにする
+        //黒い画像をアクティブにする
         m_fadeImage.enabled = true;
 
         //αを初期化

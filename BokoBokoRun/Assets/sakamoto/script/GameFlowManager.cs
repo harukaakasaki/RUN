@@ -12,8 +12,14 @@ public sealed class GameFlowManager : MonoBehaviour
     [SerializeField] private ResultManager m_resultManger;//リザルトマネージャー
     [SerializeField] private FadeManager m_fadeManager;//フェードマネージャー
 
+    //カメラを実際に切り替えるクラスの参照
+    [SerializeField] private cameraManager m_cameraManager;
+
+    private bool m_isTransitioning;//シーンを切り替え中か
+
     public enum Scene
     {
+        None,   //何もない
         Title,  //タイトルシーン
         InGame, //ゲーム中
         Result, //リザルトシーン
@@ -37,7 +43,7 @@ public sealed class GameFlowManager : MonoBehaviour
         //シーンをタイトルに切り替える
         ChangeScene(Scene.Title);
         //フェードを行う
-        yield return m_fadeManager.FadeIn(1.0f, 0.0f);
+        yield return m_fadeManager.FadeIn();
     }
 
     private void Awake()
@@ -63,8 +69,12 @@ public sealed class GameFlowManager : MonoBehaviour
 
                 //タイトルマネージャーからゲームスタートされてるかを取得して
                 //スタートされている&フェード中じゃなければゲームシーンに遷移する
-                if (m_titleManger.GetIsStart() && !m_fadeManager.m_isFading)
+                if (!m_isTransitioning && 
+                    m_titleManger.GetIsStart() &&
+                    !m_fadeManager.m_isFading)
                 {
+                    m_isTransitioning = true;
+
                     StartCoroutine(ChangeInGame());
                 }
                 break;
@@ -81,13 +91,20 @@ public sealed class GameFlowManager : MonoBehaviour
     private IEnumerator ChangeInGame()
     {
         //まずフェードアウトを行う
-        yield return m_fadeManager.FadeOut(0.0f, 1.0f);
+        yield return m_fadeManager.FadeOut(0.0f,1.0f);
 
         //暗転中にマネージャーを切り替え
         ChangeScene(Scene.InGame);
+        //カメラも切り替え
+        m_cameraManager.SetGame();
+
+        //カメラを完全に切り替えるために1フレーム待つ
+        yield return null;
 
         //フェードインを行う
         yield return m_fadeManager.FadeIn(1.0f, 0.0f);
+
+        m_isTransitioning = false;
     }
 
     public void ChangeScene(Scene scene)
@@ -96,14 +113,24 @@ public sealed class GameFlowManager : MonoBehaviour
         switch (scene)
         {
             case Scene.Title:
+                AllEnabled();
                 m_titleManger.enabled = true;
                 break;
             case Scene.InGame:
+                AllEnabled();
                 m_inGameManger.enabled = true;
                 break;
             case Scene.Result:
+                AllEnabled();
                 m_resultManger.enabled = true;
                 break;
         }
+    }
+
+    private void AllEnabled()
+    {
+        m_titleManger.enabled = false;
+        m_inGameManger.enabled = false;
+        m_resultManger.enabled = false;
     }
 }
