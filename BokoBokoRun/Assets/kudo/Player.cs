@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -25,6 +26,10 @@ public class Player : C
 
     //スムージング用
     private float m_smoothedSpeed;
+
+    // ノックバック用オフセット
+    private Vector3 m_knockbackOffset = Vector3.zero;
+    private Coroutine m_knockbackCoroutine;
 
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
     // Start is called before the first frame update
@@ -56,9 +61,8 @@ public class Player : C
             m_targetPos = m_controller.transform.position;
         }
 
-        //自身の位置をターゲットに追随
-      
-        transform.position = m_targetPos;
+        //自身の位置をターゲットに追随 + ノックバックオフセットを適用
+        transform.position = m_targetPos + m_knockbackOffset;
 
         //速度計算
         Vector3 now = transform.position;
@@ -85,10 +89,55 @@ public class Player : C
 
         // 前フレーム位置を更新
         m_prevPos = now;
-
-
-
+        
         Tick();
+    }
+    // トリガーで敵と接触したときの処理はクラスレベルで定義する
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("GameEnemy"))
+        {
+            Debug.Log("敵に当たりました！");
+
+            // 衝突相手からプレイヤーが離れる向きにベクトルを作る
+            Vector3 dir = (transform.position - other.transform.position).normalized;
+            // 斜めに飛ばしたいのでY成分を追加
+            dir.y = Mathf.Max(dir.y, 0.5f); //必要に応じて上昇量を調整
+            dir = dir.normalized;
+
+            // 力の強さ
+            float strength = 2.0f;
+
+            Vector3 knockback = dir * strength;
+
+            // 既存のノックバックがあれば止める
+            if (m_knockbackCoroutine != null)
+            {
+                StopCoroutine(m_knockbackCoroutine);
+            }
+            // 指定時間で減衰させる
+            m_knockbackCoroutine = StartCoroutine(KnockbackRoutine(knockback, 0.5f));
+            //敵と当たったら死亡判定を入れる
+
+            bool isDead = true; // ここは調整
+        }
+    }
+
+    // ノックバックの減衰処理
+    private IEnumerator KnockbackRoutine(Vector3 force, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            // 線形減衰
+            float t = 1f - (elapsed / duration);
+            m_knockbackOffset = force * t;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        m_knockbackOffset = Vector3.zero;
+        m_knockbackCoroutine = null;
     }
 
     protected override void Tick()
