@@ -140,7 +140,10 @@ public sealed class GameFlowManager : MonoBehaviour
         m_inGameManger.enabled = false;
         m_resultManger.enabled = false;
     }
-
+    /// <summary>
+    /// 現在接続されているコントローラーの数を返す関数
+    /// </summary>
+    /// <returns></returns>
     public int GetPadNum() 
     {
         return m_padNum;
