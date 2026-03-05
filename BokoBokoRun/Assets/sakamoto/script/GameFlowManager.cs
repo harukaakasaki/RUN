@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public sealed class GameFlowManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public sealed class GameFlowManager : MonoBehaviour
     [SerializeField] private cameraManager m_cameraManager;
 
     private bool m_isTransitioning;//シーンを切り替え中か
+
+    //パッドの数
+    private int m_padNum;
 
     public enum Scene
     {
@@ -61,6 +65,9 @@ public sealed class GameFlowManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        m_padNum = Gamepad.all.Count;
+        Debug.Log("現在のコントローラーの数:" +  m_padNum);
+
         switch (m_scene)
         {
             case Scene.Title://タイトル
@@ -69,7 +76,7 @@ public sealed class GameFlowManager : MonoBehaviour
 
                 //タイトルマネージャーからゲームスタートされてるかを取得して
                 //スタートされている&フェード中じゃなければゲームシーンに遷移する
-                if (!m_isTransitioning && 
+                if (!m_isTransitioning &&
                     m_titleManger.GetIsStart() &&
                     !m_fadeManager.m_isFading)
                 {
@@ -91,7 +98,7 @@ public sealed class GameFlowManager : MonoBehaviour
     private IEnumerator ChangeInGame()
     {
         //まずフェードアウトを行う
-        yield return m_fadeManager.FadeOut(0.0f,1.0f);
+        yield return m_fadeManager.FadeOut(0.0f, 1.0f);
 
         //暗転中にマネージャーを切り替え
         ChangeScene(Scene.InGame);
@@ -132,5 +139,10 @@ public sealed class GameFlowManager : MonoBehaviour
         m_titleManger.enabled = false;
         m_inGameManger.enabled = false;
         m_resultManger.enabled = false;
+    }
+
+    public int GetPadNum() 
+    {
+        return m_padNum;
     }
 }
