@@ -48,6 +48,8 @@ public sealed class GameFlowManager : MonoBehaviour
     {
         //シーンをタイトルに切り替える
         ChangeScene(Scene.Title);
+        //カメラもタイトルに切り替える
+        m_cameraManager.SetTitle();
         //フェードを行う
         yield return m_fadeManager.FadeIn();
     }
@@ -78,7 +80,7 @@ public sealed class GameFlowManager : MonoBehaviour
                 Debug.Log("タイトルシーンです");
 
                 //タイトルマネージャーからゲームスタートされてるかを取得して
-                //スタートされている&フェード中じゃなければゲームシーンに遷移する
+                //スタートされている&フェード中じゃなければセレクトシーンに遷移する
                 if (!m_isTransitioning &&
                     m_titleManger.GetIsStart() &&
                     !m_fadeManager.m_isFading)
@@ -90,15 +92,42 @@ public sealed class GameFlowManager : MonoBehaviour
                 break;
             case Scene.Select:
                 Debug.Log("セレクトシーンです");
-                //TODO:決定ボタンが押されたらゲームシーンに遷移する
+
+                //セレクトマネージャーから決定ボタンが押されたかどうかを取得して
+                //押されている&フェード中じゃなければゲームシーンに遷移する
+                if(!m_isTransitioning &&
+                    m_selectManger.IsDecided() &&
+                    !m_fadeManager.m_isFading)
+                {
+                    m_isTransitioning = true;
+
+                    StartCoroutine(ChangeInGame());
+                }
                 break;
 
             case Scene.InGame:
                 Debug.Log("インゲームシーンです");
-                //TODO:Result遷移も同様の手順で行う
+                //Result遷移も同様の手順で行う
+                if (!m_isTransitioning &&
+                    m_inGameManger.IsEnd() &&
+                    !m_fadeManager.m_isFading)
+                {
+                    m_isTransitioning = true;
+
+                    StartCoroutine(ChangeResult());
+                }
                 break;
+
             case Scene.Result:
                 Debug.Log("リザルトシーンです");
+                if (!m_isTransitioning &&
+                    m_resultManger.IsBackTitle() &&
+                    !m_fadeManager.m_isFading)
+                {
+                    m_isTransitioning = true;
+
+                    StartCoroutine(ChangeTitle());
+                }
                 break;
         }
     }
@@ -132,7 +161,45 @@ public sealed class GameFlowManager : MonoBehaviour
         //カメラも切り替える
         m_cameraManager.SetSelect();
 
-        //カメラを完全に切り替えるために1フレーム松
+        //カメラを完全に切り替えるために1フレーム待つ
+        yield return null;
+
+        //フェードインを行う
+        yield return m_fadeManager.FadeIn(1.0f, 0.0f);
+
+        //シーン遷移中フラグを降ろす
+        m_isTransitioning = false;
+    }
+
+    private IEnumerator ChangeResult()
+    {
+        //まずフェードアウトを行う
+        yield return m_fadeManager.FadeOut(0.0f, 1.0f);
+        //暗転中にリザルトマネージャーに切り替える
+        ChangeScene(Scene.Result);
+        //カメラも切り替える
+        m_cameraManager.SetResult();
+
+        //カメラを完全に切り替えるために1フレーム待つ
+        yield return null;
+
+        //フェードインを行う
+        yield return m_fadeManager.FadeIn(1.0f, 0.0f);
+
+        //シーン遷移中フラグを降ろす
+        m_isTransitioning = false;
+    }
+
+    private IEnumerator ChangeTitle()
+    {
+        //まずフェードアウトを行う
+        yield return m_fadeManager.FadeOut(0.0f, 1.0f);
+        //暗転中にリザルトマネージャーに切り替える
+        ChangeScene(Scene.Title);
+        //カメラも切り替える
+        m_cameraManager.SetTitle();
+
+        //カメラを完全に切り替えるために1フレーム待つ
         yield return null;
 
         //フェードインを行う

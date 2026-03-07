@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ResultManager : GameManagerBase
 {
+    private bool m_isBackTitle = false;//ƒ^ƒCƒgƒ‹‚É–ß‚é‚©
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +16,21 @@ public class ResultManager : GameManagerBase
     // Update is called once per frame
     void Update()
     {
-        
+#if UNITY_EDITOR 
+        Debug();
+#endif
+    }
+
+    public bool IsBackTitle()
+    {
+        return m_isBackTitle;
+    }
+
+    private void Debug()
+    {
+        if (Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            m_isBackTitle = true;
+        }
     }
 }

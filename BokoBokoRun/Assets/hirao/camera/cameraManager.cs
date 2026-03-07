@@ -12,15 +12,15 @@ public class cameraManager : MonoBehaviour
 
 
     //Listでカメラをまとめる
-    //public List<CinemachineVirtualCamera> cameras = new List<CinemachineVirtualCamera>();
-    [SerializeField] CinemachineVirtualCamera[] cameras;
+    public List<CinemachineVirtualCamera> cameras = new List<CinemachineVirtualCamera>();
+    //[SerializeField] CinemachineVirtualCamera[] cameras;
 
 
     //インデックスでアクセスしやすいように定数を定義
-    private const int kResultCamera = 0;
-    private const int kGameCamera = 1;
-    private const int kTitleCamera = 2;
-    private const int kSelectCamera = 3;
+    private const int kTitleCamera = 0;
+    private const int kSelectCamera = 1;
+    private const int kGameCamera = 2;
+    private const int kResultCamera = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +55,7 @@ public class cameraManager : MonoBehaviour
     public void SetTitle()
     {
         //for文ですべてのカメラの優先度を下げる
-        for (int i = 0; i < cameras.Length; i++)
+        for (int i = 0; i < cameras.Count; i++)
         {
             cameras[i].Priority = 0;
         }
@@ -66,7 +66,7 @@ public class cameraManager : MonoBehaviour
     public void SetGame()
     {
         //for文ですべてのカメラの優先度を下げる
-        for (int i = 0; i < cameras.Length; i++)
+        for (int i = 0; i < cameras.Count; i++)
         {
             cameras[i].Priority = 0;
         }
@@ -77,7 +77,7 @@ public class cameraManager : MonoBehaviour
     public void SetResult()
     {
         //for文ですべてのカメラの優先度を下げる
-        for (int i = 0; i < cameras.Length; i++)
+        for (int i = 0; i < cameras.Count; i++)
         {
             cameras[i].Priority = 0;
         }
@@ -88,7 +88,7 @@ public class cameraManager : MonoBehaviour
     public void SetSelect()
     {
         //for文ですべてのカメラの優先度を下げる
-        for (int i = 0; i < cameras.Length; i++)
+        for (int i = 0; i < cameras.Count; i++)
         {
             cameras[i].Priority = 0;
         }
