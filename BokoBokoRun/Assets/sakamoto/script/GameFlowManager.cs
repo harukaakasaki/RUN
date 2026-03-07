@@ -130,7 +130,7 @@ public sealed class GameFlowManager : MonoBehaviour
         //暗転中にセレクトマネージャーに切り替える
         ChangeScene(Scene.Select);
         //カメラも切り替える
-        //TODO:セレクトシーンカメラに切り替える
+        m_cameraManager.SetSelect();
 
         //カメラを完全に切り替えるために1フレーム松
         yield return null;

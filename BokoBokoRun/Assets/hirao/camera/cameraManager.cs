@@ -20,11 +20,12 @@ public class cameraManager : MonoBehaviour
     private const int kResultCamera = 0;
     private const int kGameCamera = 1;
     private const int kTitleCamera = 2;
+    private const int kSelectCamera = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
@@ -37,22 +38,24 @@ public class cameraManager : MonoBehaviour
 
         if (Keyboard.current != null && Keyboard.current.wKey.wasPressedThisFrame)
         {
-                SetGame();//ゲーム用のカメラを優先させる関数を呼び出す
+            SetGame();//ゲーム用のカメラを優先させる関数を呼び出す
         }
 
         if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            
-                SetResult();//リザルト用のカメラを優先させる関数を呼び出す
+            SetResult();//リザルト用のカメラを優先させる関数を呼び出す
         }
 
-
+        if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            SetSelect();//リザルト用のカメラを優先させる関数を呼び出す
+        }
     }
 
     public void SetTitle()
     {
         //for文ですべてのカメラの優先度を下げる
-        for(int i = 0; i < cameras.Length; i++)
+        for (int i = 0; i < cameras.Length; i++)
         {
             cameras[i].Priority = 0;
         }
@@ -67,7 +70,7 @@ public class cameraManager : MonoBehaviour
         {
             cameras[i].Priority = 0;
         }
-        //タイトル用のカメラの優先度を上げる
+        //インゲーム用のカメラの優先度を上げる
         cameras[kGameCamera].Priority = 10;
     }
 
@@ -78,7 +81,18 @@ public class cameraManager : MonoBehaviour
         {
             cameras[i].Priority = 0;
         }
-        //タイトル用のカメラの優先度を上げる
+        //リザルト用のカメラの優先度を上げる
         cameras[kResultCamera].Priority = 10;
+    }
+
+    public void SetSelect()
+    {
+        //for文ですべてのカメラの優先度を下げる
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            cameras[i].Priority = 0;
+        }
+        //セレクト用のカメラの優先度を上げる
+        cameras[kSelectCamera].Priority = 10;
     }
 }
