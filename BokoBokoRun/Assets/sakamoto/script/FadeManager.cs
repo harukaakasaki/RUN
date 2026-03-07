@@ -14,7 +14,7 @@ public class FadeManager : MonoBehaviour
     [SerializeField] private Image m_fadeImage;//最前面の黒い画像
 
     float m_graphRed, m_graphGreen, m_graphBlue;
-    public float m_graphAlpha; //画像のRGBA
+    private float m_graphAlpha; //画像のRGBA
     public bool m_isFading { get; private set; }//セッターとゲッターをメンバ変数と同時に宣言
 
     /// <summary>

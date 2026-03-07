@@ -277,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameras:
   - {fileID: 890766627}
+  - {fileID: 879319990}
   - {fileID: 585511350}
   - {fileID: 1567237432}
 --- !u!4 &201034275
@@ -336,7 +337,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 1
     m_CustomCurve:
       serializedVersion: 2
@@ -418,8 +419,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412293659}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -145.6, y: 9.3, z: 10.9}
+  m_LocalRotation: {x: 0.09140975, y: -0.5689734, z: 0.063834175, w: 0.814763}
+  m_LocalPosition: {x: 26.455276, y: 10.111525, z: -208.60455}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -502,7 +503,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -661,14 +662,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 879319988}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15388568, y: -0.66618645, z: 0.14323324, w: 0.7155411}
-  m_LocalPosition: {x: -285.16, y: 155.6, z: -382.86}
+  m_LocalRotation: {x: 0.13647063, y: -0.7029213, z: 0.124090835, w: 0.6869345}
+  m_LocalPosition: {x: -285.2, y: 155.59, z: -383.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2145231914}
   m_Father: {fileID: 201034275}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.22, y: -91.564, z: -1.314}
 --- !u!114 &879319990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,7 +686,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -886,7 +887,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 20
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -1626,7 +1627,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -1878,7 +1879,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fadeImage: {fileID: 1030674870}
-  m_graphAlpha: 0
 --- !u!4 &1751058198
 Transform:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class TitleManager : GameManagerBase
 {
     private System.IDisposable m_onAnyButton;//何かのボタンが押されたときに使う変数
-    private bool m_isStated;//ゲームを開始したかどうか
+    private bool m_isStated = false;//ゲームを開始したかどうか
 
     // Start is called before the first frame update
     void Start()
