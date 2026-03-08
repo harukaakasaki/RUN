@@ -13,6 +13,12 @@ public class NewBehaviourScript : MonoBehaviour
     //幅を取得するためのゲームオブジェクト
     [SerializeField] GameObject m_gameObject;
 
+
+    [SerializeField] float wrapEarly = 1.0f; // 早めに回す余白
+    [SerializeField] float spawnGap = 0.0f; // 右側に出すときの余白
+
+
+
     //幅の半分
     float m_halfWidth;
 
@@ -48,6 +54,9 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log($"Update running. pos={m_pos}, speed={Speed}");
+
         //フレームレートに依存しない移動左に移動
         m_pos.x -= Speed * Time.deltaTime;
         //位置を反映
@@ -64,11 +73,13 @@ public class NewBehaviourScript : MonoBehaviour
         float rightWorldX = m_camera.ViewportToWorldPoint(new Vector3(1f, 0.5f, distance)).x;
 
         // オブジェクトの左端がカメラの左端より左に出たら、右端の外側に移動させる
-        if (transform.position.x + m_halfWidth < leftWorldX)
+
+        if (transform.position.x + m_halfWidth < leftWorldX + wrapEarly)
         {
             // オブジェクトの右端をカメラの右端の外側に配置
-            m_pos.x = rightWorldX + m_halfWidth;
+            m_pos.x = rightWorldX + m_halfWidth + spawnGap;
             transform.position = m_pos;
         }
+
     }
 }
