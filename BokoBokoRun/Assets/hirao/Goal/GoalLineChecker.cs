@@ -5,7 +5,7 @@ using UnityEngine;
 public class GoalLineChecker : MonoBehaviour
 {
     //Ú‘±‚³‚ê‚Ä‚¢‚éƒvƒŒƒCƒ„[‚Ì”‚ğ”‚¦‚é‚½‚ß‚Ì‚à‚Ì
-    [SerializeField] private GameFlowManager m_padScript;
+    [SerializeField] private GameFlowManager m_GameFlowManager;
     private int m_padNum;
 
     [SerializeField] int Rank = 0;//‡ˆÊ(‚Ç‚±‚©‚É“n‚·)
@@ -29,7 +29,7 @@ public class GoalLineChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_padNum = m_padScript.GetPadNum();
+        m_padNum = m_GameFlowManager.GetPadNum();
     }
 
     private void OnTriggerEnter(Collider other)

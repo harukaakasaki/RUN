@@ -3684,7 +3684,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -6289,7 +6289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &410406348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6303,7 +6303,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fadeImage: {fileID: 1053081092}
-  m_graphAlpha: 0
 --- !u!4 &410406349
 Transform:
   m_ObjectHideFlags: 0
@@ -11641,6 +11640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_titleManger: {fileID: 214421665}
+  m_selectManger: {fileID: 0}
   m_inGameManger: {fileID: 1256481097}
   m_resultManger: {fileID: 1367477849}
   m_fadeManager: {fileID: 410406348}
@@ -28251,6 +28251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dd2bd42591c2045b8c6d7d55cbd021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GameFlowManager: {fileID: 815724786}
   Rank: 0
 --- !u!65 &1873514560
 BoxCollider:
