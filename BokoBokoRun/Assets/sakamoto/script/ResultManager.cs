@@ -7,6 +7,8 @@ public class ResultManager : GameManagerBase
 {
     private bool m_isBackTitle = false;//タイトルに戻るか
 
+    private string m_bestPlayerTag;//一位になったプレイヤーのタグ
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,5 +34,10 @@ public class ResultManager : GameManagerBase
         {
             m_isBackTitle = true;
         }
+    }
+
+    public void SetBestPlayerTag(string bestPlayer)
+    {
+        m_bestPlayerTag = bestPlayer;
     }
 }
