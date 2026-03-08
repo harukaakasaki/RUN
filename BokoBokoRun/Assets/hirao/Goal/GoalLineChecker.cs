@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GoalLineChecker : MonoBehaviour
 {
+    //接続されているプレイヤーの数を数えるためのもの
+    [SerializeField] private GameFlowManager m_padScript;
+    private int m_padNum;
+
     [SerializeField] int Rank = 0;//順位(どこかに渡す)
     bool isFinish = false;//このbool文がtrueになった時、カメラがScene遷移する
 
@@ -25,15 +29,48 @@ public class GoalLineChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        m_padNum = m_padScript.GetPadNum();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+
+        for(int i = 0; i < m_padNum; i++)
         {
-            Rank++;
-            //いったん最初の人に触れたらゴール移行をする
+         string playerTag = "Player" + (i + 1).ToString();
+            if (other.CompareTag(playerTag))
+            {
+                Rank++;
+                //このRankをPlayerに渡す
+
+                if(Rank == 1)
+                {
+                    //1位のときの処理
+                    //セット関数をセットして、そこに引数でplayerTagを渡す
+
+
+                }
+
+
+                //Rankが最後の人までいったら、シーン遷移する
+                if (Rank >= m_padNum)
+                {
+                    isFinish = true;
+                }
+            }
         }
+
+        //if (other.CompareTag("Player"))
+        //{
+        //    Rank++;
+        //    //このRankをPlayerに渡す
+
+        //    //Rankが最後の人までいったら、シーン遷移する
+        //    if (Rank >= m_padNum)
+        //    {
+        //        isFinish = true;
+        //    }
+
+        //}
     }
 }
