@@ -8,11 +8,11 @@ public sealed class GameFlowManager : MonoBehaviour
 {
     private static GameFlowManager m_instance;
 
-    [SerializeField] private TitleManager m_titleManger;   //タイトルマネージャー
-    [SerializeField] private SelectManager m_selectManger;   //セレクトマネージャー
-    [SerializeField] private InGameManager m_inGameManger;//インゲームマネージャー
-    [SerializeField] private ResultManager m_resultManger;//リザルトマネージャー
-    [SerializeField] private FadeManager m_fadeManager;//フェードマネージャー
+    [SerializeField] private TitleManager m_titleManger;        //タイトルマネージャー
+    [SerializeField] private SelectManager m_selectManger;      //セレクトマネージャー
+    [SerializeField] private InGameManager m_inGameManger;      //インゲームマネージャー
+    [SerializeField] private ResultManager m_resultManger;      //リザルトマネージャー
+    [SerializeField] private FadeManager m_fadeManager;         //フェードマネージャー
 
     //カメラを実際に切り替えるクラスの参照
     [SerializeField] private cameraManager m_cameraManager;

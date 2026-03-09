@@ -15,14 +15,17 @@ public class PlayerPrefabSwitcher : MonoBehaviour
     private void Awake()
     {
         //マネージャーが参照されていなければ
-        if (m_playerInputManager != null)
+        if (m_playerInputManager == null)
         {
             //コンポーネントを取得する
             m_playerInputManager = GetComponent<PlayerInputManager>();
-            //
-            m_playerInputManager.onPlayerJoined += OnPlayerJoined;
-            SetNextPrefab();
         }
+
+        //Joinが起きる前に0番を必ずセット
+        m_nextIndex = 0;
+        SetNextPrefab();
+
+        m_playerInputManager.onPlayerJoined += OnPlayerJoined;
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class PlayerPrefabSwitcher : MonoBehaviour
 
     private void SetNextPrefab()
     {
+        //次のプレハブを設定する
         var nextPrefab = Mathf.Clamp(m_nextIndex, 0, m_playerPrefabs.Length - 1);
         m_playerInputManager.playerPrefab = m_playerPrefabs[nextPrefab];
     }

@@ -33,4 +33,9 @@ public class InGameManager : GameManagerBase
             m_isEnd = true;
         }
     }
+
+    public void OnEnd()
+    {
+        m_isEnd = true;
+    }
 }
