@@ -1,23 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SelectManager : MonoBehaviour
 {
     private bool m_isDecided = false;//決定ボタンを押したかどうか
+    [SerializeField] private GameFlowManager m_gameFlowManager;
+
+    //プレイヤーのスポーン位置
+    [SerializeField] Transform[] m_spawnPositions;
+
+    enum PlayerNum
+    {
+        Player1,
+        Player2,
+        Player3,
+        Player4,
+        Num
+    }
+
+    private void Awake()
+    {
+
+    }
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    { 
+
     }
 
     // Update is called once per frame
     void Update()
     {
 #if UNITY_EDITOR
-        Debug();
+        //Debug();
 #endif
     }
 
@@ -26,11 +46,22 @@ public class SelectManager : MonoBehaviour
         return m_isDecided;
     }
 
-    private void Debug()
+    //private void Debug()
+    //{
+    //    if (Keyboard.current.zKey.wasPressedThisFrame)
+    //    {
+    //        m_isDecided = true;
+    //    }
+    //}
+
+    void OnPlayerJoined(PlayerInput input)
     {
-        if (Keyboard.current.zKey.wasPressedThisFrame)
-        {
-            m_isDecided = true;
-        }
+        Debug.Log("OnPlayerJoined called: " + input.playerIndex);
+
+        int index = input.playerIndex;//プレイヤーの通し番号を取得
+
+        //スポーン位置へ移動
+        input.transform.position = m_spawnPositions[index].position;
+        input.transform.rotation = m_spawnPositions[index].rotation;
     }
 }

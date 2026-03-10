@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3bb09ccf2aca780419fd853243b420d9, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Player4
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 3bb09ccf2aca780419fd853243b420d9, type: 3}
       propertyPath: m_Controller
