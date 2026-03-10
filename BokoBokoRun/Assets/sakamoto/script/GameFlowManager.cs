@@ -254,4 +254,9 @@ public sealed class GameFlowManager : MonoBehaviour
     {
         return m_padNum;
     }
+
+    public Scene GetNowScene()
+    {
+        return m_scene;
+    }
 }
