@@ -48,6 +48,8 @@ public class GoalLineChecker : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
+        //Debug.Log("当たったよプレイヤーと%s",other.C);
+
         for(int i = 0; i < m_padNum; i++)
         {
          string playerTag = "Player" + (i + 1).ToString();
@@ -63,8 +65,7 @@ public class GoalLineChecker : MonoBehaviour
                 {
                     //1位のときの処理
                     //セット関数をセットして、そこに引数でplayerTagを渡す
-
-
+                    Debug.Log("あなたの順位は" + m_Rank + "位です");
                 }
 
 
