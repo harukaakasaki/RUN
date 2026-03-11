@@ -6,25 +6,18 @@ using static UnityEditor.PlayerSettings;
 
 public class Controller : MonoBehaviour
 {
-    //定数クラス
-    static class Constants
-    {
-        public const float kSpeed = 10.0f;//移動速度
-        public const float kJumpPower = 300.0f;//ジャンプ力
-    }
+    /// <summary>
+    /// 外部からは読み取り専用で中身はこのスクリプトで書き換え可能な書き方(get;private set;)
+    /// </summary>
+    public Vector3 MoveInput { get; private set;  }
 
     //項目名を設定
     [Header("Input Actions (.inputactions asset)")]
     //[SerializeField] private InputActionAsset m_actionsAsset;
 
-    //移動速度
-    private float m_speed = Constants.kSpeed;
     //移動
     private InputAction m_moveAction;
-    //Rigidbody
-    private Rigidbody m_rigidbody;
-    //フェードマネージャー
-    private FadeManager m_fadeManager;
+
     //PlayerInput
     private PlayerInput m_playerInput;
 
@@ -32,7 +25,6 @@ public class Controller : MonoBehaviour
     {
         //コンポーネントを取得
         m_playerInput = GetComponent<PlayerInput>();
-        m_rigidbody = GetComponent<Rigidbody>();
 
         //各プレイヤーに紐づくactionsからアクションを取得
         m_moveAction = m_playerInput.actions["Move"];
@@ -47,15 +39,9 @@ public class Controller : MonoBehaviour
         var moveValue = m_moveAction.ReadValue<Vector2>();
         //移動ベクトルの大きさを1に制限
         moveValue = Vector2.ClampMagnitude(moveValue, 1.0f);
-        //移動ベクトルの計算
-        var move = new Vector3(moveValue.x, 0.0f, moveValue.y) * m_speed * Time.deltaTime;
-
-        //移動
-        transform.Translate(move, Space.World);
-
-        if (m_moveAction.WasPressedThisFrame())
-        {
-            Debug.Log("Move");
-        }
+       
+        MoveInput = new Vector3(moveValue.x,0,moveValue.y);
+  
+   
     }
 }

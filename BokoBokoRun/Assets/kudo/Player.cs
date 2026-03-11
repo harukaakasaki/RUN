@@ -16,16 +16,14 @@ public class Player : C
     private Controller m_controller;
     PlayerState m_state;
     Animator m_animator;
-    //回転
-    float m_rotateSpeed = 7.0f;
+
+    Vector3 InitPos = new Vector3(0,0,0);//初期座標
+
     
     private Vector3 m_playerPos;
     [SerializeField] private Vector3 m_spawnPos;
     private Vector3 m_prevPos;
     private Vector3 m_targetPos;
-
-    //スムージング用
-    private float m_smoothedSpeed;
 
     // ノックバック用オフセット
     private Vector3 m_knockbackOffset = Vector3.zero;
@@ -36,6 +34,9 @@ public class Player : C
     void Start()
     {
         m_state = PlayerState.Idle;
+        //初期座標の更新
+        transform.position = InitPos;
+
        
         // Animatorコンポーネントを取得
         m_animator = GetComponent<Animator>();
@@ -55,41 +56,65 @@ public class Player : C
 
     protected override void Update()
     {
+        //TODO
+        //プレイヤーの移動
+        //プレイヤーの回転
+        //プレイヤーのふっとばし
+
+        Vector3 move = new Vector3();
+
         //  入力ターゲット位置を取得
-        if (m_controller != null)
+        if (m_controller != null)//現在はmoveInputをそのまま私
         {
-            m_targetPos = m_controller.transform.position;
+            m_targetPos = m_controller.MoveInput.normalized;//padの入力を更新
+
+            //移動量//そのフレームの
+            move = m_controller.MoveInput;
         }
 
-        //自身の位置をターゲットに追随 + ノックバックオフセットを適用
-        transform.position = m_targetPos + m_knockbackOffset;
+        if(move.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(move);
 
-        //速度計算
-        Vector3 now = transform.position;
-        Vector3 delta = now - m_prevPos; // 水平成分のみ見たいなら y=0 に
-        delta.y = 0f;
+            transform.rotation = Quaternion.Slerp(transform.rotation,
+                targetRot, 0.5f);
+        }
 
-        float rawSpeed = (Time.deltaTime > 0f) ? (delta.magnitude / Time.deltaTime) : 0f;
-        m_smoothedSpeed = Mathf.Lerp(m_smoothedSpeed, rawSpeed, 0.2f);
-        
-        bool isMoving = m_smoothedSpeed > 0.05f;
-        m_state = isMoving ? PlayerState.Move : PlayerState.Idle;
+
+        //targetPosを小さくする
+        m_targetPos = m_targetPos * 0.01f;
+
+        //自身の位置を元の座標+ターゲット + ノックバックオフセットを適用
+        transform.position = transform.position + m_targetPos + m_knockbackOffset;
+
+        if(move.sqrMagnitude > 0.001f)//そのフレームで移動していたらStateを変える
+        {
+            m_state = PlayerState.Move;
+            Debug.Log("m_stateはmoveです");
+        }
+        else
+        {
+            m_state = PlayerState.Idle;
+            Debug.Log("m_stateはIdleです");
+        }
+
+
 
         if (m_animator)
         {
-            m_animator.SetBool(IsMovingHash, isMoving);
+            m_animator.SetBool(IsMovingHash, m_state ==  PlayerState.Move);//動いているかをboolでanimatorのセット
         }
 
-        // 回転移動しているときだけ
-        if (delta.sqrMagnitude > 0.0001f)
-        {
-            Vector3 dir = delta.normalized;
-            transform.forward = Vector3.Slerp(transform.forward, dir, Time.deltaTime * m_rotateSpeed);
-        }
+        //// 回転移動しているときだけ
+        //if (delta.sqrMagnitude > 0.0001f)
+        //{
+        //    Vector3 dir = delta.normalized;
+        //    transform.forward = Vector3.Slerp(transform.forward, dir, Time.deltaTime * m_rotateSpeed);
+        //}
 
         // 前フレーム位置を更新
-        m_prevPos = now;
-        
+       // m_prevPos = now;//使わない
+        //使ってない
         Tick();
     }
     // トリガーで敵と接触したときの処理はクラスレベルで定義する
