@@ -4964,6 +4964,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.07, z: 0}
+--- !u!65 &207701923
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207701918}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &210535751
 GameObject:
   m_ObjectHideFlags: 0
@@ -10590,6 +10611,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.0437016
       objectReference: {fileID: 0}
+    - target: {fileID: -5415430821220795485, guid: 7e8934533aa31e1418de39aa6842254d, type: 3}
+      propertyPath: m_TagString
+      value: GameEnemy
+      objectReference: {fileID: 0}
     - target: {fileID: -5370525323545450450, guid: 7e8934533aa31e1418de39aa6842254d, type: 3}
       propertyPath: m_Quality
       value: 0
@@ -10777,6 +10802,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7e8934533aa31e1418de39aa6842254d, type: 3}
       propertyPath: m_Name
       value: Happy Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7e8934533aa31e1418de39aa6842254d, type: 3}
+      propertyPath: m_TagString
+      value: GameEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 1189529853000058984, guid: 7e8934533aa31e1418de39aa6842254d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11058,6 +11087,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e8934533aa31e1418de39aa6842254d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 207701919}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7e8934533aa31e1418de39aa6842254d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 207701923}
   m_SourcePrefab: {fileID: 100100000, guid: 7e8934533aa31e1418de39aa6842254d, type: 3}
 --- !u!1 &491100217
 GameObject:
