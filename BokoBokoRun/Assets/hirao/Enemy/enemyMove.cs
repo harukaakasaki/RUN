@@ -9,7 +9,7 @@ public enum EnemyState
 }
 
 
-public class enemyMove : C
+public class enemyMove : Character
 {
     //Enemy‚Ìó‘Ô
     public EnemyState m_State = EnemyState.Enter;

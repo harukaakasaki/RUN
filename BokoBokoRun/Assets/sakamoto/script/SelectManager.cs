@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SelectManager : MonoBehaviour
@@ -63,5 +65,7 @@ public class SelectManager : MonoBehaviour
         //スポーン位置へ移動
         input.transform.position = m_spawnPositions[index].position;
         input.transform.rotation = m_spawnPositions[index].rotation;
+
+        Debug.Log("プレイヤーの位置をセレクトシーンへ移動");
     }
 }

@@ -9,7 +9,7 @@ public enum ResultEnemyState
 }
 
 
-public class ResltEnemy : C
+public class ResltEnemy : Character
 {
     //Enemyの状態
     public ResultEnemyState m_State = ResultEnemyState.Enter;
