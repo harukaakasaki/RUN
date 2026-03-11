@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 // キャラクターの基本クラス
 //C抽象クラスってこと
-public abstract class C : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     //グローバル変数-------------------------------------------------
     [Header("グローバル変数")]

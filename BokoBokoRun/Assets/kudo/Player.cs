@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -12,8 +13,13 @@ public enum PlayerState
     Move,
 }
 
-public class Player : C
+public class Player : Character
 {
+    static class Constants
+    {
+        public const float kMoveSpeed = 6.0f;
+    }
+
     private Controller m_controller;
     PlayerState m_state;
     Animator m_animator;
@@ -37,7 +43,7 @@ public class Player : C
     {
         m_state = PlayerState.Idle;
         //初期座標の更新
-        transform.position = InitPos;
+        //transform.position = InitPos;
 
         //GameFlowManagerコンポーネントを取得
         m_flowManager = FindObjectOfType<GameFlowManager>();
@@ -53,8 +59,8 @@ public class Player : C
             Debug.LogError("Animator が見つかりません.");
         }
         //初期位置を保存
-        m_playerPos = m_spawnPos;
-        transform.position = m_playerPos;
+        //m_playerPos = m_spawnPos;
+        //transform.position = m_playerPos;
 
         // 同じオブジェクトにアタッチされているControllerを取得
         m_controller = GetComponent<Controller>();
@@ -96,8 +102,8 @@ public class Player : C
                     targetRot, 0.5f);
             }
 
-            //targetPosを小さくする
-            m_targetPos = m_targetPos * 0.01f;
+            //0.01倍していたため移動が極端に遅くなっていた。移動速度はMoveSpeedで制御する
+            m_targetPos = move.normalized * Constants.kMoveSpeed * Time.deltaTime;
 
             //自身の位置を元の座標+ターゲット + ノックバックオフセットを適用
             transform.position = transform.position + m_targetPos + m_knockbackOffset;

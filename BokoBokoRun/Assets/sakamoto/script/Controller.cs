@@ -41,7 +41,5 @@ public class Controller : MonoBehaviour
         moveValue = Vector2.ClampMagnitude(moveValue, 1.0f);
        
         MoveInput = new Vector3(moveValue.x,0,moveValue.y);
-  
-   
     }
 }

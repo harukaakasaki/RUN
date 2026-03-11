@@ -37,7 +37,7 @@ public class InGameManager : GameManagerBase
         //m_GoalLineChecker.GetGoalNum();
 
         //ƒJƒƒ‰‚ğ“®‚©‚·
-        m_TargetMove.MoveCamera(0.005f);
+        m_TargetMove.MoveCamera(0.03f);
 
     }
 
