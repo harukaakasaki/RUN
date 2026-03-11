@@ -13,7 +13,11 @@ public class targetMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 move = new Vector3(0.005f, 0.0f, 0.0f);
+     
+    }
+    public void MoveCamera(float x)
+    {
+        Vector3 move = new Vector3(x, 0.0f, 0.0f);
 
         transform.position += move;
     }
