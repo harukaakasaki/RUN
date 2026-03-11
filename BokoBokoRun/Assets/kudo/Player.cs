@@ -20,7 +20,7 @@ public class Player : C
 
     Vector3 InitPos = new Vector3(0,0,0);//初期座標
 
-    [SerializeField] private GameFlowManager m_flowManager;
+    private GameFlowManager m_flowManager;
     
     private Vector3 m_playerPos;
     [SerializeField] private Vector3 m_spawnPos;
@@ -39,7 +39,13 @@ public class Player : C
         //初期座標の更新
         transform.position = InitPos;
 
-       
+        //GameFlowManagerコンポーネントを取得
+        m_flowManager = FindObjectOfType<GameFlowManager>();
+        if (m_flowManager == null)
+        {
+            Debug.LogError("flowManager が見つかりません.");
+        }
+
         // Animatorコンポーネントを取得
         m_animator = GetComponent<Animator>();
         if (m_animator == null)
