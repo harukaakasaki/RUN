@@ -6,9 +6,11 @@ public class GoalLineChecker : MonoBehaviour
 {
     //接続されているプレイヤーの数を数えるためのもの
     [SerializeField] private GameFlowManager m_GameFlowManager;
+    [SerializeField] private InGameManager m_InGameManager;
     private int m_padNum;
+   
 
-    [SerializeField] int Rank = 0;//順位(どこかに渡す)
+    [SerializeField] int m_Rank = 0;//順位(どこかに渡す)
     bool isFinish = false;//このbool文がtrueになった時、カメラがScene遷移する
 
     //問題点
@@ -23,7 +25,8 @@ public class GoalLineChecker : MonoBehaviour
     void Start()
     {
         //最初に受け取る
-
+        m_padNum = m_GameFlowManager.GetPadNum();
+      
     }
 
     // Update is called once per frame
@@ -31,6 +34,16 @@ public class GoalLineChecker : MonoBehaviour
     {
         m_padNum = m_GameFlowManager.GetPadNum();
     }
+    /// <summary>
+    /// ゴールした人数
+    /// </summary>
+    public int GetGoalNum()
+    {
+       return m_Rank;
+    }
+
+  
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -40,10 +53,13 @@ public class GoalLineChecker : MonoBehaviour
          string playerTag = "Player" + (i + 1).ToString();
             if (other.CompareTag(playerTag))
             {
-                Rank++;
+                m_Rank++;
                 //このRankをPlayerに渡す
 
-                if(Rank == 1)
+                //ゴールした分、生き残っている人数を減らす
+                m_InGameManager.DecreaseAliveNum();
+
+                if (m_Rank == 1)
                 {
                     //1位のときの処理
                     //セット関数をセットして、そこに引数でplayerTagを渡す
@@ -53,7 +69,7 @@ public class GoalLineChecker : MonoBehaviour
 
 
                 //Rankが最後の人までいったら、シーン遷移する
-                if (Rank >= m_padNum)
+                if (m_Rank >= m_padNum)//ぶっ飛ばされた人の数分を減らす
                 {
                     isFinish = true;
                 }
