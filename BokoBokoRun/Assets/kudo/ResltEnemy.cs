@@ -16,7 +16,7 @@ public class ResltEnemy : C
     int m_count = 0;
     bool isRotate = false;
     Vector3 m_Respawn = new Vector3(0.0f, 0.0f, 0.0f);
-    int m_FrameCount = 0;
+    int m_Timer = 0;
     //敵を戻したかどうか
     bool m_isRespawn = false;
     //関数
@@ -57,30 +57,38 @@ public class ResltEnemy : C
 
         //最初のポジションを取得する
         m_Respawn = transform.position;
-        m_FrameCount = 0;
-        m_isRespawn = false;
+        m_Timer = 0;
+        //m_isRespawn = false;
 
     }
 
     // Update is called once per frame
     protected override void Update()//毎フレーム更新
     {
-        m_FrameCount++;
+
         Tick();
         this.transform.position += m_Velocity;
 
         //最初のポジションを取得する
-        m_CharacterPos = transform.position;
+        //m_CharacterPos = transform.position;
 
         //指定したフレーム後に最初に取得したポジションに戻る
-        if(!m_isRespawn && m_FrameCount >= 5f)
+        if(m_Timer >= 140f)
         {
+            Debug.Log("gfege");
             transform.position = m_Respawn;
-
-            
+            m_Timer = 0;
         }
-
+       
     }
+
+    private void FixedUpdate()
+    {
+        //タイマの更新
+        m_Timer++;
+    }
+
+
     protected override void Tick()//enemyの動き
     {
         if (isRotate)
