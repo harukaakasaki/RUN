@@ -37,7 +37,7 @@ public class SelectManager : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        //Debug();
+        DebugProcessing();
 #endif
     }
 
@@ -46,13 +46,13 @@ public class SelectManager : MonoBehaviour
         return m_isDecided;
     }
 
-    //private void Debug()
-    //{
-    //    if (Keyboard.current.zKey.wasPressedThisFrame)
-    //    {
-    //        m_isDecided = true;
-    //    }
-    //}
+    private void DebugProcessing()
+    {
+        if (Keyboard.current.zKey.wasPressedThisFrame)
+        {
+            m_isDecided = true;
+        }
+    }
 
     void OnPlayerJoined(PlayerInput input)
     {
