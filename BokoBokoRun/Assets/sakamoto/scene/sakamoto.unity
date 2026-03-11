@@ -442,7 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GameFlowManager: {fileID: 1951619562}
-  m_GoalLineChecker: {fileID: 0}
+  m_GoalLineChecker: {fileID: 958471986}
   m_TargetMove: {fileID: 0}
 --- !u!4 &151515946 stripped
 Transform:
