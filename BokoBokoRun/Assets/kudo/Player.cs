@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,6 +20,7 @@ public class Player : C
 
     Vector3 InitPos = new Vector3(0,0,0);//初期座標
 
+    [SerializeField] private GameFlowManager m_flowManager;
     
     private Vector3 m_playerPos;
     [SerializeField] private Vector3 m_spawnPos;
@@ -56,53 +58,59 @@ public class Player : C
 
     protected override void Update()
     {
-        //TODO
-        //プレイヤーの移動
-        //プレイヤーの回転
-        //プレイヤーのふっとばし
+        
+    }
 
-        Vector3 move = new Vector3();
-
-        //  入力ターゲット位置を取得
-        if (m_controller != null)//現在はmoveInputをそのまま私
+    private void FixedUpdate()
+    {
+        //インゲームの時のみ処理を行う
+        if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame)
         {
-            m_targetPos = m_controller.MoveInput.normalized;//padの入力を更新
+            //TODO
+            //プレイヤーの移動
+            //プレイヤーの回転
+            //プレイヤーのふっとばし
 
-            //移動量//そのフレームの
-            move = m_controller.MoveInput;
+            Vector3 move = new Vector3();
+
+            //  入力ターゲット位置を取得
+            if (m_controller != null)//現在はmoveInputをそのまま私
+            {
+                m_targetPos = m_controller.MoveInput.normalized;//padの入力を更新
+
+                //移動量//そのフレームの
+                move = m_controller.MoveInput;
+            }
+
+            if (move.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(move);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation,
+                    targetRot, 0.5f);
+            }
+
+            //targetPosを小さくする
+            m_targetPos = m_targetPos * 0.01f;
+
+            //自身の位置を元の座標+ターゲット + ノックバックオフセットを適用
+            transform.position = transform.position + m_targetPos + m_knockbackOffset;
+
+            if (move.sqrMagnitude > 0.01f)//そのフレームで移動していたらStateを変える
+            {
+                m_state = PlayerState.Move;
+                Debug.Log("m_stateはmoveです");
+            }
+            else
+            {
+                m_state = PlayerState.Idle;
+                Debug.Log("m_stateはIdleです");
+            }
         }
-
-        if(move.sqrMagnitude > 0.001f)
-        {
-            Quaternion targetRot = Quaternion.LookRotation(move);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation,
-                targetRot, 0.5f);
-        }
-
-
-        //targetPosを小さくする
-        m_targetPos = m_targetPos * 0.01f;
-
-        //自身の位置を元の座標+ターゲット + ノックバックオフセットを適用
-        transform.position = transform.position + m_targetPos + m_knockbackOffset;
-
-        if(move.sqrMagnitude > 0.01f)//そのフレームで移動していたらStateを変える
-        {
-            m_state = PlayerState.Move;
-            Debug.Log("m_stateはmoveです");
-        }
-        else
-        {
-            m_state = PlayerState.Idle;
-            Debug.Log("m_stateはIdleです");
-        }
-
-
 
         if (m_animator)
         {
-            m_animator.SetBool(IsMovingHash, m_state ==  PlayerState.Move);//動いているかをboolでanimatorのセット
+            m_animator.SetBool(IsMovingHash, m_state == PlayerState.Move);//動いているかをboolでanimatorのセット
         }
 
         //// 回転移動しているときだけ
@@ -113,10 +121,11 @@ public class Player : C
         //}
 
         // 前フレーム位置を更新
-       // m_prevPos = now;//使わない
+        // m_prevPos = now;//使わない
         //使ってない
         Tick();
     }
+
     // トリガーで敵と接触したときの処理はクラスレベルで定義する
 
     private void OnTriggerEnter(Collider other)

@@ -2797,7 +2797,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 8942640760005622162, guid: add70a03e02a1614a86f2d991baab555, type: 3}
+  m_PlayerPrefab: {fileID: 4852126040732759613, guid: 2bf0ceba705483e4580fb62612bce134, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -2821,7 +2821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerInputManager: {fileID: 884531197}
   m_playerPrefabs:
-  - {fileID: 8942640760005622162, guid: add70a03e02a1614a86f2d991baab555, type: 3}
+  - {fileID: 4852126040732759613, guid: 2bf0ceba705483e4580fb62612bce134, type: 3}
   - {fileID: 1203150191352157626, guid: 906f57cdae9e6344099113425b4e8c76, type: 3}
   - {fileID: 2794864677108834484, guid: fb363afe248de3649b2a9011ca981fd1, type: 3}
   - {fileID: 4474017872564009907, guid: 792a0a8b064fd4549b6f6d87ff6ee88a, type: 3}
