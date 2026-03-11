@@ -87,7 +87,7 @@ public class Player : C
         //自身の位置を元の座標+ターゲット + ノックバックオフセットを適用
         transform.position = transform.position + m_targetPos + m_knockbackOffset;
 
-        if(move.sqrMagnitude > 0.001f)//そのフレームで移動していたらStateを変える
+        if(move.sqrMagnitude > 0.01f)//そのフレームで移動していたらStateを変える
         {
             m_state = PlayerState.Move;
             Debug.Log("m_stateはmoveです");
