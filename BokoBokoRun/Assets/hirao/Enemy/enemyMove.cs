@@ -22,6 +22,7 @@ public class enemyMove : Character
       m_Velocity = new Vector3(0.01f, 0.0f, 0.0f);
     }
     private void Entering()//出場中
+    
     {
         m_count++;
         //角度によって、進む向きを変える
@@ -55,14 +56,16 @@ public class enemyMove : Character
     // Update is called once per frame
     protected override void Update()//毎フレーム更新
     {
-        Tick();
+     
       
 
     }
 
     private void FixedUpdate()
     {
+        Tick();
         this.transform.position += m_Velocity;
+
     }
     protected override void Tick()//enemyの動き
     {
