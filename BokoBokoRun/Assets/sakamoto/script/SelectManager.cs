@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,11 @@ public class SelectManager : MonoBehaviour
     //プレイヤーのスポーン位置
     [SerializeField] Transform[] m_spawnPositions;
 
+    // 参加したプレイヤーのリスト
+    private List<PlayerInput> m_joinedPlayers = new List<PlayerInput>();
+
+
+
     enum PlayerNum
     {
         Player1,
@@ -23,6 +29,8 @@ public class SelectManager : MonoBehaviour
         Player4,
         Num
     }
+  
+   
 
     private void Awake()
     {
@@ -32,7 +40,7 @@ public class SelectManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-
+       
     }
 
     // Update is called once per frame
@@ -61,11 +69,23 @@ public class SelectManager : MonoBehaviour
         Debug.Log("OnPlayerJoined called: " + input.playerIndex);
 
         int index = input.playerIndex;//プレイヤーの通し番号を取得
-
         //スポーン位置へ移動
         input.transform.position = m_spawnPositions[index].position;
         input.transform.rotation = m_spawnPositions[index].rotation;
 
         Debug.Log("プレイヤーの位置をセレクトシーンへ移動");
+        //保存する
+        m_joinedPlayers.Add(input);
+        Debug.Log("★★★ プレイヤー追加後のCount: " + m_joinedPlayers.Count + " ★★★");
     }
+
+    public List<PlayerInput> GetJoinedPlayers()
+    {
+       
+        Debug.Log("★★★ GetJoinedPlayersのCount: " + m_joinedPlayers.Count + " ★★★");
+        return m_joinedPlayers;
+
+    }
+
+
 }

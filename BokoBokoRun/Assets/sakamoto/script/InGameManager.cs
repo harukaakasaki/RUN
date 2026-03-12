@@ -9,6 +9,13 @@ public class InGameManager : GameManagerBase
     [SerializeField] private GameFlowManager m_GameFlowManager;
     [SerializeField] private GoalLineChecker m_GoalLineChecker;
     [SerializeField] private targetMove m_TargetMove;
+    //ゲームシーンのプレイヤーのスポーン位置
+    [SerializeField] Transform[] m_spawnPositionsOfGame;
+
+
+    // 参加したプレイヤーのリスト
+    private List<PlayerInput> m_joinedPlayers = new List<PlayerInput>();
+
     private int m_padNum;
     private int m_aliveNum;//誰が生き残っているか
 
@@ -72,5 +79,30 @@ public class InGameManager : GameManagerBase
     public void OnEnd()
     {
         m_isEnd = true;
+    }
+
+
+    /// <summary>
+    /// GameSceneに切り替わったとき、プレイヤーの位置をゲームシーンのスポーン位置へ移動させる
+    /// </summary>
+    public void SetInGamePlayers()
+    {
+        Debug.Log("プレイヤーをInGameに移動中です");
+        for (int i = 0; i < m_joinedPlayers.Count; i++)
+        {
+            var input = m_joinedPlayers[i];
+            int index = input.playerIndex;//プレイヤーの通し番号を取得
+
+            //スポーン位置へ移動
+            input.transform.position = m_spawnPositionsOfGame[index].position;
+            input.transform.rotation = m_spawnPositionsOfGame[index].rotation;
+            Debug.Log("プレイヤーの位置をゲームシーンへ移動");
+        }
+    }
+
+    public void SetPlayerInput(List<PlayerInput> list)
+    {
+        m_joinedPlayers = list;
+        Debug.Log("プレイヤーのリストを受け取ったよ");
     }
 }

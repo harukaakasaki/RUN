@@ -8,11 +8,18 @@ public sealed class GameFlowManager : MonoBehaviour
 {
     private static GameFlowManager m_instance;
 
-    [SerializeField] private TitleManager m_titleManger;        //タイトルマネージャー
+    [SerializeField] private TitleManager m_titleManager;        //タイトルマネージャー
     [SerializeField] private SelectManager m_selectManger;      //セレクトマネージャー
     [SerializeField] private InGameManager m_inGameManger;      //インゲームマネージャー
     [SerializeField] private ResultManager m_resultManger;      //リザルトマネージャー
     [SerializeField] private FadeManager m_fadeManager;         //フェードマネージャー
+
+    // 参加したプレイヤーのリスト//保存用
+    private List<PlayerInput> m_joinedPlayers = new List<PlayerInput>();
+
+
+    //シーンを切り替えるときにplayersを移動させる先の位置
+    [SerializeField] private Transform[] m_spawnPositions;
 
     //カメラを実際に切り替えるクラスの参照
     [SerializeField] private cameraManager m_cameraManager;
@@ -36,7 +43,7 @@ public sealed class GameFlowManager : MonoBehaviour
     void Start()
     {
         //念のためマネージャーをすべて非アクティブ化する
-        m_titleManger.enabled = false;
+        m_titleManager.enabled = false;
         m_inGameManger.enabled = false;
         m_resultManger.enabled = false;
 
@@ -82,7 +89,7 @@ public sealed class GameFlowManager : MonoBehaviour
                 //タイトルマネージャーからゲームスタートされてるかを取得して
                 //スタートされている&フェード中じゃなければセレクトシーンに遷移する
                 if (!m_isTransitioning &&
-                    m_titleManger.GetIsStart() &&
+                    m_titleManager.GetIsStart() &&
                     !m_fadeManager.m_isFading)
                 {
                     m_isTransitioning = true;
@@ -136,11 +143,15 @@ public sealed class GameFlowManager : MonoBehaviour
     {
         //まずフェードアウトを行う
         yield return m_fadeManager.FadeOut(0.0f, 1.0f);
-
+        //PlayerInputの情報を渡す
+        m_joinedPlayers = m_selectManger.GetJoinedPlayers();
         //暗転中にマネージャーを切り替え
         ChangeScene(Scene.InGame);
         //カメラも切り替え
         m_cameraManager.SetGame();
+        //プレイヤーを移動させる
+        m_inGameManger.SetPlayerInput(m_joinedPlayers);
+        m_inGameManger.SetInGamePlayers();
 
         //カメラを完全に切り替えるために1フレーム待つ
         yield return null;
@@ -160,7 +171,7 @@ public sealed class GameFlowManager : MonoBehaviour
         ChangeScene(Scene.Select);
         //カメラも切り替える
         m_cameraManager.SetSelect();
-        //プレイヤーを移動させる
+      
 
         //カメラを完全に切り替えるために1フレーム待つ
         yield return null;
@@ -220,7 +231,7 @@ public sealed class GameFlowManager : MonoBehaviour
                 //一旦すべてのマネージャーを非アクティブにする
                 AllEnabled();
                 //その後タイトルマネージャーのみをアクティブ化する
-                m_titleManger.enabled = true;
+                m_titleManager.enabled = true;
                 break;
             case Scene.Select://セレクト
                 AllEnabled();
@@ -242,7 +253,7 @@ public sealed class GameFlowManager : MonoBehaviour
     /// </summary>
     private void AllEnabled()
     {
-        m_titleManger.enabled = false;
+        m_titleManager.enabled = false;
         m_selectManger.enabled = false;
         m_inGameManger.enabled = false;
         m_resultManger.enabled = false;
