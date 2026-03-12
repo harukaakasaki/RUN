@@ -531,13 +531,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34349ab5973c0444bf58b1e262885fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BgmSource: {fileID: 0}
-  SeSource: {fileID: 0}
-  TitleBGM: {fileID: 0}
-  InGameBGM: {fileID: 0}
-  ResultBGM: {fileID: 0}
-  DecisionSE: {fileID: 0}
-  HitSE: {fileID: 0}
+  BgmSource: {fileID: 2120648514}
+  SeSource: {fileID: 2120648513}
+  TitleBGM: {fileID: 8300000, guid: 7c1c0cdb82615744991d43baf1f20049, type: 3}
+  SelectBGM: {fileID: 8300000, guid: f186ce7a31f024249a7abd78d706fd29, type: 3}
+  InGameBGM: {fileID: 8300000, guid: 8a8b68140b3769d4984da753deaca5ee, type: 3}
+  ResultBGM: {fileID: 8300000, guid: 8d9a64a1482cd934b947c20be73dead6, type: 3}
+  DecisionSE: {fileID: 8300000, guid: 7b90831f2c6f9de4bb5c6a971b5255ef, type: 3}
+  RunSE: {fileID: 8300000, guid: 180a4ef7282c69342a1b4de85bb5d4aa, type: 3}
+  CountSE: {fileID: 8300000, guid: a0f7b4b58015be24d97efd6565818f56, type: 3}
+  HitSE: {fileID: 8300000, guid: 6e8c30c9f074c2d418e0060dcc81777f, type: 3}
+  BreakObjectSE: {fileID: 8300000, guid: 79982a45ad2d9f048bb7990379467c81, type: 3}
+  GoalSE: {fileID: 8300000, guid: 7f89a2b91c718284087d742a326562fe, type: 3}
+  ChangeSceneSE: {fileID: 8300000, guid: 22b0ea618508d974a9dfeb3faf0fe6a8, type: 3}
 --- !u!4 &2120648516
 Transform:
   m_ObjectHideFlags: 0
