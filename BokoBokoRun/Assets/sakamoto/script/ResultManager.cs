@@ -23,7 +23,6 @@ public class ResultManager : GameManagerBase
 
     private GameObject m_winnerPlayer;//1位になったプレイヤーのオブジェクト
 
-
     private void OnEnable()
     {
         //勝者がいた場合の処理
@@ -63,7 +62,7 @@ public class ResultManager : GameManagerBase
     {
 #if UNITY_EDITOR 
         Debug();
-#endif
+#endif 
     }
 
     public bool IsBackTitle()
@@ -94,5 +93,17 @@ public class ResultManager : GameManagerBase
     public void OnAllLose()
     {
         m_isAllLoser = true;
+    }
+
+    /// <summary>
+    /// Aボタンが押されたときにInputManagerが勝手に呼んでくれる関数
+    /// </summary>
+    /// <param name="ctx">InputActionクラスのCallbackContextという構造体</param>
+    public void OnSubmit(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            m_isBackTitle = true;
+        }
     }
 }
