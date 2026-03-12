@@ -12,7 +12,7 @@ public enum ResultEnemyState
 public class ResltEnemy : Character
 {
     //Enemyの状態
-    public ResultEnemyState m_State = ResultEnemyState.Enter;
+    public ResultEnemyState m_State = ResultEnemyState.Active;
     int m_count = 0;
     bool isRotate = false;
     Vector3 m_Respawn = new Vector3(0.0f, 0.0f, 0.0f);
@@ -23,28 +23,9 @@ public class ResltEnemy : Character
     private void Move()//移動中
     {
 
-        m_Velocity = new Vector3(0.01f, 0.0f, 0.0f);
+        m_Velocity = new Vector3(5.0f, 0.0f, 0.0f);
     }
-    private void Entering()//出場中
-    {
-        m_count++;
-        //角度によって、進む向きを変える
-        Quaternion rot = transform.rotation;//現在の角度を入手
-        if (rot == Quaternion.identity)//どっちか2分の1
-        {
-            m_Velocity = new Vector3(0.0f, 0.0f, 0.005f);
-        }
-        else
-        {
-            m_Velocity = new Vector3(0.0f, 0.0f, -0.005f);
-        }
-        if (m_count > 1000)
-        {
-            m_State = ResultEnemyState.Active;
-            
-
-        }
-    }
+    
 
 
 
@@ -66,19 +47,7 @@ public class ResltEnemy : Character
     protected override void Update()//毎フレーム更新
     {
 
-        Tick();
-        this.transform.position += m_Velocity;
-
-        //最初のポジションを取得する
-        //m_CharacterPos = transform.position;
-
-        //指定したフレーム後に最初に取得したポジションに戻る
-        if(m_Timer >= 140f)
-        {
-            Debug.Log("gfege");
-            transform.position = m_Respawn;
-            m_Timer = 0;
-        }
+      
        
     }
 
@@ -86,6 +55,19 @@ public class ResltEnemy : Character
     {
         //タイマの更新
         m_Timer++;
+        Tick();
+        this.transform.position += m_Velocity;
+
+        //最初のポジションを取得する
+        //m_CharacterPos = transform.position;
+
+        //指定したフレーム後に最初に取得したポジションに戻る
+        //if (m_Timer >= 140f)
+        //{
+        //    Debug.Log("gfege");
+        //    transform.position = m_Respawn;
+        //    m_Timer = 0;
+        //}
     }
 
 
@@ -100,9 +82,6 @@ public class ResltEnemy : Character
 
         switch (m_State)
         {
-            case ResultEnemyState.Enter:
-                Entering();
-                break;
             case ResultEnemyState.Active:
                 Move();
                 break;
