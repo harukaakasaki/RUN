@@ -49,7 +49,7 @@ public class RoopStage : MonoBehaviour
         }
         else
         {
-            if (this.transform.position.x <= transPos.x)
+            if (this.transform.position.z <= transPos.z)
             {
                 this.transform.position = prevPos;
             }
