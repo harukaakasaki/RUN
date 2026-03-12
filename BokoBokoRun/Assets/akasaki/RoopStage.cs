@@ -6,15 +6,18 @@ public class RoopStage : MonoBehaviour
 {
     float speed = 10.0f;
     float stageWidth = 25f;
+    Vector3 transPos = new Vector3(20,0,-578);
+    Vector3 prevPos; 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // 初期座標
+        prevPos = transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // 左に移動する
         if (this.CompareTag("AkasakiWall"))
@@ -25,11 +28,31 @@ public class RoopStage : MonoBehaviour
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
+        
+        float distance = transform.position.z - prevPos.z;
             
-        // 一定一位置を超えると、右に移動する
-        if (transform.position.x <= -stageWidth)
+
+
+        if(distance<0)
         {
-            transform.position += new Vector3(stageWidth* 3, 0,0);
+            distance = -distance;
+        }
+
+        
+        // 左に移動する
+        if (this.CompareTag("AkasakiWall"))
+        {
+            if (this.transform.position.z <= transPos.z)
+            {
+                this.transform.position = prevPos;
+            }
+        }
+        else
+        {
+            if (this.transform.position.x <= transPos.x)
+            {
+                this.transform.position = prevPos;
+            }
         }
     }
 }

@@ -444,6 +444,7 @@ MonoBehaviour:
   m_GameFlowManager: {fileID: 1951619562}
   m_GoalLineChecker: {fileID: 958471986}
   m_TargetMove: {fileID: 341040792}
+  m_spawnPositionsOfGame: []
 --- !u!4 &151515946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 668735768885291391, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
@@ -1716,8 +1717,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412293659}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13647063, y: -0.7029213, z: 0.124090835, w: 0.6869345}
-  m_LocalPosition: {x: -85.20001, y: 155.59, z: -345.65}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -5, y: 2, z: -202.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5625,11 +5626,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ff4c4ca5ad92f438b7cf9f54a38434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_titleManger: {fileID: 879418709}
+  m_titleManager: {fileID: 879418709}
   m_selectManger: {fileID: 1145132597}
   m_inGameManger: {fileID: 132543550}
   m_resultManger: {fileID: 443995829}
   m_fadeManager: {fileID: 1751058197}
+  m_spawnPositions: []
   m_cameraManager: {fileID: 201034274}
 --- !u!4 &1951619563
 Transform:
