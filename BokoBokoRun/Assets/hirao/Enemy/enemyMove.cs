@@ -56,8 +56,13 @@ public class enemyMove : Character
     protected override void Update()//毎フレーム更新
     {
         Tick();
-        this.transform.position += m_Velocity;
+      
 
+    }
+
+    private void FixedUpdate()
+    {
+        this.transform.position += m_Velocity;
     }
     protected override void Tick()//enemyの動き
     {
