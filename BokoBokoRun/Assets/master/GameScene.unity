@@ -33997,10 +33997,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad54f8e7ff62d449b9238e65f5618c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_winAnimPlayers: []
-  m_winnerPosObj: {fileID: 0}
-  m_loseAnimPlayers: []
-  m_loserPosObj: []
+  m_winAnimPlayers:
+  - {fileID: 2649926379699328825, guid: 7abbdbd6aa73d5c439c6eba605ac8bf4, type: 3}
+  - {fileID: 1954280716814012320, guid: eb059602569d7bb488c7dbae0d74b475, type: 3}
+  - {fileID: 8710799353644499014, guid: b4ee2d51a29b7884f95e86dea51307a8, type: 3}
+  - {fileID: 6221301153338241567, guid: a5b51e3d13e88384b9b3fb0cef106cde, type: 3}
+  m_winnerPosObj: {fileID: 1656133168}
+  m_loseAnimPlayers:
+  - {fileID: 2497893116450942148, guid: 3fe9b9211e9c5894da154f8a6fd11185, type: 3}
+  - {fileID: 5851780525127048245, guid: 176698ef2f1882149a16951fab00e645, type: 3}
+  - {fileID: 1116154902943746359, guid: a9e3dace76e523f45a2476fc3ea0aa18, type: 3}
+  - {fileID: 6474627323324199092, guid: fb81f29e31b8ed04ba77eda5386deca0, type: 3}
+  m_loserPosObj:
+  - {fileID: 493948968}
+  - {fileID: 1855254055}
+  - {fileID: 1296275045}
+  - {fileID: 767893487}
 --- !u!4 &1367477850
 Transform:
   m_ObjectHideFlags: 0
