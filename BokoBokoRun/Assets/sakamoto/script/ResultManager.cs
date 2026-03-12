@@ -59,7 +59,7 @@ public class ResultManager : GameManagerBase
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 #if UNITY_EDITOR 
         Debug();

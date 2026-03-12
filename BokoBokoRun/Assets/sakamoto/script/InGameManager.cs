@@ -23,7 +23,7 @@ public class InGameManager : GameManagerBase
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 #if UNITY_EDITOR
         UpdateDebug();

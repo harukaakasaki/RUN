@@ -67,7 +67,7 @@ public sealed class GameFlowManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Test:ƒpƒbƒh‚Ì”‚ğæ“¾
         m_padNum = Gamepad.all.Count;

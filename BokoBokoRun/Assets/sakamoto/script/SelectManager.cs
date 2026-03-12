@@ -36,7 +36,7 @@ public class SelectManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 #if UNITY_EDITOR
         DebugProcessing();
