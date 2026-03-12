@@ -16,9 +16,9 @@ public class MoveTransRoop : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        this.transform.position -= new Vector3(0.1f, 0, 0);
+        this.transform.position += new Vector3(0.1f, 0, 0);
 
-        if(this.transform.position.x < targetTransEnd.position.x)
+        if(this.transform.position.x > targetTransEnd.position.x)
         {
             this.transform.position = new Vector3(targetTransStart.position.x, this.transform.position.y, this.transform.position.z);
         }
