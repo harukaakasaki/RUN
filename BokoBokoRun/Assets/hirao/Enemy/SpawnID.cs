@@ -17,15 +17,23 @@ public class SpawnID : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         coolTimer--;
+
+        //TODO:
+        //padの取得数をゲット
+        //padの数、ぶっ飛ばされた数をもとに最後の人とあたったら敵を出す
+        //
     }
 
     void OnTriggerEnter(Collider other)//子オブジェクトが当たり判定と当たったら、これが呼び出される
     {
         if (coolTimer > 0) return;
-        if(other.CompareTag("Player"))
+
+        
+
+        if (other.CompareTag("Player"))
         {
         // 親のEnemyFactoryを取得して通知
         EnemyFactory factory = GetComponentInParent<EnemyFactory>();

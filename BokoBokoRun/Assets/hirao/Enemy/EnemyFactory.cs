@@ -24,6 +24,8 @@ public class EnemyFactory : MonoBehaviour
     Vector3 point7 = new Vector3(408.5f, 0.6f, 30);
     Vector3 point71 = new Vector3(408.5f, 0.6f, 45);
 
+    
+
 
 
 
