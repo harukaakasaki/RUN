@@ -160,6 +160,7 @@ public sealed class GameFlowManager : MonoBehaviour
         ChangeScene(Scene.Select);
         //カメラも切り替える
         m_cameraManager.SetSelect();
+        //プレイヤーを移動させる
 
         //カメラを完全に切り替えるために1フレーム待つ
         yield return null;
