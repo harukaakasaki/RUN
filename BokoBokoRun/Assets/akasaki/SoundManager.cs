@@ -13,14 +13,21 @@ public class SoundManager : MonoBehaviour
 
     // BGM系
     [Header("BGM")]// インスペクターで見やすくするためのヘッダー
-    public AudioClip TitleBGM; // タイトル画面のBGM
-    public AudioClip InGameBGM;// インゲーム画面のBGM
-    public AudioClip ResultBGM;// リザルト画面のBGM
+    public AudioClip TitleBGM;  // タイトル画面のBGM
+    public AudioClip SelectBGM; // セレクト画面のBGM
+    public AudioClip InGameBGM; // インゲーム画面のBGM
+    public AudioClip ResultBGM; // リザルト画面のBGM
 
     // SE系
     [Header("SE")]// インスペクターで見やすくするためのヘッダー
-    public AudioClip DecisionSE;// 決定SE
-    public AudioClip HitSE;     // ヒット時のSE
+    public AudioClip DecisionSE;   // 決定時のSE
+    public AudioClip RunSE;        // 走り時のSE
+    public AudioClip CountSE;      // カウントダウンSE
+    public AudioClip HitSE;        // ヒット時のSE
+    public AudioClip BreakObjectSE;// オブジェクト破壊時のSE
+    public AudioClip GoalSE;       // ゴール時のSE
+    public AudioClip ChangeSceneSE;// シーン切り替え時のSE
+
 
     // SoundManagerを一つだけにする
     void Awake()
