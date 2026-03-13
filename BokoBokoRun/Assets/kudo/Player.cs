@@ -30,6 +30,7 @@ public class Player : Character
     Vector3 InitPos = new Vector3(0,0,0);//初期座標
 
     private GameFlowManager m_flowManager;
+    private InGameManager m_inGameManager;
     
     private Vector3 m_playerPos;
     [SerializeField] private Vector3 m_spawnPos;
@@ -53,6 +54,13 @@ public class Player : Character
         if (m_flowManager == null)
         {
             Debug.LogError("flowManager が見つかりません.");
+        }
+
+        //InGameManagerコンポーネントを取得
+        m_inGameManager = FindObjectOfType<InGameManager>();
+        if (m_inGameManager == null)
+        {
+            Debug.LogError("InGameManager が見つかりません.");
         }
 
         // Animatorコンポーネントを取得
@@ -79,8 +87,9 @@ public class Player : Character
 
     private void FixedUpdate()
     {
-        //インゲームの時のみ処理を行う
-        if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame)
+        //インゲームの時のみ、又はInGame中のm_isCanMoveがtrueのみ動けるようにする
+        if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
+            m_inGameManager.IsCanMove())
         {
             if (!m_isNoActive)//生きているかfalseが生きている
             {

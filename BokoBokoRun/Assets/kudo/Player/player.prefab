@@ -155,7 +155,6 @@ MonoBehaviour:
   m_UseRootMotion: 0
   m_Gravity: 0
   m_spawnPos: {x: -6.7, y: 0.6, z: 40.28}
-  resetPosition: {x: -6.7, y: 0.6, z: 40.28}
 --- !u!95 &1903036525689988007
 Animator:
   serializedVersion: 5
