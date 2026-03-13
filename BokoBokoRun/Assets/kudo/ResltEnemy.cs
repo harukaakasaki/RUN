@@ -60,7 +60,7 @@ public class ResltEnemy : Character
 
         
         //指定したフレーム後に最初に取得したポジションに戻る
-        if (m_Timer >= 180f)
+        if (m_Timer >= 210f)
         {
             Debug.Log("gfege");
             transform.position = m_Respawn;
