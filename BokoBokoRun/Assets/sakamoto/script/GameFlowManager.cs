@@ -224,8 +224,12 @@ public sealed class GameFlowManager : MonoBehaviour
 
     public void ChangeScene(Scene scene)
     {
-        //シーンを切り替える
+        // シーンを切り替える
         m_scene = scene;
+
+        // UIマネージャーも切り替える
+        m_uiManager.ChangeUI(m_scene);
+
         switch (scene)
         {
             case Scene.Title://タイトル
