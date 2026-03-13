@@ -7,6 +7,7 @@ public class GoalLineChecker : MonoBehaviour
     //接続されているプレイヤーの数を数えるためのもの
     [SerializeField] private GameFlowManager m_GameFlowManager;
     [SerializeField] private InGameManager m_InGameManager;
+    [SerializeField] private ResultManager m_resultManager;
     private int m_padNum;
    
 
@@ -57,7 +58,7 @@ public class GoalLineChecker : MonoBehaviour
             {
                 m_Rank++;
                 //このRankをPlayerに渡す
-
+                Debug.Log("goalとplayerがあたったよ");
                 //ゴールした分、生き残っている人数を減らす
                 m_InGameManager.DecreaseAliveNum();
 
@@ -66,6 +67,10 @@ public class GoalLineChecker : MonoBehaviour
                     //1位のときの処理
                     //セット関数をセットして、そこに引数でplayerTagを渡す
                     Debug.Log("あなたの順位は" + m_Rank + "位です");
+
+                    //m_resultManager
+                    m_resultManager.SetBestPlayerTag(playerTag);
+
                 }
 
 
