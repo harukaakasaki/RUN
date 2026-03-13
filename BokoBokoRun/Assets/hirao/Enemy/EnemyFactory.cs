@@ -27,7 +27,11 @@ public class EnemyFactory : MonoBehaviour
     
     // Inspectorでアサインする敵のPrefab
     public GameObject enemyPrefab;
-   
+
+    //エフェクト呼び出す
+    private onEffectManager m_efManager;
+    //エフェクトを出す位置
+    private Vector3 m_effectPos;
 
     // 指定位置に敵を生成するメソッド
     public GameObject SpawnEnemy(Vector3 position,bool anc)//boolはy軸反転するかどうか
@@ -37,18 +41,28 @@ public class EnemyFactory : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, position, anc ? Quaternion.identity : Quaternion.Euler(0, 180, 0));
             enemy.GetComponent<enemyMove>().SetStateEnemy();
             return enemy;
+
+           
+
         }
         else
         {
             Debug.LogWarning("Enemy Prefabがアサインされていません");
             return null;
         }
+       
+
     }
 
     // Start is called before the first frame update
-    void Start()
+   void Start()
     {
-        
+        //GameFlowManagerコンポーネントを取得
+        m_efManager = FindObjectOfType<onEffectManager>();
+        if (m_efManager == null)
+        {
+            Debug.LogError("onEffectManager が見つかりません.");
+        }
     }
 
     // Update is called once per frame
@@ -75,6 +89,13 @@ public class EnemyFactory : MonoBehaviour
         //            break;
         //    }
         //}
+
+        //敵と当たったらエフェクトを出す
+        string name = "Spawn";
+        //エフェクトを出す
+        m_efManager.PlayEffect(transform.position, name);
+        Debug.Log("エフェクトを出しました");
+
     }
     public void OnChildernTrigger(int id)
     {

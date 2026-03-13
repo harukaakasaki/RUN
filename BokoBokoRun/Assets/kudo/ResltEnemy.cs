@@ -21,9 +21,6 @@ public class ResltEnemy : Character
     bool m_isRespawn = false;
 
    
-  
-    
-
 
 
     // Start is called before the first frame update
