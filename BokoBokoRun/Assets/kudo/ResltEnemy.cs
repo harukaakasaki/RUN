@@ -19,12 +19,9 @@ public class ResltEnemy : Character
     int m_Timer = 0;
     //敵を戻したかどうか
     bool m_isRespawn = false;
-    //関数
-    private void Move()//移動中
-    {
 
-        m_Velocity = new Vector3(5.0f, 0.0f, 0.0f);
-    }
+   
+  
     
 
 
@@ -35,6 +32,8 @@ public class ResltEnemy : Character
 
         m_count = 0;
         isRotate = false;
+
+        m_Velocity = new Vector3(0.0f, 0.0f, 0.05f);
 
         //最初のポジションを取得する
         m_Respawn = transform.position;
@@ -57,17 +56,16 @@ public class ResltEnemy : Character
         m_Timer++;
         Tick();
         this.transform.position += m_Velocity;
+        Debug.Log("動いている");
 
-        //最初のポジションを取得する
-        //m_CharacterPos = transform.position;
-
+        
         //指定したフレーム後に最初に取得したポジションに戻る
-        //if (m_Timer >= 140f)
-        //{
-        //    Debug.Log("gfege");
-        //    transform.position = m_Respawn;
-        //    m_Timer = 0;
-        //}
+        if (m_Timer >= 180f)
+        {
+            Debug.Log("gfege");
+            transform.position = m_Respawn;
+            m_Timer = 0;
+        }
     }
 
 
@@ -80,14 +78,8 @@ public class ResltEnemy : Character
         }
 
 
-        switch (m_State)
-        {
-            case ResultEnemyState.Active:
-                Move();
-                break;
-            default:
-                break;
-        }
+        
+          
     }
 
 

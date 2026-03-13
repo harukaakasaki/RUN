@@ -8983,6 +8983,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8878093310220891411, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8952002751533609951, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -44018,7 +44022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 51630678045589259, guid: 842ffa5d37596df428120a1092510862, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.62
+      value: -4.22
       objectReference: {fileID: 0}
     - target: {fileID: 51630678045589259, guid: 842ffa5d37596df428120a1092510862, type: 3}
       propertyPath: m_LocalPosition.y
@@ -44026,7 +44030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 51630678045589259, guid: 842ffa5d37596df428120a1092510862, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.6
+      value: 7.57
       objectReference: {fileID: 0}
     - target: {fileID: 51630678045589259, guid: 842ffa5d37596df428120a1092510862, type: 3}
       propertyPath: m_LocalRotation.w
@@ -44063,6 +44067,10 @@ PrefabInstance:
     - target: {fileID: 915380658822568811, guid: 842ffa5d37596df428120a1092510862, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530004694825477467, guid: 842ffa5d37596df428120a1092510862, type: 3}
+      propertyPath: m_Radius
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 4942265275661204961, guid: 842ffa5d37596df428120a1092510862, type: 3}
       propertyPath: m_Enabled
