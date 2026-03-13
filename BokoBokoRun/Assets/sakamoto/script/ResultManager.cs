@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
@@ -90,7 +91,10 @@ public class ResultManager : GameManagerBase
         if (m_gameFlowManager.GetNowScene() == GameFlowManager.Scene.Result)
         {
             m_frame++;
-            
+            if(m_frame >= 200)
+            {
+                SceneManager.LoadScene("ResultScene");
+            }
         }
     }
 
