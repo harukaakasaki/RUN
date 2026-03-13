@@ -16,7 +16,7 @@ public enum PlayerState
 public class Player : Character
 {
 
-    public Vector3 resetPosition;// 戻す位置
+   Vector3 resetPosition = new Vector3(35.0f,-33,0);// 戻す位置
     bool m_isNoActive;//生きているか死んでいるか
     static class Constants
     {
@@ -168,14 +168,14 @@ public class Player : Character
             }
             // 指定時間で減衰させる
             m_knockbackCoroutine = StartCoroutine(KnockbackRoutine(knockback, 0.5f));
-            //敵と当たったら死亡判定を入れる
-            m_isNoActive = true;
             //インゲームマネージャーにぶっ飛ばされたということを渡す
 
         }
             // 天井タグに当たったらプレイヤーの位置をリセット
             if (other.CompareTag("Ceiling"))
             {
+            //敵と当たったら死亡判定を入れる
+            m_isNoActive = true;
                 Debug.Log("Playerの位置を変更");
                 // プレイヤーをリセット位置に戻す
                 transform.position = resetPosition;
