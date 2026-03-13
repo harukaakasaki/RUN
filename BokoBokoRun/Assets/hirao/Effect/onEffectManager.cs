@@ -42,6 +42,7 @@ public class onEffectManager : MonoBehaviour
         if(m_effectDictionary.TryGetValue(name,out GameObject effect))//TryGetValueはキーが存在するか確認して、あれば値を取り出し、結果をboolで返す
         {
             Instantiate(effect,pos,Quaternion.identity);
+            Debug.Log("Effect played : " + name);//エフェクトが見つかった場合のログ
         }
         else
         {
