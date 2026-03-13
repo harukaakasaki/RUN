@@ -25,6 +25,8 @@ public class ResultManager : GameManagerBase
     [SerializeField] private GameObject[] m_loseAnimPlayers;//負けた時のアニメーションを行っているプレイヤーの配列
     [SerializeField] private GameObject[] m_loserPosObj;//2位以降のプレイヤーの位置にあるオブジェクト
 
+    private int m_frame;
+
     private void OnEnable()
     {
         //現在ゲーム内にいるプレイヤーをタグで検索して
@@ -82,6 +84,14 @@ public class ResultManager : GameManagerBase
 #if UNITY_EDITOR 
         DebugSakamoto();
 #endif 
+
+        //5秒たったらほんの一瞬だけ別のシーンに行く
+        //そのあとタイトルシーンに戻る
+        if (m_gameFlowManager.GetNowScene() == GameFlowManager.Scene.Result)
+        {
+            m_frame++;
+            
+        }
     }
 
     public bool IsBackTitle()
