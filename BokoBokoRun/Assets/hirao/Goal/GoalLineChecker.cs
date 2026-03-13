@@ -61,7 +61,6 @@ public class GoalLineChecker : MonoBehaviour
                 Debug.Log("goalとplayerがあたったよ");
                 //ゴールした分、生き残っている人数を減らす
                 m_InGameManager.DecreaseAliveNum();
-
                 if (m_Rank == 1)
                 {
                     //1位のときの処理
@@ -72,10 +71,10 @@ public class GoalLineChecker : MonoBehaviour
                     m_resultManager.SetBestPlayerTag(playerTag);
 
                 }
-
-
+                //ぶっ飛ばされた人の数
+                 int verstNum = m_InGameManager.GetVerstNum();
                 //Rankが最後の人までいったら、シーン遷移する
-                if (m_Rank >= m_padNum)//ぶっ飛ばされた人の数分を減らす
+                if (m_Rank >= m_padNum - verstNum)//ぶっ飛ばされた人の数分を減らす
                 {
                     isFinish = true;
                 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class InGameManager : GameManagerBase
 {
@@ -18,6 +19,8 @@ public class InGameManager : GameManagerBase
 
     private int m_padNum;
     private int m_aliveNum;//誰が生き残っているか
+    private int prevVerstNum;//前フレームで死んだ人の数
+    private int nowVerstNum;//現在フレームで死んだ人の数
 
 
     private bool m_isEnd = false;   //ゲームが終了したか
@@ -27,6 +30,9 @@ public class InGameManager : GameManagerBase
     {
         m_padNum = m_GameFlowManager.GetPadNum();//接続されているpadの数を取得
         m_aliveNum = m_padNum;//最初は全員生きている状態
+
+        prevVerstNum = 0;
+        nowVerstNum = 0;
     }
 
     // Update is called once per frame
@@ -46,7 +52,16 @@ public class InGameManager : GameManagerBase
         //カメラを動かす
         m_TargetMove.MoveCamera(0.03f);
 
+        prevVerstNum = nowVerstNum;
+
+        nowVerstNum = CheckPlayersAlive();//死んだ人の数
+        //前のフレームよりもバーストされた人が増えたら生きている数の人を減らす
+        if (prevVerstNum != nowVerstNum)
+        {
+            DecreaseAliveNum();//人が減る処理
+        }
     }
+
 
     public bool IsEnd()
     {
@@ -104,5 +119,33 @@ public class InGameManager : GameManagerBase
     {
         m_joinedPlayers = list;
         Debug.Log("プレイヤーのリストを受け取ったよ");
+    }
+    /// <summary>
+    /// 現在死んでいる人の数
+    /// </summary>
+    /// <returns></returns>
+    public int GetVerstNum()
+    {
+        return nowVerstNum;
+    }
+
+    private int CheckPlayersAlive()
+    {
+        int VerstNum = 0;
+
+        for (int i = 0; i < m_joinedPlayers.Count; i++)
+        {
+            var input = m_joinedPlayers[i];
+            int index = input.playerIndex;//プレイヤーの通し番号を取得
+
+            //ぶっ飛ばされた数を把握
+            var m_playerScr = input.GetComponent<Player>();
+
+           if(m_playerScr.GetNoActive())
+            {
+                VerstNum++;
+            }
+        }
+        return VerstNum;
     }
 }
