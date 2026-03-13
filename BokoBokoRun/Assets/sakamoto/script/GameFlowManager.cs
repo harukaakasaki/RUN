@@ -244,6 +244,7 @@ public sealed class GameFlowManager : MonoBehaviour
             case Scene.Result://ƒŠƒUƒ‹ƒg
                 AllEnabled();
                 m_resultManger.enabled = true;
+                m_resultManger.gameObject.SetActive(true);
                 break;
         }
     }
@@ -253,6 +254,8 @@ public sealed class GameFlowManager : MonoBehaviour
     /// </summary>
     private void AllEnabled()
     {
+        m_resultManger.gameObject.SetActive(false);
+
         m_titleManager.enabled = false;
         m_selectManger.enabled = false;
         m_inGameManger.enabled = false;
