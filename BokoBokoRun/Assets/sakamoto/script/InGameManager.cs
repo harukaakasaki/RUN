@@ -12,32 +12,32 @@ public class InGameManager : GameManagerBase
         public const int kCountDownFrame = 150;
     }
 
-    //Ú‘±‚³‚ê‚Ä‚¢‚éƒvƒŒƒCƒ„[‚Ì”‚ğ”‚¦‚é‚½‚ß‚Ì‚à‚Ì
+    //æ¥ç¶šã•ã‚Œã¦ã„ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ•°ã‚’æ•°ãˆã‚‹ãŸã‚ã®ã‚‚ã®
     [SerializeField] private GameFlowManager m_GameFlowManager;
     [SerializeField] private GoalLineChecker m_GoalLineChecker;
     [SerializeField] private targetMove m_TargetMove;
-    //ƒQ[ƒ€ƒV[ƒ“‚ÌƒvƒŒƒCƒ„[‚ÌƒXƒ|[ƒ“ˆÊ’u
+    //ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒãƒ¼ãƒ³ä½ç½®
     [SerializeField] Transform[] m_spawnPositionsOfGame;
 
-    private int m_frame = 0;//Å‰‚ÌƒJƒEƒ“ƒgƒ_ƒEƒ“—p‚ÌƒtƒŒ[ƒ€
-    private bool m_isCanMove = false;//ƒJƒEƒ“ƒgƒ_ƒEƒ“’†“®‚¯‚È‚¢‚æ‚¤‚É‚·‚é‚½‚ß‚Ìƒtƒ‰ƒO
+    private int m_frame = 0;//æœ€åˆã®ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ç”¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ 
+    private bool m_isCanMove = false;//ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ä¸­å‹•ã‘ãªã„ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã®ãƒ•ãƒ©ã‚°
 
-    // Q‰Á‚µ‚½ƒvƒŒƒCƒ„[‚ÌƒŠƒXƒg
+    // å‚åŠ ã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒªã‚¹ãƒˆ
     private List<PlayerInput> m_joinedPlayers = new List<PlayerInput>();
 
     private int m_padNum;
-    private int m_aliveNum;     //’N‚ª¶‚«c‚Á‚Ä‚¢‚é‚©
-    private int prevVerstNum;   //‘OƒtƒŒ[ƒ€‚Å€‚ñ‚¾l‚Ì”
-    private int nowVerstNum;    //Œ»İƒtƒŒ[ƒ€‚Å€‚ñ‚¾l‚Ì”
+    private int m_aliveNum;     //èª°ãŒç”Ÿãæ®‹ã£ã¦ã„ã‚‹ã‹
+    private int prevVerstNum;   //å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã§æ­»ã‚“ã äººã®æ•°
+    private int nowVerstNum;    //ç¾åœ¨ãƒ•ãƒ¬ãƒ¼ãƒ ã§æ­»ã‚“ã äººã®æ•°
 
 
-    private bool m_isEnd = false;   //ƒQ[ƒ€‚ªI—¹‚µ‚½‚©
+    private bool m_isEnd = false;   //ã‚²ãƒ¼ãƒ ãŒçµ‚äº†ã—ãŸã‹
 
     // Start is called before the first frame update
     void Start()
     {
-        m_padNum = m_GameFlowManager.GetPadNum();//Ú‘±‚³‚ê‚Ä‚¢‚épad‚Ì”‚ğæ“¾
-        m_aliveNum = m_padNum;//Å‰‚Í‘Sˆõ¶‚«‚Ä‚¢‚éó‘Ô
+        m_padNum = m_GameFlowManager.GetPadNum();//æ¥ç¶šã•ã‚Œã¦ã„ã‚‹padã®æ•°ã‚’å–å¾—
+        m_aliveNum = m_padNum;//æœ€åˆã¯å…¨å“¡ç”Ÿãã¦ã„ã‚‹çŠ¶æ…‹
 
         prevVerstNum = 0;
         nowVerstNum = 0;
@@ -45,7 +45,7 @@ public class InGameManager : GameManagerBase
 
     private void OnEnable()
     {
-        //ƒJƒEƒ“ƒgƒ_ƒEƒ“—p‚ÌƒtƒŒ[ƒ€‚ğ‘ã“ü
+        //ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ç”¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ä»£å…¥
         m_frame = Constants.kCountDownFrame;
     }
 
@@ -56,12 +56,12 @@ public class InGameManager : GameManagerBase
         UpdateDebug();
 #endif
 
-        //ƒQ[ƒ€ƒV[ƒ“‚É‚È‚Á‚½‚Æ‚«‚ÉƒtƒŒ[ƒ€‚ğŒ¸‚ç‚·
+        //ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã«ãªã£ãŸã¨ãã«ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’æ¸›ã‚‰ã™
         if (m_GameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame)
         {
             m_frame--;
-           // Debug.Log("InGameFrame : "  + m_frame);
-            //kCountDownFrame‚½‚Á‚½‚ç“®‚¯‚é‚æ‚¤‚É‚·‚é
+
+            //kCountDownFrameãŸã£ãŸã‚‰å‹•ã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
             if (m_frame < 0)
             {
                 m_isCanMove = true;
@@ -70,22 +70,22 @@ public class InGameManager : GameManagerBase
 
 
         //TODO:
-        //ƒS[ƒ‹‚µ‚½A‚Ô‚Á”ò‚Î‚³‚ê‚½‚ÉŒÄ‚ÔŠÖ”‚ğì‚é//Š®—¹
-        //‚Á”ò‚Î‚µandƒS[ƒ‹‚µ‚½l‚ªÚ‘±‚³‚ê‚Ä‚¢‚é”‚Æ‚»‚ë‚¦‚ÎƒQ[ƒ€I—¹‚É‚·‚é
-        //‚±‚ÌƒQ[ƒ€‚ÉØ‚è‘Ö‚í‚Á‚Ä‚©‚çAƒJƒƒ‰‚ğ“®‚©‚µn‚ß‚é//Š®—¹
+        //ã‚´ãƒ¼ãƒ«ã—ãŸæ™‚ã€ã¶ã£é£›ã°ã•ã‚ŒãŸæ™‚ã«å‘¼ã¶é–¢æ•°ã‚’ä½œã‚‹//å®Œäº†
+        //å¹ã£é£›ã°ã—andã‚´ãƒ¼ãƒ«ã—ãŸäººãŒæ¥ç¶šã•ã‚Œã¦ã„ã‚‹æ•°ã¨ãã‚ãˆã°ã‚²ãƒ¼ãƒ çµ‚äº†ã«ã™ã‚‹
+        //ã“ã®ã‚²ãƒ¼ãƒ ã«åˆ‡ã‚Šæ›¿ã‚ã£ã¦ã‹ã‚‰ã€ã‚«ãƒ¡ãƒ©ã‚’å‹•ã‹ã—å§‹ã‚ã‚‹//å®Œäº†
 
         //m_GoalLineChecker.GetGoalNum();
 
-        //ƒJƒƒ‰‚ğ“®‚©‚·
+        //ã‚«ãƒ¡ãƒ©ã‚’å‹•ã‹ã™
         m_TargetMove.MoveCamera(0.06f);
 
         prevVerstNum = nowVerstNum;
 
-        nowVerstNum = CheckPlayersAlive();//€‚ñ‚¾l‚Ì”
-        //‘O‚ÌƒtƒŒ[ƒ€‚æ‚è‚àƒo[ƒXƒg‚³‚ê‚½l‚ª‘‚¦‚½‚ç¶‚«‚Ä‚¢‚é”‚Ìl‚ğŒ¸‚ç‚·
+        nowVerstNum = CheckPlayersAlive();//æ­»ã‚“ã äººã®æ•°
+        //å‰ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚ˆã‚Šã‚‚ãƒãƒ¼ã‚¹ãƒˆã•ã‚ŒãŸäººãŒå¢—ãˆãŸã‚‰ç”Ÿãã¦ã„ã‚‹æ•°ã®äººã‚’æ¸›ã‚‰ã™
         if (prevVerstNum != nowVerstNum)
         {
-            DecreaseAliveNum();//l‚ªŒ¸‚éˆ—
+            DecreaseAliveNum();//äººãŒæ¸›ã‚‹å‡¦ç†
         }
     }
 
@@ -100,13 +100,13 @@ public class InGameManager : GameManagerBase
         m_aliveNum--;
         if (m_aliveNum <= 0)
         {
-            //‘Sˆõ€‚ñ‚¾‚Æ‚«‚Ìˆ—
-            //ƒV[ƒ“‘JˆÚ‚·‚é
+            //å…¨å“¡æ­»ã‚“ã ã¨ãã®å‡¦ç†
+            //ã‚·ãƒ¼ãƒ³é·ç§»ã™ã‚‹
             OnEnd();
         }
         else
         {
-            //‚Ü‚¾¶‚«‚Ä‚¢‚él‚ª‚¢‚é‚Æ‚«‚Ìˆ—
+            //ã¾ã ç”Ÿãã¦ã„ã‚‹äººãŒã„ã‚‹ã¨ãã®å‡¦ç†
         }
     }
 
@@ -125,30 +125,30 @@ public class InGameManager : GameManagerBase
 
 
     /// <summary>
-    /// GameScene‚ÉØ‚è‘Ö‚í‚Á‚½‚Æ‚«AƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğƒQ[ƒ€ƒV[ƒ“‚ÌƒXƒ|[ƒ“ˆÊ’u‚ÖˆÚ“®‚³‚¹‚é
+    /// GameSceneã«åˆ‡ã‚Šæ›¿ã‚ã£ãŸã¨ãã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã®ã‚¹ãƒãƒ¼ãƒ³ä½ç½®ã¸ç§»å‹•ã•ã›ã‚‹
     /// </summary>
     public void SetInGamePlayers()
     {
-        Debug.Log("ƒvƒŒƒCƒ„[‚ğInGame‚ÉˆÚ“®’†‚Å‚·");
+        Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’InGameã«ç§»å‹•ä¸­ã§ã™");
         for (int i = 0; i < m_joinedPlayers.Count; i++)
         {
             var input = m_joinedPlayers[i];
-            int index = input.playerIndex;//ƒvƒŒƒCƒ„[‚Ì’Ê‚µ”Ô†‚ğæ“¾
+            int index = input.playerIndex;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®é€šã—ç•ªå·ã‚’å–å¾—
 
-            //ƒXƒ|[ƒ“ˆÊ’u‚ÖˆÚ“®
+            //ã‚¹ãƒãƒ¼ãƒ³ä½ç½®ã¸ç§»å‹•
             input.transform.position = m_spawnPositionsOfGame[index].position;
             input.transform.rotation = m_spawnPositionsOfGame[index].rotation;
-            Debug.Log("ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ğƒQ[ƒ€ƒV[ƒ“‚ÖˆÚ“®");
+            Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã¸ç§»å‹•");
         }
     }
 
     public void SetPlayerInput(List<PlayerInput> list)
     {
         m_joinedPlayers = list;
-        Debug.Log("ƒvƒŒƒCƒ„[‚ÌƒŠƒXƒg‚ğó‚¯æ‚Á‚½‚æ");
+        Debug.Log("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒªã‚¹ãƒˆã‚’å—ã‘å–ã£ãŸã‚ˆ");
     }
     /// <summary>
-    /// Œ»İ€‚ñ‚Å‚¢‚él‚Ì”
+    /// ç¾åœ¨æ­»ã‚“ã§ã„ã‚‹äººã®æ•°
     /// </summary>
     /// <returns></returns>
     public int GetVerstNum()
@@ -156,7 +156,7 @@ public class InGameManager : GameManagerBase
         return nowVerstNum;
     }
     /// <summary>
-    /// Œ»İƒvƒŒƒC’†‚Ìl‚Ì”
+    /// ç¾åœ¨ãƒ—ãƒ¬ã‚¤ä¸­ã®äººã®æ•°
     /// </summary>
     /// <returns></returns>
     public int GetAliveNum()
@@ -172,9 +172,9 @@ public class InGameManager : GameManagerBase
         for (int i = 0; i < m_joinedPlayers.Count; i++)
         {
             var input = m_joinedPlayers[i];
-            int index = input.playerIndex;//ƒvƒŒƒCƒ„[‚Ì’Ê‚µ”Ô†‚ğæ“¾
+            int index = input.playerIndex;//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®é€šã—ç•ªå·ã‚’å–å¾—
 
-            //‚Ô‚Á”ò‚Î‚³‚ê‚½”‚ğ”cˆ¬
+            //ã¶ã£é£›ã°ã•ã‚ŒãŸæ•°ã‚’æŠŠæ¡
             var m_playerScr = input.GetComponent<Player>();
 
            if(m_playerScr.GetNoActive())
