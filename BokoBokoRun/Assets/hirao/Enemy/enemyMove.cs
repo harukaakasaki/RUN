@@ -23,15 +23,31 @@ public class enemyMove : Character
     private void Move()//移動中
     {
         
-      m_Velocity = new Vector3(0.08f, 0.0f, 0.0f);
+      m_Velocity = new Vector3(0.06f, 0.0f, 0.0f);
     }
     private void Entering()//出場中
     
     {
+        //transform.rotation = Quaternion.Euler(0, 90, 0)の時、zを＋
+
+        bool enemyRot = transform.rotation == Quaternion.identity;
+
+        if (enemyRot)
+        {
+            m_Velocity = new Vector3(0.0f, 0.0f, +0.02f);
+        }
+        else
+        {
+            m_Velocity = new Vector3(0.0f, 0.0f, -0.02f);
+        }
+
         m_count++;
-       //Countを数えて、そのあとScene繊維
-            m_State = EnemyState.Active;
+        if(m_count >= 140)//100フレーム経過したら
+        {
+        //Countを数えて、そのあとScene繊維
+        m_State = EnemyState.Active;
             isRotate = true;
+        }
           
         
     }
