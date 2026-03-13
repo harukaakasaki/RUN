@@ -25,8 +25,6 @@ public class ResultManager : GameManagerBase
     [SerializeField] private GameObject[] m_loseAnimPlayers;//負けた時のアニメーションを行っているプレイヤーの配列
     [SerializeField] private GameObject[] m_loserPosObj;//2位以降のプレイヤーの位置にあるオブジェクト
 
-    private GameObject m_winnerPlayer;//1位になったプレイヤーのオブジェクト
-
     private void OnEnable()
     {
         //現在ゲーム内にいるプレイヤーをタグで検索して
@@ -82,7 +80,7 @@ public class ResultManager : GameManagerBase
     void FixedUpdate()
     {
 #if UNITY_EDITOR 
-        Debug();
+        DebugSakamoto();
 #endif 
     }
 
@@ -91,7 +89,7 @@ public class ResultManager : GameManagerBase
         return m_isBackTitle;
     }
 
-    private void Debug()
+    private void DebugSakamoto()
     {
         if (Keyboard.current.cKey.wasPressedThisFrame)
         {
@@ -120,8 +118,9 @@ public class ResultManager : GameManagerBase
     /// Aボタンが押されたときにInputManagerが勝手に呼んでくれる関数
     /// </summary>
     /// <param name="ctx">InputActionクラスのCallbackContextという構造体</param>
-    public void OnSubmit(InputAction.CallbackContext ctx)
+    public void OnNext(InputAction.CallbackContext ctx)
     {
+        Debug.Log("isBackTitleがtrueになった！");
         if (ctx.performed)
         {
             m_isBackTitle = true;
