@@ -15,6 +15,8 @@ public enum PlayerState
 
 public class Player : Character
 {
+
+    public Vector3 resetPosition;// 戻す位置
     static class Constants
     {
         public const float kMoveSpeed = 6.0f;
@@ -167,7 +169,15 @@ public class Player : Character
             //敵と当たったら死亡判定を入れる
 
             bool isDead = true; // ここは調整
+
         }
+            // 天井タグに当たったらプレイヤーの位置をリセット
+            if (other.CompareTag("Ceiling"))
+            {
+                Debug.Log("Playerの位置を変更");
+                // プレイヤーをリセット位置に戻す
+                transform.position = resetPosition;
+            }
     }
 
     // ノックバックの減衰処理
@@ -196,5 +206,11 @@ public class Player : Character
                 break;
         }
     }
+
+    
+
+    
+
+
 }
 

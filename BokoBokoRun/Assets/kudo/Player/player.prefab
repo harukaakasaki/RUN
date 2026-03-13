@@ -155,6 +155,7 @@ MonoBehaviour:
   m_UseRootMotion: 0
   m_Gravity: 0
   m_spawnPos: {x: -6.7, y: 0.6, z: 40.28}
+  resetPosition: {x: -6.7, y: 0.6, z: 40.28}
 --- !u!95 &1903036525689988007
 Animator:
   serializedVersion: 5
@@ -201,8 +202,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
