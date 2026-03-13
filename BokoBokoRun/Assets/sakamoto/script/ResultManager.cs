@@ -50,6 +50,7 @@ public class ResultManager : GameManagerBase
         //勝者がいた場合の処理
         if (!m_isAllLoser)
         {
+            //アニメーションプレイヤーを回転させるためのQuaternionを作成
             for (int i = 0; i < m_players.Length; i++)
             {
                 //すべてのプレイヤーと勝ったプレイヤーのタグを照らし合わせる
@@ -57,13 +58,13 @@ public class ResultManager : GameManagerBase
                 {
                     //同じだったら勝ちアニメーションプレイヤーの配列に入っているオブジェクトの位置を
                     //事前に設定されてある勝者の位置に移動させる
-                    Instantiate(m_winAnimPlayers[i],m_winnerPosObj.transform.position,Quaternion.identity);
+                    Instantiate(m_winAnimPlayers[i],m_winnerPosObj.transform.position,Quaternion.Euler(0.0f,90.0f,0.0f));
                 }
                 else
                 {
                     //それが負けたプレイヤーのタグだった場合
                     //負けアニメーションのみを行うプレイヤーオブジェクトを生成する
-                    Instantiate(m_loseAnimPlayers[i], m_loserPosObj[i].transform.position, Quaternion.identity);
+                    Instantiate(m_loseAnimPlayers[i], m_loserPosObj[i].transform.position, Quaternion.Euler(0.0f, 90.0f, 0.0f));
                 }
             }
         }
@@ -73,7 +74,7 @@ public class ResultManager : GameManagerBase
             for (int i = 0; i < m_players.Length; i++)
             {
                 //負けアニメーションのみを行うプレイヤーオブジェクトを生成する
-                Instantiate(m_loseAnimPlayers[i], m_loserPosObj[i].transform.position, Quaternion.identity);
+                Instantiate(m_loseAnimPlayers[i], m_loserPosObj[i].transform.position, Quaternion.Euler(0.0f, 90.0f, 0.0f));
             }
         }
     }

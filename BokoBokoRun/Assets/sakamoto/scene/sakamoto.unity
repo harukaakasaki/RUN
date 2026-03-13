@@ -1717,8 +1717,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412293659}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5, y: 2, z: -202.5}
+  m_LocalRotation: {x: 0.21320088, y: 0, z: 0, w: 0.9770084}
+  m_LocalPosition: {x: 10.419998, y: 14.98, z: 27.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5567,6 +5567,7 @@ MonoBehaviour:
   m_inGameManger: {fileID: 132543550}
   m_resultManger: {fileID: 443995829}
   m_fadeManager: {fileID: 1751058197}
+  m_uiManager: {fileID: 0}
   m_spawnPositions: []
   m_cameraManager: {fileID: 201034274}
 --- !u!4 &1951619563
