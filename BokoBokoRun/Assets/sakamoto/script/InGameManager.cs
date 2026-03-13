@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class InGameManager : GameManagerBase
 {
+    static class Constants
+    {
+        public const int kCountDownFrame = 150;
+    }
+
     //接続されているプレイヤーの数を数えるためのもの
     [SerializeField] private GameFlowManager m_GameFlowManager;
     [SerializeField] private GoalLineChecker m_GoalLineChecker;
@@ -13,14 +19,16 @@ public class InGameManager : GameManagerBase
     //ゲームシーンのプレイヤーのスポーン位置
     [SerializeField] Transform[] m_spawnPositionsOfGame;
 
+    private int m_frame = 0;//最初のカウントダウン用のフレーム
+    private bool m_isCanMove = false;//カウントダウン中動けないようにするためのフラグ
 
     // 参加したプレイヤーのリスト
     private List<PlayerInput> m_joinedPlayers = new List<PlayerInput>();
 
     private int m_padNum;
-    private int m_aliveNum;//誰が生き残っているか
-    private int prevVerstNum;//前フレームで死んだ人の数
-    private int nowVerstNum;//現在フレームで死んだ人の数
+    private int m_aliveNum;     //誰が生き残っているか
+    private int prevVerstNum;   //前フレームで死んだ人の数
+    private int nowVerstNum;    //現在フレームで死んだ人の数
 
 
     private bool m_isEnd = false;   //ゲームが終了したか
@@ -35,12 +43,31 @@ public class InGameManager : GameManagerBase
         nowVerstNum = 0;
     }
 
+    private void OnEnable()
+    {
+        //カウントダウン用のフレームを代入
+        m_frame = Constants.kCountDownFrame;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
 #if UNITY_EDITOR
         UpdateDebug();
 #endif
+
+        //ゲームシーンになったときにフレームを減らす
+        if (m_GameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame)
+        {
+            m_frame--;
+            Debug.Log("InGameFrame : "  + m_frame);
+            //kCountDownFrameたったら動けるようにする
+            if (m_frame < 0)
+            {
+                m_isCanMove = true;
+            }
+        }
+
 
         //TODO:
         //ゴールした時、ぶっ飛ばされた時に呼ぶ関数を作る//完了
@@ -156,5 +183,10 @@ public class InGameManager : GameManagerBase
             }
         }
         return VerstNum;
+    }
+
+    public bool IsCanMove()
+    {
+        return m_isCanMove;
     }
 }

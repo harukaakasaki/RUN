@@ -19,6 +19,10 @@ public class enemyMove : Character
 
     //どのSceneだと動かすのか
     private GameFlowManager m_flowManager;
+    //インゲームに入って最初の4秒はカウントダウンなので
+    //動けないようにするためのInGameManager
+    private InGameManager m_inGameManager;
+
     //関数
     private void Move()//移動中
     {
@@ -67,6 +71,13 @@ public class enemyMove : Character
         {
             Debug.LogError("flowManager が見つかりません.");
         }
+
+        //InGameManagerコンポーネントを取得
+        m_inGameManager = FindObjectOfType<InGameManager>();
+        if (m_inGameManager == null)
+        {
+            Debug.LogError("InGameManager が見つかりません.");
+        }
     }
 
     // Update is called once per frame
@@ -81,8 +92,9 @@ public class enemyMove : Character
 
     private void FixedUpdate()
     {
-        //インゲームの時のみ処理を行う
-        if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame)
+        //インゲームの時のみ、又はInGame中のm_isCanMoveがtrueのみ動けるようにする
+        if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
+            m_inGameManager.IsCanMove())
         {
             Tick();
             this.transform.position += m_Velocity;
