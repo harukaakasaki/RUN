@@ -25,22 +25,11 @@ public class enemyMove : Character
     
     {
         m_count++;
-        //Šp“x‚É‚æ‚Á‚ÄAi‚ÞŒü‚«‚ð•Ï‚¦‚é
-        Quaternion rot = transform.rotation;//Œ»Ý‚ÌŠp“x‚ð“üŽè
-        if(rot ==  Quaternion.identity)//‚Ç‚Á‚¿‚©2•ª‚Ì1
-        {
-            m_Velocity = new Vector3(0.0f, 0.0f, 0.005f);
-        }
-        else
-        {
-            m_Velocity = new Vector3(0.0f, 0.0f, -0.005f);
-        }
-        if(m_count > 1000)
-        {
+       
             m_State = EnemyState.Active;
             isRotate = true;
           
-        }
+        
     }
 
 
@@ -78,9 +67,6 @@ public class enemyMove : Character
 
         switch(m_State)
         {
-            case EnemyState.Enter:
-                Entering();
-                break;
             case EnemyState.Active:
                 Move();
                 break;
