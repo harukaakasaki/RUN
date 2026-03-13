@@ -13,6 +13,7 @@ public sealed class GameFlowManager : MonoBehaviour
     [SerializeField] private InGameManager m_inGameManger;      //インゲームマネージャー
     [SerializeField] private ResultManager m_resultManger;      //リザルトマネージャー
     [SerializeField] private FadeManager m_fadeManager;         //フェードマネージャー
+    [SerializeField] private UIManager m_uiManager;         //UIマネージャー
 
     // 参加したプレイヤーのリスト//保存用
     private List<PlayerInput> m_joinedPlayers = new List<PlayerInput>();
