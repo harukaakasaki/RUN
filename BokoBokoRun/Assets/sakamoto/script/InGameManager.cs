@@ -60,7 +60,7 @@ public class InGameManager : GameManagerBase
         if (m_GameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame)
         {
             m_frame--;
-            Debug.Log("InGameFrame : "  + m_frame);
+           // Debug.Log("InGameFrame : "  + m_frame);
             //kCountDownFrame‚½‚Á‚½‚ç“®‚¯‚é‚æ‚¤‚É‚·‚é
             if (m_frame < 0)
             {

@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
+
 
 public enum PlayerState
 {
@@ -41,6 +43,9 @@ public class Player : Character
     private Vector3 m_knockbackOffset = Vector3.zero;
     private Coroutine m_knockbackCoroutine;
 
+    //エフェクト呼び出す
+    private onEffectManager m_efManager;
+    private Vector3 m_effectPos;//エフェクトを出す位置
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
     // Start is called before the first frame update
     void Start()
@@ -69,6 +74,13 @@ public class Player : Character
         {
             Debug.LogError("Animator が見つかりません.");
         }
+
+        //InGameManagerコンポーネントを取得
+        m_efManager = FindObjectOfType<onEffectManager>();
+        if (m_efManager == null)
+        {
+            Debug.LogError("onEffectManager が見つかりません.");
+        }
         //初期位置を保存
         //m_playerPos = m_spawnPos;
         //transform.position = m_playerPos;
@@ -87,6 +99,15 @@ public class Player : Character
 
     private void FixedUpdate()
     {
+        //if (Keyboard.current != null && Keyboard.current.jKey.wasPressedThisFrame)
+        //{
+        //    string name = "Impact";
+        //    //エフェクトを出す
+        //    m_efManager.PlayEffect(this.transform.position, name);
+        //    Debug.Log("エフェクトを押したよ");
+        //}
+
+        m_effectPos = transform.position;
         //インゲームの時のみ、又はInGame中のm_isCanMoveがtrueのみ動けるようにする
         if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
             m_inGameManager.IsCanMove())
@@ -179,9 +200,15 @@ public class Player : Character
             m_knockbackCoroutine = StartCoroutine(KnockbackRoutine(knockback, 0.5f));
             //インゲームマネージャーにぶっ飛ばされたということを渡す
 
+            //敵と当たったらエフェクトを出す
+            string name = "Impact";
+            //エフェクトを出す
+            m_efManager.PlayEffect(transform.position, name);
+            Debug.Log("エフェクトを出しました");
+
         }
-            // 天井タグに当たったらプレイヤーの位置をリセット
-            if (other.CompareTag("Ceiling"))
+        // 天井タグに当たったらプレイヤーの位置をリセット
+        if (other.CompareTag("Ceiling"))
             {
             //敵と当たったら死亡判定を入れる
             m_isNoActive = true;
@@ -189,6 +216,9 @@ public class Player : Character
                 // プレイヤーをリセット位置に戻す
                 transform.position = resetPosition;
             }
+       
+
+
     }
 
     // ノックバックの減衰処理
