@@ -17,6 +17,7 @@ public class Player : Character
 {
 
     public Vector3 resetPosition;// 戻す位置
+    bool m_isNoActive;//生きているか死んでいるか
     static class Constants
     {
         public const float kMoveSpeed = 6.0f;
@@ -66,6 +67,7 @@ public class Player : Character
 
         // 同じオブジェクトにアタッチされているControllerを取得
         m_controller = GetComponent<Controller>();
+        m_isNoActive = false;//生きているか//最初は生きている
     }
 
 
@@ -80,46 +82,46 @@ public class Player : Character
         //インゲームの時のみ処理を行う
         if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame)
         {
-            //TODO
-            //プレイヤーの移動
-            //プレイヤーの回転
-            //プレイヤーのふっとばし
-
-            Vector3 move = new Vector3();
-
-            //  入力ターゲット位置を取得
-            if (m_controller != null)//現在はmoveInputをそのまま私
+            if (!m_isNoActive)//生きているかfalseが生きている
             {
-                m_targetPos = m_controller.MoveInput.normalized;//padの入力を更新
+                Vector3 move = new Vector3();
 
-                //移動量//そのフレームの
-                move = m_controller.MoveInput;
+                //  入力ターゲット位置を取得
+                if (m_controller != null)//現在はmoveInputをそのまま私
+                {
+                    m_targetPos = m_controller.MoveInput.normalized;//padの入力を更新
+
+                    //移動量//そのフレームの
+                    move = m_controller.MoveInput;
+                }
+
+                if (move.sqrMagnitude > 0.001f)
+                {
+                    Quaternion targetRot = Quaternion.LookRotation(move);
+
+                    transform.rotation = Quaternion.Slerp(transform.rotation,
+                        targetRot, 0.5f);
+                }
+
+                //0.01倍していたため移動が極端に遅くなっていた。移動速度はMoveSpeedで制御する
+                m_targetPos = move.normalized * Constants.kMoveSpeed * Time.deltaTime;
+
+                //自身の位置を元の座標+ターゲット + ノックバックオフセットを適用
+                transform.position = transform.position + m_targetPos + m_knockbackOffset;
+
+                if (move.sqrMagnitude > 0.01f)//そのフレームで移動していたらStateを変える
+                {
+                    m_state = PlayerState.Move;
+                    Debug.Log("m_stateはmoveです");
+                }
+                else
+                {
+                    m_state = PlayerState.Idle;
+                    Debug.Log("m_stateはIdleです");
+                }
             }
 
-            if (move.sqrMagnitude > 0.001f)
-            {
-                Quaternion targetRot = Quaternion.LookRotation(move);
-
-                transform.rotation = Quaternion.Slerp(transform.rotation,
-                    targetRot, 0.5f);
-            }
-
-            //0.01倍していたため移動が極端に遅くなっていた。移動速度はMoveSpeedで制御する
-            m_targetPos = move.normalized * Constants.kMoveSpeed * Time.deltaTime;
-
-            //自身の位置を元の座標+ターゲット + ノックバックオフセットを適用
-            transform.position = transform.position + m_targetPos + m_knockbackOffset;
-
-            if (move.sqrMagnitude > 0.01f)//そのフレームで移動していたらStateを変える
-            {
-                m_state = PlayerState.Move;
-                Debug.Log("m_stateはmoveです");
-            }
-            else
-            {
-                m_state = PlayerState.Idle;
-                Debug.Log("m_stateはIdleです");
-            }
+            
         }
 
         if (m_animator)
@@ -167,8 +169,8 @@ public class Player : Character
             // 指定時間で減衰させる
             m_knockbackCoroutine = StartCoroutine(KnockbackRoutine(knockback, 0.5f));
             //敵と当たったら死亡判定を入れる
-
-            bool isDead = true; // ここは調整
+            m_isNoActive = true;
+            //インゲームマネージャーにぶっ飛ばされたということを渡す
 
         }
             // 天井タグに当たったらプレイヤーの位置をリセット
@@ -208,7 +210,10 @@ public class Player : Character
     }
 
     
-
+    public bool GetNoActive()
+    {
+        return m_isNoActive;
+    }
     
 
 
