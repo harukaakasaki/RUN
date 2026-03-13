@@ -12,14 +12,14 @@ public enum EnemyState
 public class enemyMove : Character
 {
     //Enemy‚Ìó‘Ô
-    public EnemyState m_State = EnemyState.Enter;
+    public EnemyState m_State = EnemyState.Active;
     int m_count = 0;
     bool isRotate = false;
     //ŠÖ”
     private void Move()//ˆÚ“®’†
     {
         
-      m_Velocity = new Vector3(0.01f, 0.0f, 0.0f);
+      m_Velocity = new Vector3(0.08f, 0.0f, 0.0f);
     }
     private void Entering()//oê’†
     
@@ -67,6 +67,9 @@ public class enemyMove : Character
 
         switch(m_State)
         {
+            case EnemyState.Enter:
+                Entering();
+                break;
             case EnemyState.Active:
                 Move();
                 break;
