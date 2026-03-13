@@ -128,6 +128,15 @@ public class InGameManager : GameManagerBase
     {
         return nowVerstNum;
     }
+    /// <summary>
+    /// Œ»İƒvƒŒƒC’†‚Ìl‚Ì”
+    /// </summary>
+    /// <returns></returns>
+    public int GetAliveNum()
+    {
+        return m_aliveNum;
+
+    }
 
     private int CheckPlayersAlive()
     {

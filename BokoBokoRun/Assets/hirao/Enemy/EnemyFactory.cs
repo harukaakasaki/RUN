@@ -7,37 +7,36 @@ using UnityEngine.InputSystem;
 public class EnemyFactory : MonoBehaviour
 {
     //敵がスポーンする座標//追加していく//inspectorでいじれる機能があったはず、//Excelみたいに
-    Vector3 point0 = new Vector3(53.5f, 0.6f, 30);
-    Vector3 point01 = new Vector3(53.5f, 0.6f, 45);
-    Vector3 point1 = new Vector3(104.5f, 0.6f, 30);
-    Vector3 point11 = new Vector3(104.5f, 0.6f, 45);
-    Vector3 point2 = new Vector3(153.5f, 0.6f, 30);
-    Vector3 point21 = new Vector3(153.5f, 0.6f, 45);
-    Vector3 point3 = new Vector3(204.5f, 0.6f, 30);
-    Vector3 point31 = new Vector3(204.5f, 0.6f, 45);
-    Vector3 point4 = new Vector3(251.5f, 0.6f, 30);
-    Vector3 point41 = new Vector3(251.5f, 0.6f, 45);
-    Vector3 point5 = new Vector3(306.5f, 0.6f, 30);
-    Vector3 point51 = new Vector3(306.5f, 0.6f, 45);
-    Vector3 point6 = new Vector3(357.5f, 0.6f, 30);
-    Vector3 point61 = new Vector3(357.5f, 0.6f, 45);
-    Vector3 point7 = new Vector3(408.5f, 0.6f, 30);
-    Vector3 point71 = new Vector3(408.5f, 0.6f, 45);
+    Vector3 point0 = new Vector3(53.5f, 0.6f, 25);
+    Vector3 point01 = new Vector3(53.5f, 0.6f, 40);
+    Vector3 point1 = new Vector3(104.5f, 0.6f, 25);
+    Vector3 point11 = new Vector3(104.5f, 0.6f, 40);
+    Vector3 point2 = new Vector3(153.5f, 0.6f, 25);
+    Vector3 point21 = new Vector3(153.5f, 0.6f, 40);
+    Vector3 point3 = new Vector3(204.5f, 0.6f, 25);
+    Vector3 point31 = new Vector3(204.5f, 0.6f, 40);
+    Vector3 point4 = new Vector3(251.5f, 0.6f, 25);
+    Vector3 point41 = new Vector3(251.5f, 0.6f, 40);
+    Vector3 point5 = new Vector3(306.5f, 0.6f, 25);
+    Vector3 point51 = new Vector3(306.5f, 0.6f, 40);
+    Vector3 point6 = new Vector3(357.5f, 0.6f, 25);
+    Vector3 point61 = new Vector3(357.5f, 0.6f, 40);
+    Vector3 point7 = new Vector3(408.5f, 0.6f, 25);
+    Vector3 point71 = new Vector3(408.5f, 0.6f, 40);
 
     
-
-
-
-
     // Inspectorでアサインする敵のPrefab
     public GameObject enemyPrefab;
+   
 
     // 指定位置に敵を生成するメソッド
     public GameObject SpawnEnemy(Vector3 position,bool anc)//boolはy軸反転するかどうか
     {
         if (enemyPrefab != null)
         {
-            return Instantiate(enemyPrefab, position, anc ?Quaternion.identity : Quaternion.Euler(0, 180, 0));
+            GameObject enemy = Instantiate(enemyPrefab, position, anc ? Quaternion.identity : Quaternion.Euler(0, 180, 0));
+            enemy.GetComponent<enemyMove>().SetStateEnemy();
+            return enemy;
         }
         else
         {
@@ -49,7 +48,7 @@ public class EnemyFactory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame

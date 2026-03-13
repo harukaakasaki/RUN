@@ -11,10 +11,14 @@ public enum EnemyState
 
 public class enemyMove : Character
 {
+    [Header("EnemyState")]
     //Enemyの状態
-    public EnemyState m_State = EnemyState.Active;
+    public EnemyState m_State = EnemyState.Enter;
     int m_count = 0;
     bool isRotate = false;
+
+    //どのSceneだと動かすのか
+    private GameFlowManager m_flowManager;
     //関数
     private void Move()//移動中
     {
@@ -25,7 +29,7 @@ public class enemyMove : Character
     
     {
         m_count++;
-       
+       //Countを数えて、そのあとScene繊維
             m_State = EnemyState.Active;
             isRotate = true;
           
@@ -40,21 +44,33 @@ public class enemyMove : Character
     
         m_count = 0;
         isRotate = false;
+
+        //GameFlowManagerコンポーネントを取得
+        m_flowManager = FindObjectOfType<GameFlowManager>();
+        if (m_flowManager == null)
+        {
+            Debug.LogError("flowManager が見つかりません.");
+        }
     }
 
     // Update is called once per frame
     protected override void Update()//毎フレーム更新
     {
-     
-      
 
+    }
+    public void SetStateEnemy()
+    {
+        m_State = EnemyState.Enter;
     }
 
     private void FixedUpdate()
     {
-        Tick();
-        this.transform.position += m_Velocity;
-
+        //インゲームの時のみ処理を行う
+        if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame)
+        {
+            Tick();
+            this.transform.position += m_Velocity;
+        }
     }
     protected override void Tick()//enemyの動き
     {
