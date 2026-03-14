@@ -47,6 +47,8 @@ public class Player : Character
     private onEffectManager m_efManager;
     private Vector3 m_effectPos;//エフェクトを出す位置
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
+
+    [SerializeField] private Transform m_gameCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -82,7 +84,6 @@ public class Player : Character
             Debug.LogError("onEffectManager が見つかりません.");
         }
 
-
         //初期位置を保存
         //m_playerPos = m_spawnPos;
         //transform.position = m_playerPos;
@@ -90,6 +91,16 @@ public class Player : Character
         // 同じオブジェクトにアタッチされているControllerを取得
         m_controller = GetComponent<Controller>();
         m_isNoActive = false;//生きているか//最初は生きている
+
+        //m_gameCameraがインスペクターで設定されていない場合、タグ "GameCamera" を持つオブジェクトを探して設定する
+        if (m_gameCamera == null)
+        {
+            GameObject camObj = GameObject.FindGameObjectWithTag("GameCamera");
+            if (camObj != null) m_gameCamera = camObj.transform;
+            else Debug.LogWarning("タグ 'GameCamera' のオブジェクトが見つかりません。インスペクターで m_gameCamera を設定してください。");
+        }
+
+
     }
 
 
@@ -176,55 +187,55 @@ public class Player : Character
 
     // トリガーで敵と接触したときの処理はクラスレベルで定義する
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("GameEnemy"))
         {
             Debug.Log("敵に当たりました！");
 
-            // 衝突相手からプレイヤーが離れる向きにベクトルを作る
-            Vector3 dir = (transform.position - other.transform.position).normalized;
-            // 斜めに飛ばしたいのでY成分を追加
-            dir.y = Mathf.Max(dir.y, 0.5f); //必要に応じて上昇量を調整
-            dir = dir.normalized;
+            // ノックバック方向を「カメラ方向」に
+            Vector3 dir;
+            if (m_gameCamera != null)
+            {
+                // プレイヤー -> カメラ の方向
+                dir = (m_gameCamera.position - transform.position).normalized;
 
-            // 力の強さ
+                // 少し上方向に持ち上げたい場合（任意）
+                dir.y = Mathf.Max(dir.y, 0.35f); // 上昇量はお好みで
+                dir = dir.normalized;
+            }
+            else
+            {
+                // 敵から離れる方向
+                dir = (transform.position - other.transform.position).normalized;
+                dir.y = Mathf.Max(dir.y, 0.5f);
+                dir = dir.normalized;
+            }
+
             float strength = 2.0f;
-
             Vector3 knockback = dir * strength;
 
-            // 既存のノックバックがあれば止める
             if (m_knockbackCoroutine != null)
             {
                 StopCoroutine(m_knockbackCoroutine);
             }
-            // 指定時間で減衰させる
             m_knockbackCoroutine = StartCoroutine(KnockbackRoutine(knockback, 0.5f));
-            //インゲームマネージャーにぶっ飛ばされたということを渡す
 
-            //敵と当たったらエフェクトを出す
+            // エフェクト
             string name = "Impact";
-            //エフェクトを出す
-            m_efManager.PlayEffect(transform.position, name);
-            Debug.Log("エフェクトを出しました");
-            //敵と当たったら音を出す
-            SoundManager.Instance.PlaySE(SoundManager.Instance.HitSE);
-            Debug.Log("音を出しました");
-
+            m_efManager?.PlayEffect(transform.position, name);
+            SoundManager.Instance?.PlaySE(SoundManager.Instance.HitSE);
         }
-        // 天井タグに当たったらプレイヤーの位置をリセット
+
         if (other.CompareTag("Ceiling"))
-            {
-            //敵と当たったら死亡判定を入れる
+        {
             m_isNoActive = true;
-                Debug.Log("Playerの位置を変更");
-                // プレイヤーをリセット位置に戻す
-                transform.position = resetPosition;
-            }
-       
-
-
+            Debug.Log("Playerの位置を変更");
+            transform.position = resetPosition;
+        }
     }
+
 
     // ノックバックの減衰処理
     private IEnumerator KnockbackRoutine(Vector3 force, float duration)

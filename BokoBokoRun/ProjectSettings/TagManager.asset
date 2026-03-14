@@ -12,6 +12,7 @@ TagManager:
   - Player4
   - AkasakiWall
   - Ceiling
+  - GameCamera
   layers:
   - Default
   - TransparentFX
