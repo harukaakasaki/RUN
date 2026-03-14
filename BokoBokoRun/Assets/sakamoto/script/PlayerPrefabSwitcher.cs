@@ -27,7 +27,10 @@ public class PlayerPrefabSwitcher : MonoBehaviour
 
         m_playerInputManager.onPlayerJoined += OnPlayerJoined;
     }
+    void Start()
+    {
 
+    }
     // Update is called once per frame
     void Update()
     {

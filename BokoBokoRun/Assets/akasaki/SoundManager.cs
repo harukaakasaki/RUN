@@ -26,6 +26,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip HitSE;        // ヒット時のSE
     public AudioClip BreakObjectSE;// オブジェクト破壊時のSE
     public AudioClip GoalSE;       // ゴール時のSE
+    public AudioClip SummonSE;     // 召喚時のSE
     public AudioClip ChangeSceneSE;// シーン切り替え時のSE
 
 

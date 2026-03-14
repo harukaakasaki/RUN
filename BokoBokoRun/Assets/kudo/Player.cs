@@ -81,6 +81,8 @@ public class Player : Character
         {
             Debug.LogError("onEffectManager が見つかりません.");
         }
+
+
         //初期位置を保存
         //m_playerPos = m_spawnPos;
         //transform.position = m_playerPos;
@@ -205,6 +207,9 @@ public class Player : Character
             //エフェクトを出す
             m_efManager.PlayEffect(transform.position, name);
             Debug.Log("エフェクトを出しました");
+            //敵と当たったら音を出す
+            SoundManager.Instance.PlaySE(SoundManager.Instance.HitSE);
+            Debug.Log("音を出しました");
 
         }
         // 天井タグに当たったらプレイヤーの位置をリセット

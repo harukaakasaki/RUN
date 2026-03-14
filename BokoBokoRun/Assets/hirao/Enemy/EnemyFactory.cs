@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class EnemyFactory : MonoBehaviour
 {
-    //“G‚ªƒXƒ|[ƒ“‚·‚éÀ•W//’Ç‰Á‚µ‚Ä‚¢‚­//inspector‚Å‚¢‚¶‚ê‚é‹@”\‚ª‚ ‚Á‚½‚Í‚¸A//Excel‚İ‚½‚¢‚É
+    //æ•µãŒã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹åº§æ¨™//è¿½åŠ ã—ã¦ã„ã//inspectorã§ã„ã˜ã‚Œã‚‹æ©Ÿèƒ½ãŒã‚ã£ãŸã¯ãšã€//Excelã¿ãŸã„ã«
     Vector3 point0 = new Vector3(53.5f, 0.6f, 28);
     Vector3 point01 = new Vector3(53.5f, 0.6f, 42);
     Vector3 point1 = new Vector3(104.5f, 0.6f, 28);
@@ -25,15 +25,19 @@ public class EnemyFactory : MonoBehaviour
     Vector3 point71 = new Vector3(408.5f, 0.6f, 42);
 
     
-    // Inspector‚ÅƒAƒTƒCƒ“‚·‚é“G‚ÌPrefab
+    // Inspectorã§ã‚¢ã‚µã‚¤ãƒ³ã™ã‚‹æ•µã®Prefab
     public GameObject enemyPrefab;
 
     [SerializeField] private onEffectManager m_efManager;
-    //ƒGƒtƒFƒNƒg‚ğo‚·ˆÊ’u
+    //ã‚¹ãƒãƒ¼ãƒ³SEã®ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ FixedUpdateã§ã‚«ã‚¦ãƒ³ãƒˆã—ã¦ã€ã“ã‚Œä»¥ä¸Šãªã‚‰SEã‚’é³´ã‚‰ã™ã€ã¿ãŸã„ãªæ„Ÿã˜ã§
+    [SerializeField] private int summonSeCooldownFrames = 100;
+    //ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å‡ºã™ä½ç½®
     private Vector3 m_effectPos;
 
-    // w’èˆÊ’u‚É“G‚ğ¶¬‚·‚éƒƒ\ƒbƒh
-    public GameObject SpawnEnemy(Vector3 position,bool anc)//bool‚Íy²”½“]‚·‚é‚©‚Ç‚¤‚©
+    private float m_soundCoolTime;
+
+    // æŒ‡å®šä½ç½®ã«æ•µã‚’ç”Ÿæˆã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
+    public GameObject SpawnEnemy(Vector3 position,bool anc)//boolã¯yè»¸åè»¢ã™ã‚‹ã‹ã©ã†ã‹
     {
         if (enemyPrefab != null)
         {
@@ -41,12 +45,10 @@ public class EnemyFactory : MonoBehaviour
             enemy.GetComponent<enemyMove>().SetStateEnemy();
             return enemy;
 
-           
-
         }
         else
         {
-            Debug.LogWarning("Enemy Prefab‚ªƒAƒTƒCƒ“‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+            Debug.LogWarning("Enemy PrefabãŒã‚¢ã‚µã‚¤ãƒ³ã•ã‚Œã¦ã„ã¾ã›ã‚“");
             return null;
         }
        
@@ -56,11 +58,11 @@ public class EnemyFactory : MonoBehaviour
     // Start is called before the first frame update
    void Start()
     {
-        //GameFlowManagerƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾
+        //GameFlowManagerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—
         m_efManager = FindObjectOfType<onEffectManager>();
         if (m_efManager == null)
         {
-            Debug.LogError("onEffectManager ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ.");
+            Debug.LogError("onEffectManager ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“.");
         }
     }
 
@@ -72,42 +74,75 @@ public class EnemyFactory : MonoBehaviour
         //    SpawnEnemy(this.transform.position);
         //}
 
-        string name = "Spawn";
-        //ƒGƒtƒFƒNƒg‚ğo‚·
-        m_efManager.PlayEffect(transform.position, name);
-        Debug.Log("ƒGƒtƒFƒNƒg‚ğo‚µ‚Ü‚µ‚½");
+       
 
     }
 
-    void OnTriggerEnter(Collider other)//qƒIƒuƒWƒFƒNƒg‚ª“–‚½‚è”»’è‚Æ“–‚½‚Á‚½‚çA‚±‚ê‚ªŒÄ‚Ño‚³‚ê‚é
+    private void FixedUpdate()
+    {
+        //ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ 
+        m_soundCoolTime++;
+    }
+
+    void OnTriggerEnter(Collider other)//å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå½“ãŸã‚Šåˆ¤å®šã¨å½“ãŸã£ãŸã‚‰ã€ã“ã‚ŒãŒå‘¼ã³å‡ºã•ã‚Œã‚‹
     {
         //SpawnID point = GetComponent<SpawnID>();
-        //Debug.Log("•Ç‚É“–‚½‚Á‚½‚æB");
+        //Debug.Log("å£ã«å½“ãŸã£ãŸã‚ˆã€‚");
         //if (point != null)
         //{
         //   switch(point.spawnID)
         //    {
         //        case 0:
         //            SpawnEnemy(point0);
-        //            Debug.Log("“G‚ª¶¬‚³‚ê‚Ü‚µ‚½B");
+        //            Debug.Log("æ•µãŒç”Ÿæˆã•ã‚Œã¾ã—ãŸã€‚");
         //            break;
         //    }
         //}
         //if (Keyboard.current != null && Keyboard.current.jKey.wasPressedThisFrame)
         //{
         //    string name = "Spawn";
-        //    //ƒGƒtƒFƒNƒg‚ğo‚·
+        //    //ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å‡ºã™
         //    m_efManager.PlayEffect(transform.position, name);
-        //    Debug.Log("ƒGƒtƒFƒNƒg‚ğ‰Ÿ‚µ‚½‚æ");
+        //    Debug.Log("ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’æŠ¼ã—ãŸã‚ˆ");
         //}
 
+        // Player1ã€œ4 ã®ã©ã‚Œã‹
+        bool isAnyPlayer =
+            other.CompareTag("Player1") ||
+            other.CompareTag("Player2") ||
+            other.CompareTag("Player3") ||
+            other.CompareTag("Player4");
 
-        string name = "Spawn";
-        //ƒGƒtƒFƒNƒg‚ğo‚·
-        m_efManager.PlayEffect(transform.position, name);
-        Debug.Log("ƒGƒtƒFƒNƒg‚ğo‚µ‚Ü‚µ‚½");
+
+
+
+        // Player ä»¥å¤–ã¯ç„¡è¦–
+        if (!isAnyPlayer) return;
+
+        // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ä¸­ã¯ç„¡è¦–
+        if (m_soundCoolTime < summonSeCooldownFrames) return;
+        // SE
+        if (SoundManager.Instance != null && SoundManager.Instance.SummonSE != null)
+        {
+            SoundManager.Instance.PlaySE(SoundManager.Instance.SummonSE);
+        }
+
+        // ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+        if (m_efManager != null)
+        {
+            Vector3 pos = other.ClosestPoint(transform.position);
+            m_efManager.PlayEffect(pos, "Spawn");
+        }
+
+        Debug.Log("ã‚¹ãƒãƒ¼ãƒ³æ¼”å‡ºï¼ˆSE/ã‚¨ãƒ•ã‚§ã‚¯ãƒˆï¼‰ã‚’å†ç”Ÿã—ã¾ã—ãŸã€‚");
+
+        // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã‚’ãƒªã‚»ãƒƒãƒˆ
+        m_soundCoolTime = 0;
     }
-    public void OnChildernTrigger(int id)
+
+
+
+public void OnChildernTrigger(int id)
     {
         switch (id)
         {
