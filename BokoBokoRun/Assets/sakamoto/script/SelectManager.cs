@@ -20,7 +20,6 @@ public class SelectManager : MonoBehaviour
     private List<PlayerInput> m_joinedPlayers = new List<PlayerInput>();
 
 
-
     enum PlayerNum
     {
         Player1,
@@ -29,8 +28,8 @@ public class SelectManager : MonoBehaviour
         Player4,
         Num
     }
-  
-   
+
+
 
     private void Awake()
     {
@@ -49,6 +48,13 @@ public class SelectManager : MonoBehaviour
 #if UNITY_EDITOR
         DebugProcessing();
 #endif
+
+        //XboxPadのaボタンが押されたら
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+        {
+            //ゲームシーンに行くフラグをtrueにする
+            OnGoInGame();
+        }
     }
 
     public bool IsDecided()
@@ -81,11 +87,15 @@ public class SelectManager : MonoBehaviour
 
     public List<PlayerInput> GetJoinedPlayers()
     {
-       
+
         Debug.Log("★★★ GetJoinedPlayersのCount: " + m_joinedPlayers.Count + " ★★★");
         return m_joinedPlayers;
 
     }
 
 
+    private void OnGoInGame()
+    {
+        m_isDecided = true;
+    }
 }
