@@ -3,7 +3,20 @@ guid: f34349ab5973c0444bf58b1e262885fe
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BgmSource: {instanceID: 0}
+  - SeSource: {instanceID: 0}
+  - TitleBGM: {fileID: 8300000, guid: 7c1c0cdb82615744991d43baf1f20049, type: 3}
+  - SelectBGM: {fileID: 8300000, guid: f186ce7a31f024249a7abd78d706fd29, type: 3}
+  - InGameBGM: {fileID: 8300000, guid: 8a8b68140b3769d4984da753deaca5ee, type: 3}
+  - ResultBGM: {fileID: 8300000, guid: 8d9a64a1482cd934b947c20be73dead6, type: 3}
+  - DecisionSE: {fileID: 8300000, guid: 7b90831f2c6f9de4bb5c6a971b5255ef, type: 3}
+  - RunSE: {instanceID: 0}
+  - CountSE: {fileID: 8300000, guid: 46cc9a6b79d15bc42a8e88a1dd8cb007, type: 3}
+  - HitSE: {fileID: 8300000, guid: 86bd633628fce64429027bc4eeb929dc, type: 3}
+  - BreakObjectSE: {instanceID: 0}
+  - GoalSE: {instanceID: 0}
+  - ChangeSceneSE: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

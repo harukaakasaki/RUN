@@ -35,6 +35,8 @@ public class ResltEnemy : Character
         //最初のポジションを取得する
         m_Respawn = transform.position;
         m_Timer = 0;
+
+
         //m_isRespawn = false;
 
     }

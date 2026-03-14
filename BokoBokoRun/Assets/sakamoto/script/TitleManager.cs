@@ -10,11 +10,11 @@ public class TitleManager : GameManagerBase
 {
     private System.IDisposable m_onAnyButton;//何かのボタンが押されたときに使う変数
     private bool m_isStated = false;//ゲームを開始したかどうか
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        SoundManager.Instance.PlayBGM(SoundManager.Instance.TitleBGM);
     }
 
     private void OnEnable()
@@ -27,6 +27,7 @@ public class TitleManager : GameManagerBase
         {
             Debug.Log("ボタンを押した");
 
+            SoundManager.Instance.PlayBGM(SoundManager.Instance.SelectBGM);
             //既に開始していたら処理を飛ばす
             if (m_isStated) return;
             m_isStated = true;
