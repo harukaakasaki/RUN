@@ -110,7 +110,7 @@ public class Player : Character
         //}
 
         m_effectPos = transform.position;
-        //インゲームの時のみ、又はInGame中のm_isCanMoveがtrueのみ動けるようにする
+        //インゲームの時のみ、さらにInGame中のm_isCanMoveがtrueのみ動けるようにする
         if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
             m_inGameManager.IsCanMove())
         {
