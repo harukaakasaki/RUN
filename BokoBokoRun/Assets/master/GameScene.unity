@@ -14961,7 +14961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 11
 --- !u!64 &352849038
 MeshCollider:
@@ -18004,7 +18004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 8
 --- !u!64 &402379783
 MeshCollider:
@@ -20457,7 +20457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 10
 --- !u!64 &457839687
 MeshCollider:
@@ -46698,7 +46698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 3
 --- !u!64 &1031223106
 MeshCollider:
@@ -61611,6 +61611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83112a3903d0c584691bfbf25d6caa42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_flowManager: {fileID: 815724786}
+  m_inGameManager: {fileID: 1915145089}
 --- !u!1 &1360106048
 GameObject:
   m_ObjectHideFlags: 0
@@ -66290,7 +66292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 4
 --- !u!64 &1484201923
 MeshCollider:
@@ -70422,7 +70424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 1
 --- !u!64 &1591064753
 MeshCollider:
@@ -77883,7 +77885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 6
 --- !u!64 &1764013136
 MeshCollider:
@@ -81858,7 +81860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 9
 --- !u!64 &1862699007
 MeshCollider:
@@ -83158,7 +83160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 2
 --- !u!64 &1899852300
 MeshCollider:
@@ -86790,7 +86792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 5
 --- !u!64 &2006649733
 MeshCollider:
@@ -88368,7 +88370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolTime: 1000
-  m_ingameManager: {fileID: 0}
+  m_ingameManager: {fileID: 1915145089}
   spawnID: 7
 --- !u!64 &2039717597
 MeshCollider:
