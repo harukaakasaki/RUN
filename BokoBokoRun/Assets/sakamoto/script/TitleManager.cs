@@ -28,6 +28,7 @@ public class TitleManager : GameManagerBase
             Debug.Log("ボタンを押した");
 
             SoundManager.Instance.PlayBGM(SoundManager.Instance.SelectBGM);
+            SoundManager.Instance.PlaySE(SoundManager.Instance.DecisionSE);
             //既に開始していたら処理を飛ばす
             if (m_isStated) return;
             m_isStated = true;
