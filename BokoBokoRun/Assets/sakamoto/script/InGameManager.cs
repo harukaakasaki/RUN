@@ -41,6 +41,7 @@ public class InGameManager : GameManagerBase
 
         prevVerstNum = 0;
         nowVerstNum = 0;
+        SoundManager.Instance.PlayBGM(SoundManager.Instance.InGameBGM);
     }
 
     private void OnEnable()

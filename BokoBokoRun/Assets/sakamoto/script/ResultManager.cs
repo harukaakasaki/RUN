@@ -78,7 +78,10 @@ public class ResultManager : GameManagerBase
             }
         }
     }
-
+    private void Start()
+    {
+        SoundManager.Instance.PlayBGM(SoundManager.Instance.ResultBGM);
+    }
 
     // Update is called once per frame
     void FixedUpdate()

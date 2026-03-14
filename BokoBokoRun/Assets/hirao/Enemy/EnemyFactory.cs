@@ -28,8 +28,7 @@ public class EnemyFactory : MonoBehaviour
     // Inspectorでアサインする敵のPrefab
     public GameObject enemyPrefab;
 
-    //エフェクト呼び出す
-    private onEffectManager m_efManager;
+    [SerializeField] private onEffectManager m_efManager;
     //エフェクトを出す位置
     private Vector3 m_effectPos;
 
@@ -73,6 +72,11 @@ public class EnemyFactory : MonoBehaviour
         //    SpawnEnemy(this.transform.position);
         //}
 
+        string name = "Spawn";
+        //エフェクトを出す
+        m_efManager.PlayEffect(transform.position, name);
+        Debug.Log("エフェクトを出しました");
+
     }
 
     void OnTriggerEnter(Collider other)//子オブジェクトが当たり判定と当たったら、これが呼び出される
@@ -89,13 +93,19 @@ public class EnemyFactory : MonoBehaviour
         //            break;
         //    }
         //}
+        //if (Keyboard.current != null && Keyboard.current.jKey.wasPressedThisFrame)
+        //{
+        //    string name = "Spawn";
+        //    //エフェクトを出す
+        //    m_efManager.PlayEffect(transform.position, name);
+        //    Debug.Log("エフェクトを押したよ");
+        //}
 
-        //敵と当たったらエフェクトを出す
+
         string name = "Spawn";
         //エフェクトを出す
         m_efManager.PlayEffect(transform.position, name);
         Debug.Log("エフェクトを出しました");
-
     }
     public void OnChildernTrigger(int id)
     {
