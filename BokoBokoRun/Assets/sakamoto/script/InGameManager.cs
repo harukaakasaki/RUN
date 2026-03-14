@@ -78,7 +78,7 @@ public class InGameManager : GameManagerBase
         //m_GoalLineChecker.GetGoalNum();
 
         //カメラを動かす
-        m_TargetMove.MoveCamera(0.06f);
+        m_TargetMove.MoveCamera(0.07f);
 
         prevVerstNum = nowVerstNum;
 
