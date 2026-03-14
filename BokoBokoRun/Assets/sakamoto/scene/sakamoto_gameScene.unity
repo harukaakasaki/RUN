@@ -10796,6 +10796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 863773554240071089, guid: c0b179c053aa913469fe1a7879ea46a3, type: 3}
+  m_efManager: {fileID: 0}
+  summonSeCooldownFrames: 100
 --- !u!4 &286953044
 Transform:
   m_ObjectHideFlags: 0
@@ -49443,6 +49445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83112a3903d0c584691bfbf25d6caa42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_flowManager: {fileID: 815724786}
+  m_inGameManager: {fileID: 1256481097}
 --- !u!1001 &1361338754
 PrefabInstance:
   m_ObjectHideFlags: 0

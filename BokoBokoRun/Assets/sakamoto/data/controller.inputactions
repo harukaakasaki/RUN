@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Next",
+                    "name": "GoInGame",
                     "type": "Button",
                     "id": "3e22e42d-792f-4472-bbf0-8c3d6ea0a03b",
                     "expectedControlType": "",
@@ -103,7 +103,7 @@
                 {
                     "name": "",
                     "id": "ec29023b-8360-4326-bc73-2a9e3aa936ef",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -118,7 +118,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Next",
+                    "action": "GoInGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
