@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class targetMove : MonoBehaviour
 {
+    [SerializeField] private GameFlowManager m_flowManager;
+    [SerializeField] private InGameManager m_inGameManager;//インゲームマネージャー
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +20,12 @@ public class targetMove : MonoBehaviour
     }
     public void MoveCamera(float x)
     {
-        Vector3 move = new Vector3(x, 0.0f, 0.0f);
+        if (m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
+            m_inGameManager.IsCanMove())
+        {
+            Vector3 move = new Vector3(x, 0.0f, 0.0f);
 
-        transform.position += move;
+            transform.position += move;
+        }  
     }
 }
