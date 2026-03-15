@@ -4,24 +4,29 @@ using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+static class Constants
+{
+       public const float kEnemyeSpawnZ = 28.0f;
+}
 public class EnemyFactory : MonoBehaviour
 {
+
     //敵がスポーンする座標//追加していく//inspectorでいじれる機能があったはず、//Excelみたいに
-    Vector3 point0 = new Vector3(53.5f, 0.6f, 28);
+    Vector3 point0 = new Vector3(53.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point01 = new Vector3(53.5f, 0.6f, 42);
-    Vector3 point1 = new Vector3(104.5f, 0.6f, 28);
+    Vector3 point1 = new Vector3(104.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point11 = new Vector3(104.5f, 0.6f, 42);
-    Vector3 point2 = new Vector3(153.5f, 0.6f, 28);
+    Vector3 point2 = new Vector3(153.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point21 = new Vector3(153.5f, 0.6f, 42);
-    Vector3 point3 = new Vector3(204.5f, 0.6f, 28);
+    Vector3 point3 = new Vector3(204.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point31 = new Vector3(204.5f, 0.6f, 42);
-    Vector3 point4 = new Vector3(251.5f, 0.6f, 28);
+    Vector3 point4 = new Vector3(251.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point41 = new Vector3(251.5f, 0.6f, 42);
-    Vector3 point5 = new Vector3(306.5f, 0.6f, 28);
+    Vector3 point5 = new Vector3(306.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point51 = new Vector3(306.5f, 0.6f, 42);
-    Vector3 point6 = new Vector3(357.5f, 0.6f, 28);
+    Vector3 point6 = new Vector3(357.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point61 = new Vector3(357.5f, 0.6f, 42);
-    Vector3 point7 = new Vector3(408.5f, 0.6f, 28);
+    Vector3 point7 = new Vector3(408.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point71 = new Vector3(408.5f, 0.6f, 42);
 
     
@@ -54,6 +59,7 @@ public class EnemyFactory : MonoBehaviour
        
 
     }
+
 
     // Start is called before the first frame update
    void Start()
