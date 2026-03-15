@@ -11774,8 +11774,8 @@ Transform:
   m_GameObject: {fileID: 280596668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.70877564, z: -0, w: 0.705434}
-  m_LocalPosition: {x: -14.63, y: 0.38, z: -188.95}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -14.6, y: -1.29, z: -197.73}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -12591,6 +12591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 290050269}
   - component: {fileID: 290050270}
+  - component: {fileID: 290050271}
   m_Layer: 0
   m_Name: PressAnyButton
   m_TagString: Untagged
@@ -12665,6 +12666,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &290050271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290050268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a925d316651b0e4a8d0ec280eaf582f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  size: 0.2
 --- !u!4 &294181559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 668735768885291391, guid: 91ad7bf144749b04ab484a680630a040, type: 3}
@@ -12753,6 +12768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 296933106}
   - component: {fileID: 296933107}
+  - component: {fileID: 296933108}
   m_Layer: 0
   m_Name: BokoBoko1P
   m_TagString: Untagged
@@ -12827,6 +12843,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &296933108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296933105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a925d316651b0e4a8d0ec280eaf582f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  size: 0.1
 --- !u!1001 &297847746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21129,7 +21159,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Result
+  m_Text: 
 --- !u!222 &451451714
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29887,7 +29917,7 @@ Transform:
   m_GameObject: {fileID: 632319095}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70254236, y: 0.00088114856, z: 0.7116363, w: -0.0027130474}
-  m_LocalPosition: {x: -18.59, y: 0.65, z: -198.21}
+  m_LocalPosition: {x: -18.53, y: 0.66, z: -202.98}
   m_LocalScale: {x: 0.25, y: -0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38324,6 +38354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 819655278}
   - component: {fileID: 819655279}
+  - component: {fileID: 819655280}
   m_Layer: 0
   m_Name: BokoBoko4P
   m_TagString: Untagged
@@ -38398,6 +38429,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &819655280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819655277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a925d316651b0e4a8d0ec280eaf582f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  size: 0.1
 --- !u!1001 &820912813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38539,7 +38584,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: InGameScene
+  m_Text: 
 --- !u!222 &821286553
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -39350,7 +39395,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Any Button
+  m_Text: 
 --- !u!222 &846387850
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -56782,6 +56827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1211527889}
   - component: {fileID: 1211527890}
+  - component: {fileID: 1211527891}
   m_Layer: 0
   m_Name: BokoBoko2P
   m_TagString: Untagged
@@ -56856,6 +56902,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1211527891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211527888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a925d316651b0e4a8d0ec280eaf582f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  size: 0.1
 --- !u!1001 &1211847579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64139,6 +64199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360106049}
   - component: {fileID: 1360106050}
+  - component: {fileID: 1360106051}
   m_Layer: 0
   m_Name: BokoBoko3P
   m_TagString: Untagged
@@ -64213,6 +64274,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1360106051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360106048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a925d316651b0e4a8d0ec280eaf582f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  size: 0.1
 --- !u!1 &1360830163 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4377933626515690895, guid: a1834b6441f5f964186d094e8fd881e5, type: 3}
@@ -87420,7 +87495,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SelectText
+  m_Text: 
 --- !u!222 &1916674310
 CanvasRenderer:
   m_ObjectHideFlags: 0
