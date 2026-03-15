@@ -69,7 +69,7 @@ public class InGameManager : GameManagerBase
         if(m_isZoom)
         {
             m_CameraFrame++;
-            if (m_CameraFrame > 100)
+            if (m_CameraFrame > 10)
             {
                 m_Gamecam.Follow = m_targetCamera.transform;
                 Time.timeScale = 1f;
