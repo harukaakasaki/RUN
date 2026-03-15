@@ -23,6 +23,9 @@ public class cameraManager : MonoBehaviour
     private const int kResultCamera = 3;
     private const int kGoalCamera = 4;
 
+    //boolがtrueになったら距離を近くする
+    private bool isNear = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,5 +109,10 @@ public class cameraManager : MonoBehaviour
         }
         //セレクト用のカメラの優先度を上げる
         cameras[kGoalCamera].Priority = 10;
+    }
+
+    public void SetNear()
+    {
+        isNear = true;
     }
 }

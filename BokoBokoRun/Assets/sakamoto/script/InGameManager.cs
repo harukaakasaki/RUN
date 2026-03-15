@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
@@ -18,6 +19,15 @@ public class InGameManager : GameManagerBase
     [SerializeField] private targetMove m_TargetMove;
     //ゲームシーンのプレイヤーのスポーン位置
     [SerializeField] Transform[] m_spawnPositionsOfGame;
+    //ゲームシーンのカメラ
+    [SerializeField] CinemachineVirtualCamera m_Gamecam;
+    //カメラの元々のFollowのゲームオブジェクト
+    [SerializeField] private GameObject m_targetCamera;
+    //新しいFollowのゲームオブジェクト
+    [SerializeField] private GameObject m_newTargetCamera;
+    //カメラのFollowが変わったときの旗
+    bool m_isZoom = false;
+    private int m_CameraFrame = 0;//カメラのFollowを変えたときのフレーム
 
     private int m_frame = 0;//最初のカウントダウン用のフレーム
     private bool m_isCanMove = false;//カウントダウン中動けないようにするためのフラグ
@@ -55,6 +65,18 @@ public class InGameManager : GameManagerBase
 #if UNITY_EDITOR
         UpdateDebug();
 #endif
+        //カメラがZoom中の時、時間経過で元に戻す処理
+        if(m_isZoom)
+        {
+            m_CameraFrame++;
+            if (m_CameraFrame > 100)
+            {
+                m_Gamecam.Follow = m_targetCamera.transform;
+                Time.timeScale = 1f;
+                m_isZoom = false;
+            }
+        }
+
 
         //ゲームシーンになったとき & カメラがゴールを見た後にフレームを減らす
         if (m_GameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
@@ -189,5 +211,22 @@ public class InGameManager : GameManagerBase
     public bool IsCanMove()
     {
         return m_isCanMove;
+    }
+    public void SetCameraZoomTrigger(Vector3 pos)
+    {
+        //調整
+        pos = new Vector3(pos.x, pos.y + 3, pos.z);
+
+        // m_Gamecam.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = new Vector3(0, -3, -8);
+        //カメラのFollowを変える//その前にFollowを保存する//最初に
+        //すうびょうしたら元に戻す//そのための旗がいる
+        //もらった座標に新しいターゲットを置く
+        m_newTargetCamera.transform.position = pos;
+        m_Gamecam.Follow = m_newTargetCamera.transform;
+        //時間を遅くする
+        Time.timeScale = 0.1f;
+        m_isZoom = true;
+
+
     }
 }

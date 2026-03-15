@@ -211,6 +211,8 @@ public class Player : Character
 
             //カメラを揺らす
             m_impulse.GenerateImpulse();
+            //カメラをzoomさせる
+            m_inGameManager.SetCameraZoomTrigger(this.transform.position);
 
             // ノックバック方向を「カメラ方向」に
             Vector3 dir;
