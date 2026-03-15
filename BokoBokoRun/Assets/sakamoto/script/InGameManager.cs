@@ -41,6 +41,8 @@ public class InGameManager : GameManagerBase
     private int prevVerstNum;   //前フレームで死んだ人の数
     private int nowVerstNum;    //現在フレームで死んだ人の数
 
+    private int m_goalPlayerNum;//ゴールしたプレイヤーの数
+
     private bool m_isEnd = false;   //ゲームが終了したか
 
     // Start is called before the first frame update
@@ -111,6 +113,14 @@ public class InGameManager : GameManagerBase
         {
             DecreaseAliveNum();//人が減る処理
         }
+
+        //死んだ人の数とゴールした人の数が参加プレイヤー人数に達したら
+        int deadNum = m_GameFlowManager.GetPadNum() - m_aliveNum;
+        if (m_goalPlayerNum + deadNum == m_GameFlowManager.GetPadNum())
+        {
+            //シーン遷移をする
+            OnEnd();
+        }
     }
 
 
@@ -124,16 +134,17 @@ public class InGameManager : GameManagerBase
         m_aliveNum--;
         if (m_aliveNum <= 0)
         {
-            //全員死んだときの処理
-            //シーン遷移する
-            OnEnd();
-
             m_resultManager.OnAllLose();
         }
         else
         {
             //まだ生きている人がいるときの処理
         }
+    }
+
+    public void OnGoal()
+    {
+        m_goalPlayerNum++;
     }
 
     private void UpdateDebug()
