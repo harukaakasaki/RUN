@@ -7,6 +7,8 @@ public class targetMove : MonoBehaviour
     [SerializeField] private GameFlowManager m_flowManager;
     [SerializeField] private InGameManager m_inGameManager;//インゲームマネージャー
 
+    [SerializeField] private GameObject m_End;//ゴールオブジェクト
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,11 @@ public class targetMove : MonoBehaviour
             Vector3 move = new Vector3(x, 0.0f, 0.0f);
 
             transform.position += move;
+             float m_EndPosX = m_End.transform.position.x;//固定値
+            if (transform.position.x > m_EndPosX)
+            {
+              transform.position = new Vector3(m_EndPosX, transform.position.y, transform.position.z);
+            }
         }  
     }
 }

@@ -7,6 +7,7 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 
 public enum PlayerState
@@ -49,6 +50,9 @@ public class Player : Character
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
 
     [SerializeField] private Transform m_gameCamera;
+
+    public CinemachineImpulseSource m_impulseSource;//カメラを揺らすためのコンポーネント
+
     // Start is called before the first frame update
     void Start()
     {
@@ -193,6 +197,9 @@ public class Player : Character
         if (other.CompareTag("GameEnemy"))
         {
             Debug.Log("敵に当たりました！");
+
+            //カメラを揺らす
+            m_impulseSource.GenerateImpulse();
 
             // ノックバック方向を「カメラ方向」に
             Vector3 dir;
