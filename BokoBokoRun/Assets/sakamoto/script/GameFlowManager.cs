@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -30,6 +31,9 @@ public sealed class GameFlowManager : MonoBehaviour
     //パッドの数
     private int m_padNum;
 
+    private int m_frame;
+    const int kLookingGoalFrame = 100;
+
     public enum Scene
     {
         None,   //何もない
@@ -39,6 +43,10 @@ public sealed class GameFlowManager : MonoBehaviour
         Result, //リザルトシーン
     }
     private static Scene m_scene;
+
+    private bool m_isLookedGoal = false;//カメラがゴールを一度見たか
+    private bool m_isBackCamera = false;//カメラがゴールを見た後にインゲームカメラに戻ったか
+    [SerializeField] private CinemachineBrain m_brain;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +58,8 @@ public sealed class GameFlowManager : MonoBehaviour
 
         //タイトルを出す前に黒→透明とする
         StartCoroutine(BootTitle());
+
+        m_frame = kLookingGoalFrame;
     }
 
     private IEnumerator BootTitle()
@@ -103,7 +113,7 @@ public sealed class GameFlowManager : MonoBehaviour
 
                 //セレクトマネージャーから決定ボタンが押されたかどうかを取得して
                 //押されている&フェード中じゃなければゲームシーンに遷移する
-                if(!m_isTransitioning &&
+                if (!m_isTransitioning &&
                     m_selectManger.IsDecided() &&
                     !m_fadeManager.m_isFading)
                 {
@@ -115,7 +125,35 @@ public sealed class GameFlowManager : MonoBehaviour
 
             case Scene.InGame:
                 Debug.Log("インゲームシーンです");
-                //Result遷移も同様の手順で行う
+
+                if (m_isLookedGoal &&
+                    !m_brain.IsBlending)
+                {
+                    m_frame--;
+                }
+
+                //カメラを一度ゴールを見るように指示する
+                if (!m_isTransitioning &&
+                   !m_fadeManager.m_isFading &&
+                   !m_isLookedGoal)
+                {
+                    LookGoal();
+                }
+
+                bool lookedOneFrame = m_frame < 0;
+
+                //ゴールを見た後にカメラをインゲームに戻す
+                if (!m_isTransitioning &&
+                   !m_fadeManager.m_isFading &&
+                   !m_isBackCamera &&
+                   m_isLookedGoal &&
+                   lookedOneFrame &&
+                   !m_brain.IsBlending)
+                {
+                    BackCameraInGame();
+                }
+
+                //Result遷移も他の遷移と同様の手順で行う
                 if (!m_isTransitioning &&
                     m_inGameManger.IsEnd() &&
                     !m_fadeManager.m_isFading)
@@ -172,7 +210,7 @@ public sealed class GameFlowManager : MonoBehaviour
         ChangeScene(Scene.Select);
         //カメラも切り替える
         m_cameraManager.SetSelect();
-      
+
 
         //カメラを完全に切り替えるために1フレーム待つ
         yield return null;
@@ -220,6 +258,24 @@ public sealed class GameFlowManager : MonoBehaviour
 
         //シーン遷移中フラグを降ろす
         m_isTransitioning = false;
+    }
+
+    private void LookGoal()
+    {
+        //カメラにゴールを見るようにさせる
+        m_cameraManager.SetGoalCamera();
+
+        //ゴールを見たフラグを立てる
+        m_isLookedGoal = true;
+    }
+
+    private void BackCameraInGame()
+    {
+        //カメラをインゲームに戻す
+        m_cameraManager.SetGame();
+
+        //インゲームに戻ったフラグを立てる
+        m_isBackCamera = true;
     }
 
     public void ChangeScene(Scene scene)
@@ -278,5 +334,10 @@ public sealed class GameFlowManager : MonoBehaviour
     public Scene GetNowScene()
     {
         return m_scene;
+    }
+
+    public bool IsBackCamera()
+    {
+        return m_isBackCamera;
     }
 }
