@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -12,6 +13,12 @@ public class InGameManager : GameManagerBase
     {
         public const int kCountDownFrame = 150;
     }
+
+    // UI
+    [SerializeField] private  Image m_loseUI;
+
+    private int m_uiFrame = 0;
+    private bool m_uiActive = false;
 
     //接続されているプレイヤーの数を数えるためのもの
     [SerializeField] private GameFlowManager m_GameFlowManager;
@@ -50,6 +57,7 @@ public class InGameManager : GameManagerBase
     {
         m_padNum = m_GameFlowManager.GetPadNum();//接続されているpadの数を取得
         m_aliveNum = m_padNum;//最初は全員生きている状態
+        m_loseUI.gameObject.SetActive(false);
 
         prevVerstNum = 0;
         nowVerstNum = 0;
@@ -81,6 +89,17 @@ public class InGameManager : GameManagerBase
         }
 
 
+        // LoseのUI表示
+        if(m_uiActive == true)
+        {
+            m_uiFrame++;
+            if(m_uiFrame >= 30)
+            {
+                m_loseUI.gameObject.SetActive(false);
+                m_uiFrame = 0;
+                m_uiActive = false;
+            }
+        }
         //ゲームシーンになったとき & カメラがゴールを見た後にフレームを減らす
         if (m_GameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
             m_GameFlowManager.IsBackCamera())
@@ -242,5 +261,11 @@ public class InGameManager : GameManagerBase
         m_isZoom = true;
 
 
+    }
+
+    public void SetUILose()
+    {
+        m_uiActive = true;
+        m_loseUI.gameObject.SetActive(true);
     }
 }

@@ -19,7 +19,7 @@ public enum PlayerState
 public class Player : Character
 {
 
-   Vector3 resetPosition = new Vector3(35.0f,-33,0);// 戻す位置
+    Vector3 resetPosition = new Vector3(35.0f,-33,0);// 戻す位置
     bool m_isNoActive;//生きているか死んでいるか
     static class Constants
     {
@@ -253,6 +253,9 @@ public class Player : Character
             m_isNoActive = true;
             Debug.Log("Playerの位置を変更");
             transform.position = resetPosition;
+
+            // LoseUIの表示
+            m_inGameManager.SetUILose();
         }
     }
 
