@@ -30,7 +30,6 @@ public class InGameManager : GameManagerBase
     private int prevVerstNum;   //前フレームで死んだ人の数
     private int nowVerstNum;    //現在フレームで死んだ人の数
 
-
     private bool m_isEnd = false;   //ゲームが終了したか
 
     // Start is called before the first frame update
@@ -57,8 +56,9 @@ public class InGameManager : GameManagerBase
         UpdateDebug();
 #endif
 
-        //ゲームシーンになったときにフレームを減らす
-        if (m_GameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame)
+        //ゲームシーンになったとき & カメラがゴールを見た後にフレームを減らす
+        if (m_GameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
+            m_GameFlowManager.IsBackCamera())
         {
             m_frame--;
 

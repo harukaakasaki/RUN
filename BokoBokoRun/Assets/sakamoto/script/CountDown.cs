@@ -46,7 +46,8 @@ public class CountDown : MonoBehaviour
     {
         //1秒かけて大きくなる
         //1秒経ったら消えて次の数字が大きくなる
-        if (m_gameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame)
+        if (m_gameFlowManager.GetNowScene() == GameFlowManager.Scene.InGame &&
+            m_gameFlowManager.IsBackCamera())
         {
             //sizeUpの値ごとにサイズアップしていく
             Vector3 sizeUp = new Vector3(0.1f, 0.1f, 0.1f);

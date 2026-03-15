@@ -21,11 +21,12 @@ public class cameraManager : MonoBehaviour
     private const int kSelectCamera = 1;
     private const int kGameCamera = 2;
     private const int kResultCamera = 3;
+    private const int kGoalCamera = 4;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        SetTitle();
     }
 
     // Update is called once per frame
@@ -94,5 +95,16 @@ public class cameraManager : MonoBehaviour
         }
         //セレクト用のカメラの優先度を上げる
         cameras[kSelectCamera].Priority = 10;
+    }
+
+    public void SetGoalCamera()
+    {
+        //for文ですべてのカメラの優先度を下げる
+        for (int i = 0; i < cameras.Count; i++)
+        {
+            cameras[i].Priority = 0;
+        }
+        //セレクト用のカメラの優先度を上げる
+        cameras[kGoalCamera].Priority = 10;
     }
 }
