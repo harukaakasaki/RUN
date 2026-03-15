@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 static class Constants
 {
-       public const float kEnemyeSpawnZ = 28.0f;
+       public const float kEnemyeSpawnZ = 31.0f;
 }
 public class EnemyFactory : MonoBehaviour
 {
