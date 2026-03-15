@@ -48,12 +48,15 @@ public class SelectManager : MonoBehaviour
 #if UNITY_EDITOR
         DebugProcessing();
 #endif
-
-        //XboxPadのaボタンが押されたら
-        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+        //人数が1人以上いる状態で
+        if (m_gameFlowManager.GetPadNum() >= 1)
         {
-            //ゲームシーンに行くフラグをtrueにする
-            OnGoInGame();
+            //XboxPadのaボタンが押されたら
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                //ゲームシーンに行くフラグをtrueにする
+                OnGoInGame();
+            }
         }
     }
 
