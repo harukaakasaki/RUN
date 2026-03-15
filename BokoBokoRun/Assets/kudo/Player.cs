@@ -48,10 +48,11 @@ public class Player : Character
     private onEffectManager m_efManager;
     private Vector3 m_effectPos;//エフェクトを出す位置
     private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
+    //カメラ揺らすよう
+    CinemachineImpulseSource m_impulse;
 
     [SerializeField] private Transform m_gameCamera;
 
-    public CinemachineImpulseSource m_impulseSource;//カメラを揺らすためのコンポーネント
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +88,8 @@ public class Player : Character
         {
             Debug.LogError("onEffectManager が見つかりません.");
         }
+        //CinemachineImpulseSourceコンポーネントを取得
+        m_impulse = GetComponent<CinemachineImpulseSource>();
 
         //初期位置を保存
         //m_playerPos = m_spawnPos;
@@ -123,6 +126,13 @@ public class Player : Character
         //    m_efManager.PlayEffect(this.transform.position, name);
         //    Debug.Log("エフェクトを押したよ");
         //}
+
+        //if(m_flowManager.GetNowScene() == GameFlowManager.Scene.InGame)
+        //{
+        //    //CinemachineImpulseSourceコンポーネントを取得
+        //    m_impulseSource = GetComponent<CinemachineImpulseSource>();
+        //}
+       
 
         m_effectPos = transform.position;
         //インゲームの時のみ、さらにInGame中のm_isCanMoveがtrueのみ動けるようにする
@@ -196,10 +206,11 @@ public class Player : Character
     {
         if (other.CompareTag("GameEnemy"))
         {
-            Debug.Log("敵に当たりました！");
+            //Debug.Log("敵に当たりました！");
+      
 
             //カメラを揺らす
-            m_impulseSource.GenerateImpulse();
+            m_impulse.GenerateImpulse();
 
             // ノックバック方向を「カメラ方向」に
             Vector3 dir;

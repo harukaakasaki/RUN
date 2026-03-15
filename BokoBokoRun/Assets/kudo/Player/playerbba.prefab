@@ -291,6 +291,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6d272a8d844989943848e3c246e95ca5, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8444374532445440303}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6d272a8d844989943848e3c246e95ca5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8797073816323197465}
   m_SourcePrefab: {fileID: 100100000, guid: 6d272a8d844989943848e3c246e95ca5, type: 3}
 --- !u!1 &1203150191352157626 stripped
 GameObject:
@@ -356,7 +359,6 @@ MonoBehaviour:
   m_Gravity: -20
   m_spawnPos: {x: 0, y: 0, z: 0}
   m_gameCamera: {fileID: 0}
-  m_impulseSource: {fileID: 0}
 --- !u!114 &6448385394410706721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +460,59 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &8797073816323197465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203150191352157626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!4 &2015820523267510016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d272a8d844989943848e3c246e95ca5, type: 3}
