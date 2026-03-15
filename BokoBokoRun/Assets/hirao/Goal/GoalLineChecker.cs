@@ -60,7 +60,7 @@ public class GoalLineChecker : MonoBehaviour
                 //このRankをPlayerに渡す
                 Debug.Log("goalとplayerがあたったよ");
                 //ゴールした分、生き残っている人数を減らす
-                m_InGameManager.DecreaseAliveNum();
+                m_InGameManager.OnGoal();
                 if (m_Rank == 1)
                 {
                     //1位のときの処理

@@ -70,8 +70,7 @@ public class ResultManager : GameManagerBase
                 {
                     //それが負けたプレイヤーのタグだった場合
                     //負けアニメーションのみを行うプレイヤーオブジェクトを生成する
-                    Instantiate(m_loseAnimPlayers[i], m_loserPosObj[i].transform.position, Quaternion.Euler(0.0f, 90.0f, 0.0f));
-                    
+                    Instantiate(m_loseAnimPlayers[i], m_loserPosObj[i].transform.position, Quaternion.Euler(0.0f, 90.0f, 0.0f)); 
                 }
             }
         }
