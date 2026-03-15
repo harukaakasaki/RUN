@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class ResultManager : GameManagerBase
 {
+    [SerializeField] Image winUI;
+    [SerializeField] Image loseUI;
+
     private bool m_isBackTitle = false;//タイトルに戻るか
 
     [SerializeField] private GameFlowManager m_gameFlowManager;
@@ -59,18 +62,25 @@ public class ResultManager : GameManagerBase
                     //同じだったら勝ちアニメーションプレイヤーの配列に入っているオブジェクトの位置を
                     //事前に設定されてある勝者の位置に移動させる
                     Instantiate(m_winAnimPlayers[i],m_winnerPosObj.transform.position,Quaternion.Euler(0.0f,90.0f,0.0f));
+                    // WinUIを表示する
+                    winUI.gameObject.SetActive(true);
+
                 }
                 else
                 {
                     //それが負けたプレイヤーのタグだった場合
                     //負けアニメーションのみを行うプレイヤーオブジェクトを生成する
                     Instantiate(m_loseAnimPlayers[i], m_loserPosObj[i].transform.position, Quaternion.Euler(0.0f, 90.0f, 0.0f));
+                    
                 }
             }
         }
         //すべてのプレイヤーが負けていた場合
         else
         {
+            // LoseUIを表示する
+            loseUI.gameObject.SetActive(true);
+
             for (int i = 0; i < m_players.Length; i++)
             {
                 //負けアニメーションのみを行うプレイヤーオブジェクトを生成する

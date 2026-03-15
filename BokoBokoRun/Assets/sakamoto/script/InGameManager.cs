@@ -15,6 +15,7 @@ public class InGameManager : GameManagerBase
 
     //接続されているプレイヤーの数を数えるためのもの
     [SerializeField] private GameFlowManager m_GameFlowManager;
+    [SerializeField] private ResultManager m_resultManager;
     [SerializeField] private GoalLineChecker m_GoalLineChecker;
     [SerializeField] private targetMove m_TargetMove;
     //ゲームシーンのプレイヤーのスポーン位置
@@ -126,6 +127,8 @@ public class InGameManager : GameManagerBase
             //全員死んだときの処理
             //シーン遷移する
             OnEnd();
+
+            m_resultManager.OnAllLose();
         }
         else
         {
