@@ -52,10 +52,10 @@ public class SelectManager : MonoBehaviour
     void Update()
     {
         //人数が1人以上いる状態で
-        if (m_gameFlowManager.GetPadNum() >= 1)
+        if (m_joinedPlayers.Count >= 1)
         {
-            //XboxPadのaボタンが押されたら
-            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+            //XboxPadのSTARTボタンが押されたら
+            if (Gamepad.current.startButton.wasPressedThisFrame)
             {
                 //ゲームシーンに行くフラグをtrueにする
                 OnGoInGame();

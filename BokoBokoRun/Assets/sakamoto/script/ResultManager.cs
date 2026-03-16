@@ -32,9 +32,6 @@ public class ResultManager : GameManagerBase
     [SerializeField] private GameObject[] m_loserPosObj;//2位以降のプレイヤーの位置にあるオブジェクト
     //カメラ
     [SerializeField] private CinemachineVirtualCamera m_vcam;
-    float dt = 0f;
-
-    private int m_frame;
 
     private void OnEnable()
     {
@@ -104,18 +101,18 @@ public class ResultManager : GameManagerBase
 #if UNITY_EDITOR 
         DebugSakamoto();
 #endif 
-      
        
         //カメラを動かす処理//FollowOffsetを少しずつ変化させて、カメラを近づける
         m_vcam.m_Lens.FieldOfView = Mathf.Lerp(m_vcam.m_Lens.FieldOfView, 60.0f, 0.01f);
 
-        //5秒たったらほんの一瞬だけ別のシーンに行く
+        //Aボタンが押されたら一瞬だけ別のシーンに遷移する(急遽シーンをリセットするため)
         //そのあとタイトルシーンに戻る
         if (m_gameFlowManager.GetNowScene() == GameFlowManager.Scene.Result)
         {
-            m_frame++;
-            if(m_frame >= 200)
+            //XboxPadのAボタンが押されたら
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
             {
+                //リザルトシーンに遷移する
                 SceneManager.LoadScene("ResultScene");
             }
         }
