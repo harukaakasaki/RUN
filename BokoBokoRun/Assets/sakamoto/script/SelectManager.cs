@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SelectManager : MonoBehaviour
 {

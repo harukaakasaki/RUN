@@ -5,7 +5,6 @@ using System.Xml;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class InGameManager : GameManagerBase
 {
@@ -57,7 +56,7 @@ public class InGameManager : GameManagerBase
     {
         m_padNum = m_GameFlowManager.GetPadNum();//接続されているpadの数を取得
         m_aliveNum = m_padNum;//最初は全員生きている状態
-        m_loseUI.gameObject.SetActive(false);
+       // m_loseUI.gameObject.SetActive(false);
 
         prevVerstNum = 0;
         nowVerstNum = 0;
@@ -85,12 +84,13 @@ public class InGameManager : GameManagerBase
                 m_Gamecam.Follow = m_targetCamera.transform;
                 Time.timeScale = 1f;
                 m_isZoom = false;
+                m_CameraFrame = 0;
             }
         }
 
 
         // LoseのUI表示
-        if(m_uiActive == true)
+        if(m_uiActive)
         {
             m_uiFrame++;
             if(m_uiFrame >= 30)
@@ -267,5 +267,6 @@ public class InGameManager : GameManagerBase
     {
         m_uiActive = true;
         m_loseUI.gameObject.SetActive(true);
+        m_uiFrame = 0;
     }
 }
