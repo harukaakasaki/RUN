@@ -269,4 +269,8 @@ public class InGameManager : GameManagerBase
         m_loseUI.gameObject.SetActive(true);
         m_uiFrame = 0;
     }
+    public void SetUILoseLost()
+    {
+        m_loseUI.gameObject.SetActive(false);
+    }
 }

@@ -226,6 +226,8 @@ public sealed class GameFlowManager : MonoBehaviour
     {
         //まずフェードアウトを行う
         yield return m_fadeManager.FadeOut(0.0f, 1.0f);
+        //UIを非表示
+        m_inGameManger.SetUILoseLost();
         //暗転中にリザルトマネージャーに切り替える
         ChangeScene(Scene.Result);
         //カメラも切り替える
