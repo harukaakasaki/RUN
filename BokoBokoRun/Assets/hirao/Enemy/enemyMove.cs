@@ -27,7 +27,7 @@ public class enemyMove : Character
     private void Move()//ˆÚ“®’†
     {
         
-      m_Velocity = new Vector3(0.07f, 0.0f, 0.0f);
+      m_Velocity = new Vector3(0.09f, 0.0f, 0.0f);
     }
     private void Entering()//oê’†
     
