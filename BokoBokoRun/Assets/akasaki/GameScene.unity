@@ -72908,12 +72908,12 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 0
+  m_Priority: 20
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 2120658843}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 40.86
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -84265,7 +84265,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 40.86
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -84291,8 +84291,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121737402}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00018321819, y: 0.98973906, z: -0.14288081, w: -0.001269157}
-  m_LocalPosition: {x: 45.193024, y: 3.16, z: -563.1}
+  m_LocalRotation: {x: -0.017183304, y: -0.71109056, z: -0.017389094, w: 0.7026753}
+  m_LocalPosition: {x: -4.600006, y: 0, z: -199.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -102017,6 +102017,7 @@ MonoBehaviour:
   - {fileID: 1855254055}
   - {fileID: 1296275045}
   - {fileID: 767893487}
+  m_vcam: {fileID: 992146643}
 --- !u!4 &1367477850
 Transform:
   m_ObjectHideFlags: 0

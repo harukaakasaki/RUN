@@ -1,8 +1,10 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ResultManager : GameManagerBase
@@ -28,6 +30,9 @@ public class ResultManager : GameManagerBase
     private bool m_isAllLoser = false;//全員が負けたかどうか
     [SerializeField] private GameObject[] m_loseAnimPlayers;//負けた時のアニメーションを行っているプレイヤーの配列
     [SerializeField] private GameObject[] m_loserPosObj;//2位以降のプレイヤーの位置にあるオブジェクト
+    //カメラ
+    [SerializeField] private CinemachineVirtualCamera m_vcam;
+    float dt = 0f;
 
     private int m_frame;
 
@@ -90,6 +95,7 @@ public class ResultManager : GameManagerBase
     private void Start()
     {
         SoundManager.Instance.PlayBGM(SoundManager.Instance.ResultBGM);
+        m_vcam.m_Lens.FieldOfView = 0.1f;
     }
 
     // Update is called once per frame
@@ -98,6 +104,10 @@ public class ResultManager : GameManagerBase
 #if UNITY_EDITOR 
         DebugSakamoto();
 #endif 
+      
+       
+        //カメラを動かす処理//FollowOffsetを少しずつ変化させて、カメラを近づける
+        m_vcam.m_Lens.FieldOfView = Mathf.Lerp(m_vcam.m_Lens.FieldOfView, 60.0f, 0.01f);
 
         //5秒たったらほんの一瞬だけ別のシーンに行く
         //そのあとタイトルシーンに戻る
