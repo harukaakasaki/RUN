@@ -20,8 +20,8 @@ public class EnemyFactory : MonoBehaviour
     Vector3 point21 = new Vector3(153.5f, 0.6f, 42);
     Vector3 point3 = new Vector3(204.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point31 = new Vector3(204.5f, 0.6f, 42);
-    Vector3 point4 = new Vector3(251.5f, 0.6f, Constants.kEnemyeSpawnZ);
-    Vector3 point41 = new Vector3(251.5f, 0.6f, 42);
+    Vector3 point4 = new Vector3(264.5f, 0.6f, Constants.kEnemyeSpawnZ);
+    Vector3 point41 = new Vector3(261.5f, 0.6f, 42);
     Vector3 point5 = new Vector3(306.5f, 0.6f, Constants.kEnemyeSpawnZ);
     Vector3 point51 = new Vector3(306.5f, 0.6f, 42);
     Vector3 point6 = new Vector3(357.5f, 0.6f, Constants.kEnemyeSpawnZ);
