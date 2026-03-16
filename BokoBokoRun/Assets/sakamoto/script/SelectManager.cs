@@ -47,6 +47,10 @@ public class SelectManager : MonoBehaviour
 #if UNITY_EDITOR
         DebugProcessing();
 #endif
+    }
+
+    void Update()
+    {
         //l”‚ª1lˆÈã‚¢‚éó‘Ô‚Å
         if (m_gameFlowManager.GetPadNum() >= 1)
         {
