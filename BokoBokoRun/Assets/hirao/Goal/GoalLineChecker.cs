@@ -8,6 +8,8 @@ public class GoalLineChecker : MonoBehaviour
     [SerializeField] private GameFlowManager m_GameFlowManager;
     [SerializeField] private InGameManager m_InGameManager;
     [SerializeField] private ResultManager m_resultManager;
+    [SerializeField] private SelectManager m_selectManager;
+    
     private int m_padNum;
    
 
@@ -48,10 +50,9 @@ public class GoalLineChecker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         //Debug.Log("“–‚½‚Á‚½‚æƒvƒŒƒCƒ„[‚Æ%s",other.C);
 
-        for(int i = 0; i < m_padNum; i++)
+        for(int i = 0; i < m_selectManager.GetJoinedPlayers().Count; i++)
         {
          string playerTag = "Player" + (i + 1).ToString();
             if (other.CompareTag(playerTag))

@@ -41592,8 +41592,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GameFlowManager: {fileID: 815724786}
-  m_InGameManager: {fileID: 0}
+  m_InGameManager: {fileID: 1915145089}
   m_resultManager: {fileID: 1367477849}
+  m_selectManager: {fileID: 65018344}
   m_Rank: 0
 --- !u!65 &542913955
 BoxCollider:
@@ -102252,9 +102253,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad54f8e7ff62d449b9238e65f5618c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winUI: {fileID: 0}
+  winUI: {fileID: 706251285}
   loseUI: {fileID: 1170217732}
   m_gameFlowManager: {fileID: 815724786}
+  m_selectManager: {fileID: 65018344}
   m_winAnimPlayers:
   - {fileID: 2649926379699328825, guid: 7abbdbd6aa73d5c439c6eba605ac8bf4, type: 3}
   - {fileID: 1954280716814012320, guid: eb059602569d7bb488c7dbae0d74b475, type: 3}
@@ -136636,6 +136638,7 @@ MonoBehaviour:
   m_GameFlowManager: {fileID: 815724786}
   m_InGameManager: {fileID: 1915145089}
   m_resultManager: {fileID: 1367477849}
+  m_selectManager: {fileID: 65018344}
   m_Rank: 0
 --- !u!65 &1873514560
 BoxCollider:
@@ -139984,6 +139987,7 @@ MonoBehaviour:
   m_resultManager: {fileID: 1367477849}
   m_GoalLineChecker: {fileID: 1873514559}
   m_TargetMove: {fileID: 1355809143}
+  m_selectManager: {fileID: 65018344}
   m_spawnPositionsOfGame:
   - {fileID: 970104288}
   - {fileID: 516860022}

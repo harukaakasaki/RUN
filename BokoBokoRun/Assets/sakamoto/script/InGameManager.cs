@@ -24,6 +24,7 @@ public class InGameManager : GameManagerBase
     [SerializeField] private ResultManager m_resultManager;
     [SerializeField] private GoalLineChecker m_GoalLineChecker;
     [SerializeField] private targetMove m_TargetMove;
+    [SerializeField] private SelectManager m_selectManager;
     //ゲームシーンのプレイヤーのスポーン位置
     [SerializeField] Transform[] m_spawnPositionsOfGame;
     //ゲームシーンのカメラ
@@ -55,7 +56,7 @@ public class InGameManager : GameManagerBase
     void Start()
     {
         m_padNum = m_GameFlowManager.GetPadNum();//接続されているpadの数を取得
-        m_aliveNum = m_padNum;//最初は全員生きている状態
+        m_aliveNum = m_selectManager.GetJoinedPlayers().Count;//最初は全員生きている状態
        // m_loseUI.gameObject.SetActive(false);
 
         prevVerstNum = 0;
@@ -134,8 +135,8 @@ public class InGameManager : GameManagerBase
         }
 
         //死んだ人の数とゴールした人の数が参加プレイヤー人数に達したら
-        int deadNum = m_GameFlowManager.GetPadNum() - m_aliveNum;
-        if (m_goalPlayerNum + deadNum == m_GameFlowManager.GetPadNum())
+        int deadNum = m_selectManager.GetJoinedPlayers().Count - m_aliveNum;
+        if (m_goalPlayerNum + deadNum == m_selectManager.GetJoinedPlayers().Count)
         {
             //シーン遷移をする
             OnEnd();

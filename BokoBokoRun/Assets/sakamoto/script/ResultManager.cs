@@ -15,6 +15,7 @@ public class ResultManager : GameManagerBase
     private bool m_isBackTitle = false;//タイトルに戻るか
 
     [SerializeField] private GameFlowManager m_gameFlowManager;
+    [SerializeField] private SelectManager m_selectManager;
 
     private GameObject[] m_players;//ゲームに参加中のプレイヤーの配列
 
@@ -37,13 +38,13 @@ public class ResultManager : GameManagerBase
     {
         //現在ゲーム内にいるプレイヤーをタグで検索して
         //それをプレイヤーの配列に突っ込む
-        int padNum = m_gameFlowManager.GetPadNum();//現在接続中のパッドのタグを取得
+        int playerNum = m_selectManager.GetJoinedPlayers().Count;//現在接続中のパッドのタグを取得
 
         //プレイヤーの配列のメモリをパッドの数分確保する
-        m_players = new GameObject[padNum];
+        m_players = new GameObject[playerNum];
 
         //接続されているパッドの数分ループを回す
-        for (int i = 0; i < padNum; i++)
+        for (int i = 0; i < playerNum; i++)
         {
             //プレイヤーのタグを取得
             string playerTag = "Player" + (i + 1).ToString();
@@ -105,6 +106,11 @@ public class ResultManager : GameManagerBase
         //カメラを動かす処理//FollowOffsetを少しずつ変化させて、カメラを近づける
         m_vcam.m_Lens.FieldOfView = Mathf.Lerp(m_vcam.m_Lens.FieldOfView, 60.0f, 0.01f);
 
+        
+    }
+
+    void Update()
+    {
         //Aボタンが押されたら一瞬だけ別のシーンに遷移する(急遽シーンをリセットするため)
         //そのあとタイトルシーンに戻る
         if (m_gameFlowManager.GetNowScene() == GameFlowManager.Scene.Result)

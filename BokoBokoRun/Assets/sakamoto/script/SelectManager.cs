@@ -93,10 +93,8 @@ public class SelectManager : MonoBehaviour
 
     public List<PlayerInput> GetJoinedPlayers()
     {
-
         Debug.Log("ššš GetJoinedPlayers‚ÌCount: " + m_joinedPlayers.Count + " ššš");
         return m_joinedPlayers;
-
     }
 
 
